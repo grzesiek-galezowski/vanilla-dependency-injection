@@ -12,7 +12,7 @@ namespace DiFrameworkCons
   /// <summary>
   /// "Note that some relationships are based on types that are in Autofac.
   /// Using those relationship types do tie you to at least having a reference to Autofac, even
-  /// if you choose to use a different IoC container for the actual resolution of services." 
+  /// if you choose to use a different DI framework for the actual resolution of services." 
   /// </summary>
   public class TwoImplementationsOfTheSameInterface
   {
