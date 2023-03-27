@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiFrameworkCons", "DiFrameworkCons\DiFrameworkCons\DiFrameworkCons.csproj", "{6F062873-8130-4DA2-9B5B-49E405F633E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiFrameworkPros", "DiFrameworkPros\DiFrameworkPros\DiFrameworkPros.csproj", "{57A263C9-9F72-4F00-9AA5-35639BD73A5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E81799BD-34AF-4189-963F-B5065C3AB2C9}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F062873-8130-4DA2-9B5B-49E405F633E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F062873-8130-4DA2-9B5B-49E405F633E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F062873-8130-4DA2-9B5B-49E405F633E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F062873-8130-4DA2-9B5B-49E405F633E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A263C9-9F72-4F00-9AA5-35639BD73A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A263C9-9F72-4F00-9AA5-35639BD73A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A263C9-9F72-4F00-9AA5-35639BD73A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A263C9-9F72-4F00-9AA5-35639BD73A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA09727B-122B-4537-9CCF-DF4BADC7CBD6}
+	EndGlobalSection
+EndGlobal

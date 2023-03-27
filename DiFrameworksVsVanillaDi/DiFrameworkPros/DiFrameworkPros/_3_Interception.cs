@@ -4,47 +4,45 @@ using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
 using NUnit.Framework;
 
-namespace DiFrameworkPros
+namespace DiFrameworkPros;
+
+public class Interception
 {
-  public class Interception
+  [Test]
+  public void ShouldEnableInterception()
   {
-    [Test]
-    public void ShouldEnableInterception()
-    {
-      var containerBuilder = new ContainerBuilder();
-      containerBuilder
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder
         .RegisterType<Lol2>().As<ILol2>()
         .EnableInterfaceInterceptors()
         .InterceptedBy(typeof(CallLogger));
-      containerBuilder.RegisterType<CallLogger>();
-      
-      using (var container = containerBuilder.Build())
-      {
-        var lol2 = container.Resolve<ILol2>();
-        lol2.DoSomething();
-      }
-    }
-  }
+    containerBuilder.RegisterType<CallLogger>();
 
-  public interface ILol2
-  {
-    void DoSomething();
-  }
-
-  public class Lol2 : ILol2
-  {
-    public void DoSomething()
+    using (var container = containerBuilder.Build())
     {
-      
+      var lol2 = container.Resolve<ILol2>();
+      lol2.DoSomething();
     }
   }
+}
 
-  public class CallLogger : IInterceptor
+public interface ILol2
+{
+  void DoSomething();
+}
+
+public class Lol2 : ILol2
+{
+  public void DoSomething()
   {
-    public void Intercept(IInvocation invocation)
-    {
-      Console.WriteLine("Called " + invocation.Method.Name);
-    }
-  }
 
+  }
+}
+
+public class CallLogger : IInterceptor
+{
+  public void Intercept(IInvocation invocation)
+  {
+    Console.WriteLine("Called " + invocation.Method.Name);
+  }
 }

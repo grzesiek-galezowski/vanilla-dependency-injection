@@ -1,45 +1,40 @@
 ﻿using Autofac;
 using NUnit.Framework;
 
-namespace DiFrameworkPros
+namespace DiFrameworkPros;
+
+public class AutoWiring
 {
-    public class AutoWiring
+  [Test]
+  public void ShouldAutoWireDependencies()
+  {
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder.RegisterType<Person>().SingleInstance();
+    containerBuilder.RegisterType<Kitchen>().SingleInstance();
+    containerBuilder.RegisterType<Knife>().SingleInstance();
+
+    using (var container = containerBuilder.Build())
     {
-        [Test]
-        public void ShouldAutoWireDependencies()
-        {
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterType<Person>().SingleInstance();
-            containerBuilder.RegisterType<Kitchen>().SingleInstance();
-            containerBuilder.RegisterType<Knife>().SingleInstance();
-
-            using (var container = containerBuilder.Build())
-            {
-                var person = container.Resolve<Person>();
-            }
-        }
+      var person = container.Resolve<Person>();
     }
+  }
+}
 
 
-    public class Person
-    {
-        public Person(Kitchen kitchen)
-        {
-        }
-    }
+public class Person
+{
+  public Person(Kitchen kitchen)
+  {
+  }
+}
 
-    public class Kitchen
-    {
-        public Kitchen(Knife knife)
-        {
-        }
-    }
+public class Kitchen
+{
+  public Kitchen(Knife knife)
+  {
+  }
+}
 
-    public class Knife
-    {
-    }
-
-    
-
-
+public class Knife
+{
 }

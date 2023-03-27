@@ -9,62 +9,61 @@ using NUnit.Framework;
 //3. containers do not yield themselves to refactoring
 //4. containers give away some of the compile time checks
 
-namespace DiFrameworkCons
+namespace DiFrameworkCons;
+
+public class Decorators
 {
-  public class Decorators
+  //TODO passing part of the chain to one object and full chain to another
+  [Test]
+  public void ShouldAssembleDecoratorsByHand()
   {
-    //TODO passing part of the chain to one object and full chain to another
-    [Test]
-    public void ShouldAssembleDecoratorsByHand()
-    {
-      var answer = new SynchronizedAnswer(
+    var answer = new SynchronizedAnswer(
         new TracedAnswer(
-          new Answer()), 
+            new Answer()),
         1);
 
-      Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-      Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-      Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-      Assert.AreEqual(1, answer.X);
-    }
+    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
+    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
+    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
+    Assert.AreEqual(1, answer.X);
+  }
 
-    [Test]
-    public void ShouldAssembleDecoratorsUsingContainer()
-    {
-      var builder = new ContainerBuilder();
+  [Test]
+  public void ShouldAssembleDecoratorsUsingContainer()
+  {
+    var builder = new ContainerBuilder();
 
-      builder.RegisterType<Answer>().As<IAnswer>();
-      builder.RegisterDecorator<TracedAnswer, IAnswer>();
-      
-      //To pass parameters to decorators without invoking constructor,
-      //do this:
-      builder.RegisterType<SynchronizedAnswer>()
+    builder.RegisterType<Answer>().As<IAnswer>();
+    builder.RegisterDecorator<TracedAnswer, IAnswer>();
+
+    //To pass parameters to decorators without invoking constructor,
+    //do this:
+    builder.RegisterType<SynchronizedAnswer>()
         .InstancePerDependency()
         .Named<SynchronizedAnswer>("synced")
         .WithParameter(new NamedParameter("X", 1));
-      builder.RegisterDecorator<IAnswer>((context, parameters, inner) =>
+    builder.RegisterDecorator<IAnswer>((context, parameters, inner) =>
         context.ResolveNamed<SynchronizedAnswer>(
-          "synced",
-          new NamedParameter("NestedAnswer", inner)));
+            "synced",
+            new NamedParameter("NestedAnswer", inner)));
 
-      using var container = builder.Build();
-      var answer = container.Resolve<IAnswer>();
-      Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-      Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-      Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-      Assert.AreEqual(1, ((SynchronizedAnswer)answer).X);
-    }
+    using var container = builder.Build();
+    var answer = container.Resolve<IAnswer>();
+    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
+    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
+    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
+    Assert.AreEqual(1, ((SynchronizedAnswer)answer).X);
+  }
 
-    public interface IAnswer
-    {
-      IAnswer NestedAnswer { get; }
-    }
+  public interface IAnswer
+  {
+    IAnswer NestedAnswer { get; }
+  }
 
-    public record TracedAnswer(IAnswer NestedAnswer) : IAnswer;
-    public record SynchronizedAnswer(IAnswer NestedAnswer, int X) : IAnswer;
-    public record Answer : IAnswer
-    {
-      public IAnswer NestedAnswer => null;
-    }
+  public record TracedAnswer(IAnswer NestedAnswer) : IAnswer;
+  public record SynchronizedAnswer(IAnswer NestedAnswer, int X) : IAnswer;
+  public record Answer : IAnswer
+  {
+    public IAnswer NestedAnswer => null;
   }
 }
