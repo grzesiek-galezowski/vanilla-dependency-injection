@@ -1,4 +1,5 @@
 using Autofac;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace DiFrameworkPros;
@@ -15,7 +16,7 @@ namespace DiFrameworkPros;
 public class AutoWiring
 {
   [Test]
-  public void ShouldAutoWireBasicDependencies()
+  public void ShouldAutoWireBasicDependenciesUsingAutofac()
   {
     var containerBuilder = new ContainerBuilder();
     containerBuilder.RegisterType<Person>().SingleInstance();
@@ -29,10 +30,27 @@ public class AutoWiring
       var person = container.Resolve<Person>();
     }
   }
+  
+  [Test]
+  public void ShouldAutoWireBasicDependenciesUsingMsDi()
+  {
+    var containerBuilder = new ServiceCollection();
+    containerBuilder.AddSingleton<Person>();
+    containerBuilder.AddSingleton<Kitchen>();
+    containerBuilder.AddSingleton<Knife>();
+    containerBuilder.AddTransient<Logger>();
+    containerBuilder.AddSingleton<LoggingChannel>();
+
+    using (var container = containerBuilder.BuildServiceProvider())
+    {
+      var person = container.GetRequiredService<Person>();
+    }
+  }
 
   /// <summary>
   /// This example shows that manual DI is at disadvantage
-  /// because of having to repeat the creation of logger
+  /// because of having to repeat the creation of logger,
+  /// however...
   /// </summary>
   [Test]
   public void ShouldManuallyWireBasicDependencies()
@@ -47,7 +65,7 @@ public class AutoWiring
   }
   
   /// <summary>
-  /// ... although we can use normal C# to our advantages to minimize
+  /// ... can use normal C# to our advantages to minimize
   /// the repetition
   /// </summary>
   [Test]
@@ -70,6 +88,7 @@ public class AutoWiring
   /// <summary>
   /// ... if we use a separate class as a Composition Root,
   /// we can do that using a more typical syntax
+  /// (see inside the CompositionRoot class)
   /// </summary>
   [Test]
   public void ShouldManuallyWireBasicDependencies3()
@@ -90,7 +109,6 @@ public class AutoWiring
     {
       return new Logger(_loggingChannel);
     }
-
 
     public Person GetPerson()
     {
