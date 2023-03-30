@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -6,6 +6,14 @@ namespace DiFrameworkPros;
 
 public class DependencyReplacement
 {
+  /// <summary>
+  /// DI Containers allow replacing registrations in already filled container
+  /// builder. This can be useful for tests, where we can replace arbitrary
+  /// production dependency with one made specifically for tests.
+  ///
+  /// Most of the time this implies bad design, but can be useful sometimes
+  /// when dealing with frameworks like asp.net core. 
+  /// </summary>
   [Test]
   public void ShouldBeAbleToOverrideArbitraryDependencyInContainer()
   {
@@ -17,14 +25,21 @@ public class DependencyReplacement
     var troublesomeDependencyMock = Substitute.For<ITroublesomeDependency>();
     builder.Register(_ => troublesomeDependencyMock);
 
-    using (var container = builder.Build())
-    {
-      container.Resolve<ISomeLogic>().Execute();
+    using var container = builder.Build();
 
-      troublesomeDependencyMock.Received(1).DoSomething();
-    }
+    container.Resolve<ISomeLogic>().Execute();
+
+    troublesomeDependencyMock.Received(1).DoSomething();
   }
 
+  /// <summary>
+  /// When doing vanilla dependency injection, we don't have this powerful
+  /// mechanism at our disposal, but when we model composition root as an object,
+  /// we can use virtual factory methods and provide subclasses that override
+  /// these methods to provide test dependencies.
+  ///
+  /// I actually never had to do this IRL btw.
+  /// </summary>
   [Test]
   public void ShouldBeAbleToOverrideArbitraryDependency()
   {

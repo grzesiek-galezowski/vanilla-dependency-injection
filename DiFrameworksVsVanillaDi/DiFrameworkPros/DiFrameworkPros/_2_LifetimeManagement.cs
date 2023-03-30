@@ -86,6 +86,10 @@ public class LifetimeManagement
 
   /// <summary>
   /// ... if it really becomes a problem, I can use a simple disposal subsystem.
+  /// BTW if a framework like ASP.Net Core starts a scope, it may make sense to plug into its
+  /// scope by registering lambda from manual composition root as created within a container scope.
+  /// This might be considering "cheating" because it uses the container, but it's only used
+  /// for scope control which belongs to the framework anyway.
   /// </summary>
   [Test]
   public void ShouldDisposeOfCreatedDependenciesUsingVanillaDependencyInjection2()
