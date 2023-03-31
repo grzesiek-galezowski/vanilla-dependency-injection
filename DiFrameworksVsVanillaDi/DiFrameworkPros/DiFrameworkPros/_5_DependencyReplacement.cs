@@ -1,4 +1,6 @@
 using Autofac;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -15,7 +17,7 @@ public class DependencyReplacement
   /// when dealing with frameworks like asp.net core. 
   /// </summary>
   [Test]
-  public void ShouldBeAbleToOverrideArbitraryDependencyInContainer()
+  public void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingAutofac()
   {
     var builder = new ContainerBuilder();
 
@@ -28,6 +30,24 @@ public class DependencyReplacement
     using var container = builder.Build();
 
     container.Resolve<ISomeLogic>().Execute();
+
+    troublesomeDependencyMock.Received(1).DoSomething();
+  }
+
+  [Test]
+  public void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingMsDi()
+  {
+    var builder = new ServiceCollection();
+
+    builder.AddSingleton<ISomeLogic, SomeLogic>();
+    builder.AddSingleton<ITroublesomeDependency, TroublesomeDependency>();
+
+    var troublesomeDependencyMock = Substitute.For<ITroublesomeDependency>();
+    builder.Replace(new ServiceDescriptor(typeof(ITroublesomeDependency), _ => troublesomeDependencyMock, ServiceLifetime.Singleton));
+
+    using var container = builder.BuildServiceProvider();
+
+    container.GetRequiredService<ISomeLogic>().Execute();
 
     troublesomeDependencyMock.Received(1).DoSomething();
   }
