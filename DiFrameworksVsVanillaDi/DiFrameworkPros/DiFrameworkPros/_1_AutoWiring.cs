@@ -96,60 +96,62 @@ public class AutoWiring
     var person = new CompositionRoot().GetPerson();
   }
 
-  private class CompositionRoot
+}
+
+file class CompositionRoot
+{
+  private readonly LoggingChannel _loggingChannel;
+
+  public CompositionRoot()
   {
-    private readonly LoggingChannel _loggingChannel;
-
-    public CompositionRoot()
-    {
-      _loggingChannel = new LoggingChannel();
-    }
+    _loggingChannel = new LoggingChannel();
+  }
     
-    private Logger GetLogger()
-    {
-      return new Logger(_loggingChannel);
-    }
+  private Logger GetLogger()
+  {
+    return new Logger(_loggingChannel);
+  }
 
-    public Person GetPerson()
-    {
-      return new Person(
-        new Kitchen(
-          new Knife(
-            GetLogger()),
+  public Person GetPerson()
+  {
+    return new Person(
+      new Kitchen(
+        new Knife(
           GetLogger()),
-        GetLogger());
-    }
+        GetLogger()),
+      GetLogger());
   }
 }
 
-public class Person
+
+file class Person
 {
   public Person(Kitchen kitchen, Logger logger)
   {
   }
 }
 
-public class Kitchen
+file class Kitchen
 {
   public Kitchen(Knife knife, Logger logger)
   {
   }
 }
 
-public class Knife
+file class Knife
 {
   public Knife(Logger logger)
   {
   }
 }
 
-public class Logger
+file class Logger
 {
   public Logger(LoggingChannel loggingChannel)
   {
   }
 }
 
-public class LoggingChannel
+file class LoggingChannel
 {
 }

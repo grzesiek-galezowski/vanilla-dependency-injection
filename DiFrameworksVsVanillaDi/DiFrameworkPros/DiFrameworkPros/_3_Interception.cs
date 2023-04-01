@@ -52,25 +52,26 @@ public class Interception
     lol1.DoSomething();
     lol2.DoSomething();
   }
-}
 
-public interface ILol2
-{
-  void DoSomething();
-}
-
-public class Lol2 : ILol2
-{
-  public void DoSomething()
+  public interface ILol2
   {
+    void DoSomething();
+  }
 
+  public class Lol2 : ILol2
+  {
+    public void DoSomething()
+    {
+
+    }
+  }
+
+  public class CallLogger : IInterceptor
+  {
+    public void Intercept(IInvocation invocation)
+    {
+      Console.WriteLine("Called " + invocation.Method.Name);
+    }
   }
 }
 
-public class CallLogger : IInterceptor
-{
-  public void Intercept(IInvocation invocation)
-  {
-    Console.WriteLine("Called " + invocation.Method.Name);
-  }
-}

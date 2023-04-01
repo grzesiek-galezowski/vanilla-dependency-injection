@@ -68,68 +68,68 @@ public class DependencyReplacement
 
     logicRootForTests.TroublesomeDependency.Received(1).DoSomething();
   }
-}
 
-public interface ITroublesomeDependency
-{
-  void DoSomething();
-}
-
-public class TroublesomeDependency : ITroublesomeDependency
-{
-  public void DoSomething()
+  public interface ITroublesomeDependency
   {
-    throw new System.NotImplementedException();
-  }
-}
-
-public interface ISomeLogic
-{
-  void Execute();
-}
-
-public class SomeLogic : ISomeLogic
-{
-  private readonly ITroublesomeDependency _dep;
-
-  public SomeLogic(ITroublesomeDependency dep)
-  {
-    _dep = dep;
+    void DoSomething();
   }
 
-  public void Execute()
+  public class TroublesomeDependency : ITroublesomeDependency
   {
-    _dep.DoSomething();
-  }
-}
-
-public class LogicRoot
-{
-  private readonly SomeLogic _someLogic;
-
-  public LogicRoot()
-  {
-    _someLogic = new SomeLogic(CreateTroublesomeDependency());
+    public void DoSomething()
+    {
+      throw new System.NotImplementedException();
+    }
   }
 
-  protected virtual ITroublesomeDependency CreateTroublesomeDependency()
+  public interface ISomeLogic
   {
-    return new TroublesomeDependency();
+    void Execute();
   }
 
-  public SomeLogic GetSomeLogic()
+  public class SomeLogic : ISomeLogic
   {
-    return _someLogic;
-  }
-}
+    private readonly ITroublesomeDependency _dep;
 
-public class LogicRootForTests : LogicRoot
-{
-  protected override ITroublesomeDependency CreateTroublesomeDependency()
+    public SomeLogic(ITroublesomeDependency dep)
+    {
+      _dep = dep;
+    }
+
+    public void Execute()
+    {
+      _dep.DoSomething();
+    }
+  }
+
+  public class LogicRoot
   {
-    return TroublesomeDependency;
+    private readonly SomeLogic _someLogic;
+
+    public LogicRoot()
+    {
+      _someLogic = new SomeLogic(CreateTroublesomeDependency());
+    }
+
+    protected virtual ITroublesomeDependency CreateTroublesomeDependency()
+    {
+      return new TroublesomeDependency();
+    }
+
+    public SomeLogic GetSomeLogic()
+    {
+      return _someLogic;
+    }
   }
 
-  public ITroublesomeDependency TroublesomeDependency { get; }
+  public class LogicRootForTests : LogicRoot
+  {
+    protected override ITroublesomeDependency CreateTroublesomeDependency()
+    {
+      return TroublesomeDependency;
+    }
+
+    public ITroublesomeDependency TroublesomeDependency { get; }
       = Substitute.For<ITroublesomeDependency>();
+  }
 }

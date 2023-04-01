@@ -63,23 +63,24 @@ public class AssemblyScanning
 
   //Vanilla dependency injection doesn't have any alternative. The whole point of
   //Vanilla DI is to create the dependencies manually instead of using reflection.
+
+  public interface Interface1
+  {
+
+  }
+  public interface Interface2
+  {
+
+  }
+
+  public class MyRepository : Interface1, Interface2
+  {
+
+  }
+
+  public class MyRepository2 : Interface1, Interface2
+  {
+
+  }
 }
 
-public interface Interface1
-{
-
-}
-public interface Interface2
-{
-
-}
-
-public class MyRepository : Interface1, Interface2
-{
-
-}
-
-public class MyRepository2 : Interface1, Interface2
-{
-
-}

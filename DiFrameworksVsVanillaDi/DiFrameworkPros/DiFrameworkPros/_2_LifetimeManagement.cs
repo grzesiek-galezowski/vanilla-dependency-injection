@@ -118,7 +118,7 @@ public class LifetimeManagement
 
 }
 
-public class Lol : IDisposable
+file class Lol : IDisposable
 {
   private static int _counter = 0;
   private readonly int _currentId;
@@ -135,7 +135,7 @@ public class Lol : IDisposable
   }
 }
 
-public class Disposables : IDisposable
+file class Disposables : IDisposable
 {
   private readonly List<IDisposable> _disposables = new();
 
