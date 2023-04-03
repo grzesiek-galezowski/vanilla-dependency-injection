@@ -268,11 +268,29 @@ public class CaptiveDependency
     // "I know this should always be scoped, but I misconfigured the container"
     // With vanilla DI, we can only have:
     // "Oh, I didn't know this should always be scoped"
-    // GIVEN
     var captor = new Captor(new Transitive("Lol1"));
     {
       var strInScope1 = "Lol2";
     }
+    //you could argue that the container (with scope validation enabled)
+    //at least protects from doing this at runtime (while vanilla DI just allows it),
+    //but that's not true. With DI container, you can also make a conscious decision
+    //to pass a special instance to a singleton:
+    var i = 0;
+    var builder = new ServiceCollection();
+    builder.AddScoped(ctr => "Lol" + i++);
+    builder.AddSingleton<Captor>(ctx => new Captor(new Transitive("Lol1")));
+    builder.AddTransient<Transitive>();
+    using var container = builder.BuildServiceProvider(true); //scope validation enabled
+
+    //WHEN
+    Assert.DoesNotThrow(() =>
+    {
+      //this doesn't throw exception because we handwired a special instance of normally
+      //scoped dependency to the singleton Captor.
+      var captor1 = container.GetRequiredService<Captor>();
+    });
+
   }
 
   public record Captor(Transitive T);
