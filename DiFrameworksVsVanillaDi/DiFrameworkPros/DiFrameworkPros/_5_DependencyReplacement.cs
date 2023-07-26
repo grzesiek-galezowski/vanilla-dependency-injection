@@ -14,7 +14,7 @@ public class DependencyReplacement
   /// production dependency with one made specifically for tests.
   ///
   /// Most of the time this implies bad design, but can be useful sometimes
-  /// when dealing with frameworks like asp.net core. 
+  /// when dealing with frameworks like Asp.NET Core. 
   /// </summary>
   [Test]
   public void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingAutofac()
@@ -57,6 +57,8 @@ public class DependencyReplacement
   /// mechanism at our disposal, but when we model composition root as an object,
   /// we can use virtual factory methods and provide subclasses that override
   /// these methods to provide test dependencies.
+  ///
+  /// If we really want to.
   ///
   /// I actually never had to do this IRL btw.
   /// </summary>

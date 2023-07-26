@@ -13,6 +13,8 @@ public class AssemblyScanning
   /// <summary>
   /// DI containers have unique ability to register types from assemblies
   /// using a "convention over configuration" approach.
+  ///
+  /// Autofac has assembly scanning built in
   /// </summary>
   [Test]
   public void ShouldBeAbleToResolveBasedOnConventionUsingAutofac()
@@ -36,8 +38,13 @@ public class AssemblyScanning
       () => container.Resolve<MyRepository2>()); //not following convention
   }
 
+
+  /// <summary>
+  /// MsDi doesn't have assembly scanning by default (as of 2023),
+  /// but this capability can be added using e.g. the Scrutor library.
+  /// </summary>
   [Test]
-  public void ShouldBeAbleToResolveBasedOnConventionUsingMsDi()
+  public void ShouldBeAbleToResolveBasedOnConventionUsingMsDiAndScrutor()
   {
     var builder = new ServiceCollection();
 

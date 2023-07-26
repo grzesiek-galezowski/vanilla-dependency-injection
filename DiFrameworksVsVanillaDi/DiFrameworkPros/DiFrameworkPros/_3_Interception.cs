@@ -2,7 +2,6 @@ using System;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
-using NSubstitute.Proxies.CastleDynamicProxy;
 using NUnit.Framework;
 
 namespace DiFrameworkPros;
@@ -32,7 +31,7 @@ public class Interception
     lol2.DoSomething();
   }
 
-  private static readonly ProxyGenerator ProxyGenerator = new ProxyGenerator();
+  private static readonly ProxyGenerator ProxyGenerator = new();
 
   /// <summary>
   /// With manual DI, I'd rather just use handmade proxies, but if you want
@@ -44,7 +43,8 @@ public class Interception
   [Test]
   public void ShouldEnableInterception()
   {
-    Lol2 CreateLol2() => ProxyGenerator.CreateClassProxyWithTarget(new Lol2(), new CallLogger());
+    Lol2 CreateLol2()
+      => ProxyGenerator.CreateClassProxyWithTarget(new Lol2(), new CallLogger());
 
     var lol1 = CreateLol2();
     var lol2 = CreateLol2();
@@ -74,4 +74,5 @@ public class Interception
     }
   }
 }
+//bug change the names from Lol to something else
 

@@ -74,7 +74,7 @@ public class CircularDependencies
       "'DiFrameworkCons.CircularDependencies+Three' " +
       "while attempting to activate " +
       "'DiFrameworkCons.CircularDependencies+Two'.",
-      dependencyResolutionException.ToString());
+      dependencyResolutionException!.ToString());
   }
 
   //bug add vanilla DI example

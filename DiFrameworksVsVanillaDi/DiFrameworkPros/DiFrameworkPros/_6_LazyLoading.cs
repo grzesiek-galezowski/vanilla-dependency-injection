@@ -70,14 +70,14 @@ public class _6_LazyLoading
 
     //THEN
     //VerySlowDependency takes 10 seconds to create.
-    //Passing this assertion means control never reached this class
+    //Passing this assertion means runtime execution never reached this class
     Assert.Less(stopWatch.Elapsed, TimeSpan.FromSeconds(5));
   }
 
   /// <summary>
   /// With Vanilla DI, you have to be much more deliberate and explicit if
   /// you really want to have lazy creation (see Lazy usage in <see cref="VanillaCompositionRoot"/>).
-  /// If you rely on laziness, that can be a deal-breaker.
+  /// If you rely on laziness a lot, that can be a deal-breaker.
   ///
   /// I don't like the idea of "lazy by default". I consider it a value added
   /// that in case of Vanilla DI, the "singleton" dependencies are created up-front, because
