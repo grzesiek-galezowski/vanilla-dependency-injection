@@ -21,6 +21,9 @@ internal class _7_Modules
   {
     /// <summary>
     /// Autofac has modules built-in.
+    /// This example shows how one module (InMemoryOutputModule)
+    /// delivers an implementation of an interface required by a class
+    /// from another module (ApplicationLogicModule).
     /// </summary>
     [Test]
     public void ShouldAllowComposingModulesUsingAutofac()
