@@ -5,22 +5,34 @@ using NUnit.Framework;
 
 namespace DiFrameworkPros;
 
-//bug incomplete
-//Autofac - use modules
-//MsDi - use extension methods
-//Vanilla - use objects
+/// <summary>
+/// Some DI containers allow using modules. Modules are recipes for fragments of composition.
+/// They can be used to:
+/// - parametrize fragment of object composition recipe
+/// - logically split the composition into several parts so that each part
+///   could potentially be replaced
+/// - If combined with visibility modifiers, can also serve as
+///   quasi-architectural component, where the module consists of registrations
+///   of mostly internal types and the registered public types serve as a boundary
+/// </summary>
 internal class _7_Modules
 {
   public class UsingAutofac
   {
+    /// <summary>
+    /// Autofac has modules built-in.
+    /// </summary>
     [Test]
     public void ShouldAllowComposingModulesUsingAutofac()
     {
       //GIVEN
       var builder = new ContainerBuilder();
 
+      // modules can either be registered as types
       builder.RegisterModule<ApplicationLogicModule>();
-      builder.RegisterModule<InMemoryOutputModule>();
+      // or as objects - in which case additional arguments can easily be
+      // passed to a constructor.
+      builder.RegisterModule(new InMemoryOutputModule());
 
       //WHEN
       using var container = builder.Build();
@@ -67,6 +79,14 @@ internal class _7_Modules
 
   public class UsingMsDi
   {
+    // MS DI doesn't support modules, but the usual way
+    // to work around it is to use static methods.
+    // In this example, the static methods are called on
+    // their respective classes (so that each method can be called Add())
+    // but a more idiomatic way is to use extension methods, e.g.
+    // container.AddApplicationLogic();
+    // container.AddHttpClient();
+    // etc.
     [Test]
     public void ShouldAllowComposingModulesUsingMsDi()
     {
@@ -115,8 +135,18 @@ internal class _7_Modules
 
   public class UsingVanillaDi
   {
+    /// <summary>
+    /// Unless you need some advanced features of DI container
+    /// modules (e.g. assembly scanning for modules), they can
+    /// be easily replaced by classes that encapsulate creating
+    /// fragments of object graph and expose public methods and
+    /// properties to allow access only to the stuff that needs
+    /// to be externally visible.
+    ///
+    /// This is merely old-fashioned OO.
+    /// </summary>
     [Test]
-    public void ShouldAllowComposingModulesUsingMsDi()
+    public void ShouldAllowComposingModulesUsingVanillaDi()
     {
       //GIVEN
       var outputModule = new InMemoryOutputModule();
@@ -124,7 +154,6 @@ internal class _7_Modules
         new ApplicationLogicModule(outputModule.Output);
 
       //WHEN
-
       applicationLogicModule.ApplicationLogic.PerformAction();
 
       //THEN
