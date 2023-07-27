@@ -11,7 +11,7 @@ namespace DiFrameworkPros;
 /// DI containers automatically dispose of their created objects
 /// when the scope where they were created is over.
 /// </summary>
-public class LifetimeManagement
+public class LifetimeScopeManagement
 {
   [Test]
   public void ShouldDisposeOfCreatedDependenciesUsingAutofac()
