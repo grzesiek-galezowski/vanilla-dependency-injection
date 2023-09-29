@@ -1,6 +1,4 @@
-﻿using System;
 using Autofac;
-using Autofac.Features.Decorators;
 using NUnit.Framework;
 
 //CONS:

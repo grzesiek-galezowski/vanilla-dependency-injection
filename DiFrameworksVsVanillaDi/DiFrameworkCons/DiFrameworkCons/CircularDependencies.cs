@@ -2,9 +2,7 @@ using System;
 using Autofac;
 using Autofac.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using static DiFrameworkCons.CircularDependencies;
 
 namespace DiFrameworkCons;
 

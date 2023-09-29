@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace DiFrameworkPros;
 
 /// <summary>
-/// This shows auto wiring
+/// This example shows auto wiring
 /// - get an instance without invoking the constructor.
 /// - introduce Knife dependency to Person - no need to touch composition root
 ///

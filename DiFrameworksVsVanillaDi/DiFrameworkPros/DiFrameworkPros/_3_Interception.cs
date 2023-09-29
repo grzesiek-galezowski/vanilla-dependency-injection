@@ -18,17 +18,17 @@ public class Interception
   {
     var containerBuilder = new ContainerBuilder();
     containerBuilder
-      .RegisterType<Lol2>().As<ILol2>()
+      .RegisterType<Dependency>().As<IDependency>()
       .EnableInterfaceInterceptors()
       .InterceptedBy(typeof(CallLogger));
     containerBuilder.RegisterType<CallLogger>();
 
     using var container = containerBuilder.Build();
 
-    var lol1 = container.Resolve<ILol2>();
-    var lol2 = container.Resolve<ILol2>();
-    lol1.DoSomething();
-    lol2.DoSomething();
+    var dependency1 = container.Resolve<IDependency>();
+    var dependency2 = container.Resolve<IDependency>();
+    dependency1.DoSomething();
+    dependency2.DoSomething();
   }
 
   private static readonly ProxyGenerator ProxyGenerator = new();
@@ -43,22 +43,22 @@ public class Interception
   [Test]
   public void ShouldEnableInterception()
   {
-    Lol2 CreateLol2()
-      => ProxyGenerator.CreateClassProxyWithTarget(new Lol2(), new CallLogger());
+    Dependency CreateDependency()
+      => ProxyGenerator.CreateClassProxyWithTarget(new Dependency(), new CallLogger());
 
-    var lol1 = CreateLol2();
-    var lol2 = CreateLol2();
+    var dependency1 = CreateDependency();
+    var dependency2 = CreateDependency();
 
-    lol1.DoSomething();
-    lol2.DoSomething();
+    dependency1.DoSomething();
+    dependency2.DoSomething();
   }
 
-  public interface ILol2
+  public interface IDependency
   {
     void DoSomething();
   }
 
-  public class Lol2 : ILol2
+  public class Dependency : IDependency
   {
     public void DoSomething()
     {
@@ -74,5 +74,3 @@ public class Interception
     }
   }
 }
-//bug change the names from Lol to something else
-
