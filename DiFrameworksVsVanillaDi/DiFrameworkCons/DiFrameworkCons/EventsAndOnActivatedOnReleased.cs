@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using Autofac;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace DiFrameworkCons;
@@ -7,7 +8,7 @@ namespace DiFrameworkCons;
 public class EventsAndOnActivatedOnReleased
 {
   [Test]
-  public void ShouldShowHandMadeHandlingOfEvents()
+  public void ShouldShowHandMadeHandlingOfEventsUsingAutofac()
   {
     //GIVEN
     var builder = new ContainerBuilder();
@@ -35,7 +36,40 @@ public class EventsAndOnActivatedOnReleased
   }
 
   [Test]
-  public void ShouldShowHandMadeHandlingOfEventsWithManualComposition()
+  public void ShouldShowHandMadeHandlingOfEventsUsingMicrosoftDependencyInjection()
+  {
+    //GIVEN
+    var services = new ServiceCollection();
+    services.AddSingleton<MyObserver>();
+    services.AddTransient<MyDependency>(sp =>
+    {
+      var observer = sp.GetService<MyObserver>();
+      var dependency = new MyDependency();
+      dependency.SomeKindOfEvent += observer.Notify;
+      return dependency;
+    });
+
+    var serviceProvider = services.BuildServiceProvider();
+
+    //WHEN
+    var observer = serviceProvider.GetService<MyObserver>();
+    var dependency1 = serviceProvider.GetService<MyDependency>();
+    var dependency2 = serviceProvider.GetService<MyDependency>();
+    var dependency3 = serviceProvider.GetService<MyDependency>();
+
+    //THEN
+    dependency1.DoSomething();
+    Assert.AreEqual(dependency1.InstanceId, observer.LastReceived);
+
+    dependency2.DoSomething();
+    Assert.AreEqual(dependency2.InstanceId, observer.LastReceived);
+
+    dependency3.DoSomething();
+    Assert.AreEqual(dependency3.InstanceId, observer.LastReceived);
+  }
+
+  [Test]
+  public void ShouldShowHandMadeHandlingOfEventsWithVanillaDi()
   {
     //GIVEN
     var observer = new MyObserver();
