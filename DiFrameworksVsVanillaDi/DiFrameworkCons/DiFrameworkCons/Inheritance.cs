@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace DiFrameworkCons;
 
@@ -15,6 +15,7 @@ public class Lol
     monthlyReport.Print();
   }
 }
+
 public abstract class AbstractReport
 {
   private readonly List<string> _lines = new List<string>();
