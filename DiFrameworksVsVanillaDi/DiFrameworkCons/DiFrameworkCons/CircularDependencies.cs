@@ -1,8 +1,4 @@
-using System;
-using Autofac;
 using Autofac.Core;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 namespace DiFrameworkCons;
 

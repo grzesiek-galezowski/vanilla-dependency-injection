@@ -1,7 +1,3 @@
-using System;
-using Autofac;
-using NUnit.Framework;
-
 namespace DiFrameworkCons;
 
 class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation

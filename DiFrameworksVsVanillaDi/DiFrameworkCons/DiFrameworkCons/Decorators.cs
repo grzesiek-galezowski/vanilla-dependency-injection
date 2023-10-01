@@ -1,9 +1,5 @@
-using System;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using Autofac;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 //CONS:
 //1. containers take time to learn (every special case -> new feature)

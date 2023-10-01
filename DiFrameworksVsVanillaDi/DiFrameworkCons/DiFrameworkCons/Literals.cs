@@ -1,6 +1,3 @@
-using Autofac;
-using NUnit.Framework;
-
 namespace DiFrameworkCons;
 
 public class Literals

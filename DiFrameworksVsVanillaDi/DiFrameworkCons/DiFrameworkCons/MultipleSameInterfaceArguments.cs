@@ -1,8 +1,5 @@
-using System;
-using Autofac;
 using Autofac.Core;
 using Autofac.Features.AttributeFilters;
-using NUnit.Framework;
 
 //bug object encapsulation (check if this is possible in a container)
 //it is to some extent by using child scopes(?) but that makes these places dependent on the container

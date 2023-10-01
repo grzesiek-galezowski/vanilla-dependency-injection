@@ -1,8 +1,3 @@
-using System;
-using Autofac;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
 namespace DiFrameworkCons;
 
 public class EventsAndOnActivatedOnReleased

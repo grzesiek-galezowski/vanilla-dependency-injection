@@ -1,7 +1,4 @@
-﻿using Autofac;
-using NUnit.Framework;
-
-namespace DiFrameworkCons;
+﻿namespace DiFrameworkCons;
 
 class MultipleConstructors
 {
