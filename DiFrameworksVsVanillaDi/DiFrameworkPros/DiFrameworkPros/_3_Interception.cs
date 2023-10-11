@@ -71,6 +71,7 @@ public class Interception
     public void Intercept(IInvocation invocation)
     {
       Console.WriteLine("Called " + invocation.Method.Name);
+      invocation.Proceed();
     }
   }
 }

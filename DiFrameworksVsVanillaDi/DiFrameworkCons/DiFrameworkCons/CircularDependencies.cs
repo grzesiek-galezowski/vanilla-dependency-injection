@@ -23,6 +23,7 @@ public class CircularDependencies
     var containerBuilder = new ContainerBuilder();
     containerBuilder.RegisterType<One>();
     containerBuilder.RegisterType<Two>();
+    containerBuilder.RegisterType<Three>();
     using var container = containerBuilder.Build();
     //WHEN
     //THEN
@@ -32,19 +33,16 @@ public class CircularDependencies
     });
 
     StringAssert.Contains(
-      "Autofac.Core.DependencyResolutionException: An exception was thrown while activating DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two.",
+      "Autofac.Core.DependencyResolutionException: An exception was thrown while activating DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three",
       dependencyResolutionException!.ToString());
     StringAssert.Contains(
-      "---> Autofac.Core.DependencyResolutionException: None of the constructors found on type 'DiFrameworkCons.CircularDependencies+Two' can be invoked with the available services and parameters:",
-      dependencyResolutionException!.ToString());
-    StringAssert.Contains(
-      "Cannot resolve parameter 'Three Three' of constructor 'Void .ctor(Three)'.",
+      "Circular component dependency detected: DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One.",
       dependencyResolutionException!.ToString());
   }
 
   /// <summary>
   /// MsDi also detects circular dependencies during runtime
-  /// and throws an exception with a barely helpful message.
+  /// and throws an exception the path.
   /// </summary>
   [Test]
   //9.3.3 Constructor/Constructor dependencies
@@ -52,8 +50,10 @@ public class CircularDependencies
   {
     //GIVEN
     var containerBuilder = new ServiceCollection();
-    containerBuilder.AddTransient<One>();
-    containerBuilder.AddTransient<Two>();
+    containerBuilder
+      .AddTransient<One>()
+      .AddTransient<Two>()
+      .AddTransient<Three>();
     using var container = containerBuilder.BuildServiceProvider(true);
     //WHEN
     //THEN
@@ -63,11 +63,8 @@ public class CircularDependencies
     });
 
     StringAssert.Contains(
-      "System.InvalidOperationException: " +
-      "Unable to resolve service for type " +
-      "'DiFrameworkCons.CircularDependencies+Three' " +
-      "while attempting to activate " +
-      "'DiFrameworkCons.CircularDependencies+Two'.",
+      "A circular dependency was detected for the service of type 'DiFrameworkCons.CircularDependencies+One'.\r\n" +
+      "DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One",
       dependencyResolutionException!.ToString());
   }
 
