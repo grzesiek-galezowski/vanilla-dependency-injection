@@ -18,7 +18,7 @@ public class Lol
 
 public abstract class AbstractReport
 {
-  private readonly List<string> _lines = new List<string>();
+  private readonly List<string> _lines = new();
 
   public void Setup()
   {
