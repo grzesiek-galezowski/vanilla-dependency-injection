@@ -9,7 +9,7 @@ public class MissingDependency
   {
     //GIVEN
     var containerBuilder = new ContainerBuilder();
-    containerBuilder.RegisterType<One>();
+    containerBuilder.RegisterType<One>().InstancePerDependency();
     using var container = containerBuilder.Build();
     //WHEN
     //THEN
@@ -38,6 +38,7 @@ public class MissingDependency
       using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
       {
         ValidateOnBuild = true,
+        ValidateScopes = true
       });
     });
 
