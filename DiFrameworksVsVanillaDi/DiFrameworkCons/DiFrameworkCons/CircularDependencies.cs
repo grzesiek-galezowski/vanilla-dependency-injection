@@ -54,18 +54,46 @@ public class CircularDependencies
       .AddTransient<One>()
       .AddTransient<Two>()
       .AddTransient<Three>();
-    using var container = containerBuilder.BuildServiceProvider(true);
+    var dependencyResolutionException = Assert.Throws<AggregateException>(() =>
+    {
+      using var container = containerBuilder.BuildServiceProvider(
+        new ServiceProviderOptions
+        {
+          ValidateOnBuild = true,
+          ValidateScopes = true,
+        });
+    });
     //WHEN
     //THEN
-    var dependencyResolutionException = Assert.Throws<InvalidOperationException>(() =>
-    {
-      var one = container.GetRequiredService<One>();
-    });
 
     StringAssert.Contains(
       "A circular dependency was detected for the service of type 'DiFrameworkCons.CircularDependencies+One'.\r\n" +
       "DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One",
       dependencyResolutionException!.ToString());
+  }
+
+  /// <summary>
+  /// With lambda registration, cycles get detected later
+  /// </summary>
+  [Test]
+  //9.3.3 Constructor/Constructor dependencies
+  public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithMsDiLambdaRegistration()
+  {
+    //GIVEN
+    var containerBuilder = new ServiceCollection();
+    containerBuilder
+      .AddTransient<One>()
+      .AddTransient(c => new Two(c.GetRequiredService<Three>()))
+      .AddTransient<Three>();
+    using var container = containerBuilder.BuildServiceProvider(
+      new ServiceProviderOptions
+      {
+        ValidateOnBuild = true,
+        ValidateScopes = true,
+      });
+    //WHEN
+    //THEN
+    //uncomment to hang this test: var one = container.GetRequiredService<One>();
   }
 
   //bug add vanilla DI example
