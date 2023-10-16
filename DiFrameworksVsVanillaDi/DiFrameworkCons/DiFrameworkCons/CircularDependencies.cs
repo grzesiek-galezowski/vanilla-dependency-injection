@@ -1,4 +1,5 @@
 using Autofac.Core;
+using SimpleInjector;
 
 namespace DiFrameworkCons;
 
@@ -94,6 +95,31 @@ public class CircularDependencies
     //WHEN
     //THEN
     //uncomment to hang this test: var one = container.GetRequiredService<One>();
+  }
+
+  [Test]
+  public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithSimpleInjector()
+  {
+    //GIVEN
+    var container = new SimpleInjector.Container();
+    container.Register<One>(Lifestyle.Transient);
+    container.Register(() => new Two(container.GetInstance<Three>()));
+    container.Register<Three>();
+
+
+    Assert.Throws<InvalidOperationException>(() =>
+    {
+      container.Verify(VerificationOption.VerifyAndDiagnose);
+    });
+
+    Assert.Catch<ActivationException>(() =>
+    {
+      var instance = container.GetInstance<One>();
+    });
+
+    //WHEN
+    //THEN
+    //uncomment to hang this test: var one = container.GetInstance<One>();
   }
 
   //bug add vanilla DI example
