@@ -1,5 +1,9 @@
 namespace DiFrameworkCons;
 
+/// <summary>
+/// TODO revise this. Seemann & Van Deursen say captive dependencies
+/// are possible with Pure DI, just much harder to pull off
+/// </summary>
 public class CaptiveDependency
 {
   /// <summary>
