@@ -95,7 +95,7 @@ public class Decorators
   }
 
   /// <summary>
-  /// MsDi doesn't support decorators (we can always fall back to manual composition of course).
+  /// MsDi doesn't support decorators (we can always fall back to lambda registration of course).
   ///
   /// Two ways around this limitations are: 1) MediatR, 2) Scrutor (shown below)
   /// </summary>
@@ -108,9 +108,9 @@ public class Decorators
 
     //Decorators are applied in the order they are registered
     builder.Decorate<IAnswer, TracedAnswer>();
-    //With MsDi, there's currently no way around falling back to manual composition
+    //With MsDi, there's currently no way around falling back lambda
     //(see https://github.com/dotnet/extensions/issues/2937)
-    builder.Decorate<IAnswer>(a => new SynchronizedAnswer(a, 1));
+    builder.Decorate<IAnswer>((a, ctx) => ActivatorUtilities.CreateInstance<SynchronizedAnswer>(ctx, a, 1));
 
     using var container = builder.BuildServiceProvider();
     var answer = container.GetRequiredService<IAnswer>();

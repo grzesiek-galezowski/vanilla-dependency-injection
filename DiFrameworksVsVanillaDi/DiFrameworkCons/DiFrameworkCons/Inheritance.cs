@@ -77,6 +77,6 @@ public static class MonthlyIncomes
 {
   public static List<string> PullDataForLastMonth()
   {
-    return new List<string>() { "1", "2" };
+    return new List<string> { "1", "2" };
   }
 }

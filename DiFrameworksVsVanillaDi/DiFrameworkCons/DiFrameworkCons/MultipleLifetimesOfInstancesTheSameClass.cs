@@ -39,7 +39,7 @@ internal class MultipleLifetimesOfInstancesTheSameClass
         ctx.GetRequiredKeyedService<ThrottledOutbox>("shared")));
     services.AddTransient<EmergencyProcess>();
 
-    using var container = services.BuildServiceProvider(new ServiceProviderOptions()
+    using var container = services.BuildServiceProvider(new ServiceProviderOptions
     {
       ValidateOnBuild = true,
       ValidateScopes = true
