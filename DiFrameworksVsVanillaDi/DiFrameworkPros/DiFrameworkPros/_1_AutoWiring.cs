@@ -1,3 +1,4 @@
+using System;
 using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -124,34 +125,10 @@ file class CompositionRoot
 }
 
 
-file class Person
-{
-  public Person(Kitchen kitchen, Logger logger)
-  {
-  }
-}
+file class Person(Kitchen kitchen, Logger logger);
+file class Kitchen(Knife knife, Logger logger);
+file class Knife(Logger logger);
 
-file class Kitchen
-{
-  public Kitchen(Knife knife, Logger logger)
-  {
-  }
-}
+file class Logger(LoggingChannel loggingChannel);
 
-file class Knife
-{
-  public Knife(Logger logger)
-  {
-  }
-}
-
-file class Logger
-{
-  public Logger(LoggingChannel loggingChannel)
-  {
-  }
-}
-
-file class LoggingChannel
-{
-}
+file class LoggingChannel;
