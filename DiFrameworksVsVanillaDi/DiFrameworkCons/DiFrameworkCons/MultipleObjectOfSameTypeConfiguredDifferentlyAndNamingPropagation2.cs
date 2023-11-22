@@ -47,12 +47,11 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   }
 
   [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainer()
+  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromAutofacContainer()
   {
     //GIVEN
     var builder = new ContainerBuilder();
     builder.RegisterType<World>()
-      .As<World>()
       .WithParameter(
         (info, _) => info.Position == 1,
         (_, context) => context.ResolveNamed<Character>("secondCharacter"))
@@ -100,6 +99,52 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
 
     //WHEN
     var world = container.Resolve<World>();
+
+    //THEN
+    Assert.AreNotSame(world.Hero, world.Enemy);
+    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
+    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
+
+    Assert.IsInstanceOf<ChainMail>(world.Hero.Armor.BodyArmor);
+    Assert.IsInstanceOf<BreastPlate>(world.Enemy.Armor.BodyArmor);
+    Assert.IsInstanceOf<LongSword>(world.Hero.Weapon);
+    Assert.IsInstanceOf<ShortSword>(world.Enemy.Weapon);
+  }
+
+  [Test]
+  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromMsDi()
+  {
+    //GIVEN
+    var builder = new ServiceCollection();
+    builder.AddSingleton(c => new World(
+      c.GetRequiredService<Character>(),
+      c.GetRequiredKeyedService<Character>("secondCharacter")));
+    builder.AddSingleton(
+      ctx => ActivatorUtilities.CreateInstance<Character>(
+        ctx,
+        ctx.GetRequiredService<LongSword>()));
+    builder.AddKeyedSingleton(
+      "secondCharacter",
+      (ctx, o) => ActivatorUtilities.CreateInstance<Character>(
+        ctx,
+        ctx.GetRequiredKeyedService<Armor>("secondArmor"),
+        ctx.GetRequiredService<ShortSword>()));
+    builder.AddSingleton(ctx => ActivatorUtilities.CreateInstance<Armor>(
+      ctx,
+      ctx.GetRequiredService<ChainMail>()));
+    builder.AddKeyedSingleton(
+      "secondArmor",
+      (ctx, o) => ActivatorUtilities.CreateInstance<Armor>(
+        ctx, ctx.GetRequiredService<BreastPlate>()));
+    builder.AddTransient<Helmet>();
+    builder.AddSingleton<ChainMail>();
+    builder.AddSingleton<BreastPlate>();
+    builder.AddSingleton<LongSword>();
+    builder.AddSingleton<ShortSword>();
+    using var container = builder.BuildServiceProvider();
+
+    //WHEN
+    var world = container.GetRequiredService<World>();
 
     //THEN
     Assert.AreNotSame(world.Hero, world.Enemy);
