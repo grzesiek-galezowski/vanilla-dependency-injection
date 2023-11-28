@@ -116,7 +116,8 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   {
     //GIVEN
     var builder = new ServiceCollection();
-    builder.AddSingleton(c => new World(
+    builder.AddSingleton(c => ActivatorUtilities.CreateInstance<World>(
+      c,
       c.GetRequiredService<Character>(),
       c.GetRequiredKeyedService<Character>("secondCharacter")));
     builder.AddSingleton(
