@@ -30,12 +30,12 @@ public class Decorators2
   {
     //GIVEN
     var services = new ServiceCollection();
-    services.AddKeyedSingleton("chain1",
-      (c, _) => ActivatorUtilities.CreateInstance<A>(c,
+    services.AddKeyedSingleton("chain1", (c, _) =>
+      ActivatorUtilities.CreateInstance<A>(c,
         ActivatorUtilities.CreateInstance<B>(c,
           ActivatorUtilities.CreateInstance<C1>(c,
-            ActivatorUtilities.CreateInstance<D>(c)
-            ))));
+            ActivatorUtilities.CreateInstance<D>(c)))));
+    
     services.AddKeyedSingleton("chain2",
       (c, _) => ActivatorUtilities.CreateInstance<A>(c,
         ActivatorUtilities.CreateInstance<B>(c,
