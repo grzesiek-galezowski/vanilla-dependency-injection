@@ -120,7 +120,18 @@ public class CircularDependencies
     });
   }
 
-  //bug add vanilla DI example
+  [Test]
+  public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithVanillaDI()
+  {
+    // This will not compile
+    // var one = new One(new Two(new Three(one)));
+
+    // This potentially could happen but very unlikely when using nullable reference types as errors + var
+    One one = null;
+    var two = new Two(new Three(one));
+    one = new One(two);
+    Assert.IsNull(one.Two.Three.One);
+  }
 
   public record One(Two Two);
   public record Two(Three Three);
