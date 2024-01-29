@@ -82,10 +82,12 @@ public class CircularDependencies
   {
     //GIVEN
     var containerBuilder = new ServiceCollection();
+
     containerBuilder
       .AddTransient<One>()
       .AddTransient(c => new Two(c.GetRequiredService<Three>()))
       .AddTransient<Three>();
+
     using var container = containerBuilder.BuildServiceProvider(
       new ServiceProviderOptions
       {
@@ -97,6 +99,13 @@ public class CircularDependencies
     //uncomment to hang this test: var one = container.GetRequiredService<One>();
   }
 
+  /// <summary>
+  /// Simple injector has a Verify method that among others, tries to resolve
+  /// all rules, and can thus detect misconfigurations.
+  ///
+  /// If this method is not used, then circular dependencies cause exceptions
+  /// at dependency resolution time (though unlikely someone would not use Verify).
+  /// </summary>
   [Test]
   public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithSimpleInjector()
   {
@@ -105,7 +114,6 @@ public class CircularDependencies
     container.Register<One>(Lifestyle.Transient);
     container.Register(() => new Two(container.GetInstance<Three>()));
     container.Register<Three>();
-
 
     Assert.Throws<InvalidOperationException>(() =>
     {
@@ -120,6 +128,10 @@ public class CircularDependencies
     });
   }
 
+  /// <summary>
+  /// Vanilla Dependency Injection makes circular dependencies very hard to pull off.
+  /// You have to really try and ignore modern C# diagnostics like nullable reference types.
+  /// </summary>
   [Test]
   public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithVanillaDI()
   {
@@ -127,7 +139,7 @@ public class CircularDependencies
     // var one = new One(new Two(new Three(one)));
 
     // This potentially could happen but very unlikely when using nullable reference types as errors + var
-    One one = null;
+    One one = null!;
     var two = new Two(new Three(one));
     one = new One(two);
     Assert.IsNull(one.Two.Three.One);
