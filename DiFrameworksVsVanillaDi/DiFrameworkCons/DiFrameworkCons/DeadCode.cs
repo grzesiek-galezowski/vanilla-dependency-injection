@@ -7,7 +7,7 @@ namespace DiFrameworkCons;
 public class DeadCode
 {
   /// <summary>
-  /// The container doesn't know which registrations are gonna be used
+  /// The container doesn't know which registrations are going to be used
   /// so there's no way of detecting "dead" dependencies that are not used or passed anywhere.
   /// This may lead to a situation where we delete some objects because e.g. we remove a feature
   /// but some leftover dependencies stay because we don't even notice they were used only by that
@@ -65,7 +65,6 @@ public class DeadCode
     //THEN
     Assert.NotNull(consumer);
   }
-  //bug new example: two registrations of the same type - with different lifestyles
 }
 
 

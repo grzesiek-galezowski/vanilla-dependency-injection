@@ -1,6 +1,3 @@
-using Autofac.Core;
-using Scrutor;
-
 namespace DiFrameworkCons;
 
 public class Decorators2
@@ -24,7 +21,9 @@ public class Decorators2
     Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
     Assert.IsNull(chain2.Next.Next!.Next!.Next);
   }
-  
+
+  //bug add version with Autofac
+
   [Test]
   public void ShouldComposeVariousDecoratorConfigurationsWithMsDi()
   {

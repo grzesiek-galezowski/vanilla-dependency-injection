@@ -1,8 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace DiFrameworkCons;
 
-internal class MultipleLifetimesOfInstancesTheSameClass
+internal class MultipleLifestylesOfInstancesTheSameClass
 {
   [Test]
   public void ShouldComposeWithTwoLifestylesOfThrottledOutbox()

@@ -129,8 +129,6 @@ public class Decorators
   public record SynchronizedAnswer(IAnswer NestedAnswer, int X) : IAnswer;
   public record Answer : IAnswer
   {
-    public IAnswer NestedAnswer => null;
+    public IAnswer NestedAnswer => null!;
   }
-  //TODO passing part of the chain to one object and full chain to another
-  //TODO example with extracting library - easier to do with manual DI
 }
