@@ -22,7 +22,61 @@ public class Decorators2
     Assert.IsNull(chain2.Next.Next!.Next!.Next);
   }
 
-  //bug add version with Autofac
+  [Test] //no decorators version. Can it be simplified using decorators?
+  public void ShouldComposeVariousDecoratorConfigurationsUsingAutofac()
+  {
+    var builder = new ContainerBuilder();
+
+    builder.RegisterType<D>()
+      .InstancePerDependency();
+    builder.RegisterType<C1>()
+      .InstancePerDependency()
+      .WithParameter(
+        (info, _) => info.Name == "Next",
+        (_, context) => context.Resolve<D>());
+    builder.RegisterType<C2>()
+      .InstancePerDependency()
+      .WithParameter(
+        (info, _) => info.Name == "Next",
+        (_, context) => context.Resolve<D>());
+    builder.RegisterType<B>()
+      .WithParameter(
+        (info, _) => info.Name == "Next",
+        (_, context) => context.Resolve<C1>())
+      .InstancePerDependency()
+      .Named<B>("chain1");
+    builder.RegisterType<B>()
+      .WithParameter(
+        (info, _) => info.Name == "Next",
+        (_, context) => context.Resolve<C2>())
+      .InstancePerDependency()
+      .Named<B>("chain2");
+    builder.RegisterType<A>()
+      .WithParameter((info, _) => info.Name == "Next",
+        (_, context) => context.ResolveNamed<B>("chain1"))
+      .InstancePerDependency()
+      .Named<A>("chain1");
+    builder.RegisterType<A>()
+      .WithParameter((info, _) => info.Name == "Next",
+        (_, context) => context.ResolveNamed<B>("chain2"))
+      .InstancePerDependency()
+      .Named<A>("chain2");
+
+    using var container = builder.Build();
+    var chain1 = container.ResolveNamed<A>("chain1");
+    var chain2 = container.ResolveNamed<A>("chain2");
+
+    //THEN
+    Assert.IsInstanceOf<B>(chain1.Next);
+    Assert.IsInstanceOf<C1>(chain1.Next.Next);
+    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
+    Assert.IsNull(chain1.Next.Next!.Next!.Next);
+
+    Assert.IsInstanceOf<B>(chain2.Next);
+    Assert.IsInstanceOf<C2>(chain2.Next.Next);
+    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
+    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+  }
 
   [Test]
   public void ShouldComposeVariousDecoratorConfigurationsWithMsDi()
