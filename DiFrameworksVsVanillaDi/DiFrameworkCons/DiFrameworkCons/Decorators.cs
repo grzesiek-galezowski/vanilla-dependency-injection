@@ -21,7 +21,7 @@ public class Decorators
 {
   /// <summary>
   /// In Vanilla DI, this is pretty straightforward. It's really no different
-  /// than any other composition - just create objects and pass one object
+  /// from any other composition - just create objects and pass one object
   /// as an argument of another's constructor.
   /// </summary>
   [Test]
