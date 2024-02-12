@@ -31,34 +31,24 @@ public class Decorators2
       .InstancePerDependency();
     builder.RegisterType<C1>()
       .InstancePerDependency()
-      .WithParameter(
-        (info, _) => info.Name == "Next",
-        (_, context) => context.Resolve<D>());
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.Resolve<D>());
     builder.RegisterType<C2>()
       .InstancePerDependency()
-      .WithParameter(
-        (info, _) => info.Name == "Next",
-        (_, context) => context.Resolve<D>());
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.Resolve<D>());
     builder.RegisterType<B>()
-      .WithParameter(
-        (info, _) => info.Name == "Next",
-        (_, context) => context.Resolve<C1>())
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.Resolve<C1>())
       .InstancePerDependency()
       .Named<B>("chain1");
     builder.RegisterType<B>()
-      .WithParameter(
-        (info, _) => info.Name == "Next",
-        (_, context) => context.Resolve<C2>())
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.Resolve<C2>())
       .InstancePerDependency()
       .Named<B>("chain2");
     builder.RegisterType<A>()
-      .WithParameter((info, _) => info.Name == "Next",
-        (_, context) => context.ResolveNamed<B>("chain1"))
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.ResolveNamed<B>("chain1"))
       .InstancePerDependency()
       .Named<A>("chain1");
     builder.RegisterType<A>()
-      .WithParameter((info, _) => info.Name == "Next",
-        (_, context) => context.ResolveNamed<B>("chain2"))
+      .WithParameter((info, _) => info.Name == "Next", (_, context) => context.ResolveNamed<B>("chain2"))
       .InstancePerDependency()
       .Named<A>("chain2");
 
