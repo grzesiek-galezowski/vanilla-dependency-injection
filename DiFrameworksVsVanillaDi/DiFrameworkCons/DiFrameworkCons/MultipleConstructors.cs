@@ -1,5 +1,6 @@
-﻿namespace DiFrameworkCons;
+namespace DiFrameworkCons;
 
+//todo add descriptions
 class MultipleConstructors
 {
   [Test]

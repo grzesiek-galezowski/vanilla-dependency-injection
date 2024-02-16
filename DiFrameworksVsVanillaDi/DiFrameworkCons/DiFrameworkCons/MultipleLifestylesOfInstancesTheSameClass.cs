@@ -1,5 +1,6 @@
 namespace DiFrameworkCons;
 
+//todo add descriptions
 internal class MultipleLifestylesOfInstancesTheSameClass
 {
   [Test]

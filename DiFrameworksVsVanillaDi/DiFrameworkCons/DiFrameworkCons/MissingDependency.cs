@@ -2,6 +2,7 @@ using Autofac.Core;
 
 namespace DiFrameworkCons;
 
+//todo add descriptions
 public class MissingDependency
 {
   [Test]

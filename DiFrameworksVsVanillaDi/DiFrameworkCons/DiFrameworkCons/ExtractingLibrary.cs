@@ -3,6 +3,7 @@ using Castle.Core.Logging;
 
 namespace DiFrameworkCons;
 
+//todo add more to this example
 internal class ExtractingLibrary
 {
   [Test]

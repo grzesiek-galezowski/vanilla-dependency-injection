@@ -11,6 +11,8 @@ public class EventsAndOnActivated
   /// Autofac provides a special feature called "OnActivating" (as well as other lifetime callbacks)
   /// which allows doing something after an object is created while still getting the
   /// benefits of autowiring.
+  ///
+  /// We can use OnRelease callback to unplug an event if it's necessary
   /// </summary>
   [Test]
   public void ShouldShowHandMadeHandlingOfEventsUsingAutofac()
@@ -20,7 +22,7 @@ public class EventsAndOnActivated
     builder.RegisterType<MyObserver>().SingleInstance();
     builder.RegisterType<MyDependency>().InstancePerDependency()
         .OnActivated(args =>
-            args.Instance.SomeKindOfEvent += args.Context.Resolve<MyObserver>().Notify);
+             args.Instance.SomeKindOfEvent += args.Context.Resolve<MyObserver>().Notify);
     using var container = builder.Build();
 
     //WHEN
@@ -182,5 +184,3 @@ public class MyDependency : IMyDependency
     SomeKindOfEvent?.Invoke(InstanceId);
   }
 }
-
-//bug show how to implement OnReleased.

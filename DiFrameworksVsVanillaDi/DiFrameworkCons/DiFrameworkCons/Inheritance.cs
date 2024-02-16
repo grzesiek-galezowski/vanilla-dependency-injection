@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace DiFrameworkCons;
 
+//todo do something with this example - what exactly does it show?
 public class Lol
 {
   public void DoWork()
