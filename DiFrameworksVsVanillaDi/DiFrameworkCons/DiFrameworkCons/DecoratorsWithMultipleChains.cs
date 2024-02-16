@@ -46,6 +46,7 @@ public class DecoratorsWithMultipleChains
   [Test]
   public void ShouldComposeVariousDecoratorConfigurationsUsingAutofac()
   {
+    //GIVEN
     var builder = new ContainerBuilder();
 
     builder.RegisterType<D>()
@@ -73,6 +74,7 @@ public class DecoratorsWithMultipleChains
       .InstancePerDependency()
       .Named<A>("chain2");
 
+    //WHEN
     using var container = builder.Build();
     var chain1 = container.ResolveNamed<A>("chain1");
     var chain2 = container.ResolveNamed<A>("chain2");
@@ -98,6 +100,7 @@ public class DecoratorsWithMultipleChains
   [Test]
   public void ShouldComposeVariousDecoratorConfigurationsUsingAutofacDecoratorsFeature1()
   {
+    //GIVEN
     var builder = new ContainerBuilder();
 
     builder.RegisterType<D>()
@@ -122,6 +125,7 @@ public class DecoratorsWithMultipleChains
         (_, inner) => new A(inner), fromKey: "B2")
       .Named<IComponent>("A2");
 
+    //WHEN
     using var container = builder.Build();
     var chain1 = container.ResolveNamed<IComponent>("A1");
     var chain2 = container.ResolveNamed<IComponent>("A2");
@@ -147,6 +151,7 @@ public class DecoratorsWithMultipleChains
   [Test]
   public void ShouldComposeVariousDecoratorChainsUsingAutofacDecoratorsFeature2()
   {
+    //GIVEN
     var builder = new ContainerBuilder();
 
     builder.RegisterType<D>().InstancePerDependency().Named<IComponent>("D");
@@ -179,6 +184,7 @@ public class DecoratorsWithMultipleChains
         fromKey: "B2")
       .Named<IComponent>("chain2");
 
+    //WHEN
     using var container = builder.Build();
     var chain1 = container.ResolveNamed<IComponent>("chain1");
     var chain2 = container.ResolveNamed<IComponent>("chain2");
