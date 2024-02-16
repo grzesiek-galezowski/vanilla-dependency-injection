@@ -17,7 +17,6 @@ public class CircularDependencies
   /// going through constructor arguments.
   /// </summary>
   [Test]
-  //9.3.3 Constructor/Constructor dependencies
   public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithAutofac()
   {
     //GIVEN

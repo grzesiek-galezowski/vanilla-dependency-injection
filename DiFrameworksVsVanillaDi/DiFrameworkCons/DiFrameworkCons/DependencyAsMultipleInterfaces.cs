@@ -1,11 +1,18 @@
 namespace DiFrameworkCons;
 
-//todo add description
+/// <summary>
+/// This example shows using the same object as multiple interfaces.
+/// </summary>
 public class DependencyAsMultipleInterfaces
 {
+  /// <summary>
+  /// With Vanilla DI, this is business as usual - we can create an object,
+  /// assign it to a variable and pass everywhere where an object of compatible
+  /// type is expected.
+  /// </summary>
   [Test]
   public void ShouldUseOneInstanceForDifferentInterfacesUsingVanillaDi()
-  {
+  {  
     //GIVEN
     var cache = new Cache();
 
@@ -17,6 +24,12 @@ public class DependencyAsMultipleInterfaces
     Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
   }
 
+  /// <summary>
+  /// With Autofac, this is also relatively easy - we can use either the .As()
+  /// multiple times or just use the .AsImplementedInterfaces().
+  /// Autofac doesn't "lose" with Vanilla DI because registering as
+  /// multiple interfaces is very straightforward.
+  /// </summary>
   [Test]
   public void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfacesUsingAutofac()
   {
@@ -36,6 +49,11 @@ public class DependencyAsMultipleInterfaces
     Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
   }
 
+  /// <summary>
+  /// In MsDi, it's worse as we need to explicitly register each interface using lambdas,
+  /// which are not subject to container validation. Hence, this approach is slightly more
+  /// error-prone than Vanilla DI.
+  /// </summary>
   [Test]
   public void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfacesUsingMsDi()
   {
@@ -46,13 +64,44 @@ public class DependencyAsMultipleInterfaces
     builder.AddSingleton<IReadCache>(c => c.GetRequiredService<Cache>());
     builder.AddSingleton<IWriteCache>(c => c.GetRequiredService<Cache>());
 
-    using var container = builder.BuildServiceProvider();
+    using var container = builder.BuildServiceProvider(new ServiceProviderOptions()
+    {
+      ValidateOnBuild = true,
+      ValidateScopes = true
+    });
     //WHEN
     var cacheUser = container.GetRequiredService<UserOfReaderAndWriter>();
 
     //THEN
     Assert.AreSame(cacheUser.ReadCache, cacheUser.WriteCache);
     Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
+  }
+
+  /// <summary>
+  /// This is a test adapted from
+  /// https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/
+  /// only to show that in MsDi, registering the same implementation twice
+  /// as singleton, each time as a different interface is not equal to
+  /// resolving the same instance from each registration
+  /// </summary>
+  [Test]
+  public void WhenRegisteredAsSeparateSingleton_InstancesAreNotTheSame()
+  {
+    //GIVEN
+    var builder = new ServiceCollection();
+
+    builder.AddSingleton<IReadCache, Cache>();
+    builder.AddSingleton<IWriteCache, Cache>();
+    builder.AddSingleton<UserOfReaderAndWriter>();
+
+    //WHEN
+    using var container = builder.BuildServiceProvider();
+    //WHEN
+    var cacheUser = container.GetRequiredService<UserOfReaderAndWriter>();
+
+    //THEN
+    Assert.AreNotSame(cacheUser.ReadCache, cacheUser.WriteCache);
+    Assert.AreNotEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
   }
 }
 

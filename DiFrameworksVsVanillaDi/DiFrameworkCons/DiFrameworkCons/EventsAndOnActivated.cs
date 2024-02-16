@@ -66,10 +66,10 @@ public class EventsAndOnActivated
     var serviceProvider = services.BuildServiceProvider();
 
     //WHEN
-    var observer = serviceProvider.GetService<MyObserver>();
-    var dependency1 = serviceProvider.GetService<IMyDependency>();
-    var dependency2 = serviceProvider.GetService<IMyDependency>();
-    var dependency3 = serviceProvider.GetService<IMyDependency>();
+    var observer = serviceProvider.GetRequiredService<MyObserver>();
+    var dependency1 = serviceProvider.GetRequiredService<IMyDependency>();
+    var dependency2 = serviceProvider.GetRequiredService<IMyDependency>();
+    var dependency3 = serviceProvider.GetRequiredService<IMyDependency>();
 
     //THEN
     dependency1.DoSomething();
