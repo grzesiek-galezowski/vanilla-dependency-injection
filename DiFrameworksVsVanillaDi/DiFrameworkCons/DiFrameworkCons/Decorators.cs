@@ -1,11 +1,3 @@
-
-
-//CONS:
-//1. containers take time to learn (every special case -> new feature)
-//2. containers hide the dependency graph
-//3. containers do not yield themselves to refactoring
-//4. containers give away some of the compile time checks
-
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -97,10 +89,10 @@ public class Decorators
   /// <summary>
   /// MsDi doesn't support decorators (we can always fall back to lambda registration of course).
   ///
-  /// Two ways around this limitations are: 1) MediatR, 2) Scrutor (shown below)
+  /// Two ways around these limitations are: 1) MediatR, 2) Scrutor (shown below)
   /// </summary>
   [Test]
-  public void ShouldAssembleDecoratorsUsingMsDi()
+  public void ShouldAssembleDecoratorsUsingMsDiWithScrutor()
   {
     var builder = new ServiceCollection();
 

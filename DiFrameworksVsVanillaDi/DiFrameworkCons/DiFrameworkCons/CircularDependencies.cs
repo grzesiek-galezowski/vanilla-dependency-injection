@@ -46,7 +46,6 @@ public class CircularDependencies
   /// and throws an exception the path.
   /// </summary>
   [Test]
-  //9.3.3 Constructor/Constructor dependencies
   public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithMsDi()
   {
     //GIVEN
@@ -77,7 +76,6 @@ public class CircularDependencies
   /// With lambda registration, cycles get detected later
   /// </summary>
   [Test]
-  //9.3.3 Constructor/Constructor dependencies
   public void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithMsDiLambdaRegistration()
   {
     //GIVEN
