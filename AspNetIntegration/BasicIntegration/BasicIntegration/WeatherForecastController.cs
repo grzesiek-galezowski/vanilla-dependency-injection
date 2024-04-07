@@ -1,7 +1,7 @@
 using BasicIntegration.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicIntegration.Controllers;
+namespace BasicIntegration;
 
 [ApiController]
 [Route("[controller]")]

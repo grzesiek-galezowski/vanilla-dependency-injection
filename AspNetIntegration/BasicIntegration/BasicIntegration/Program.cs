@@ -1,5 +1,3 @@
-using BasicIntegration.Dto;
-
 namespace BasicIntegration;
 
 public class Program
@@ -16,11 +14,12 @@ public class Program
     b.Services.AddControllers().AddControllersAsServices();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     b.Services.AddEndpointsApiExplorer();
+    b.Services.AddSignalR();
     b.Services.AddSwaggerGen();
 
     var app = b.Build();
 
-    app.Services.GetRequiredService<ServiceLogicRoot>(); //eager initialization
+    var root = app.Services.GetRequiredService<ServiceLogicRoot>(); //eager initialization
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
@@ -34,15 +33,9 @@ public class Program
     app.UseAuthorization();
 
     app.MapControllers();
-    app.MapPost("MinimalWeatherForecast", async (HttpContext context, ServiceLogicRoot serviceLogicRoot) =>
-    {
-      await serviceLogicRoot.SaveWeatherForecastEndpoint.Handle(context);
-    });
-
-    app.MapGet("MinimalWeatherForecast", async (HttpContext context, ServiceLogicRoot serviceLogicRoot) =>
-    {
-      await serviceLogicRoot.RetrieveWeatherForecastEndpoint.Handle(context);
-    });
+    app.MapPost("MinimalWeatherForecast", root.SaveWeatherForecastEndpoint.Handle);
+    app.MapGet("MinimalWeatherForecast", root.RetrieveWeatherForecastEndpoint.Handle);
+    app.MapHub<WeatherForecastHub>("/WeatherForecastHub");
 
     app.Run();
   }

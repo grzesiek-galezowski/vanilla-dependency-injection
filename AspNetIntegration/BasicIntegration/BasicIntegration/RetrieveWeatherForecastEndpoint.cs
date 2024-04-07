@@ -4,8 +4,7 @@ namespace BasicIntegration;
 
 public class RetrieveWeatherForecastEndpoint(
   List<WeatherForecastDto> controllerState,
-  ILogger<RetrieveWeatherForecastEndpoint> logger)
-  : IEndpoint
+  ILogger logger) : IEndpoint
 {
   public async Task Handle(HttpContext context)
   {

@@ -1,4 +1,3 @@
-using BasicIntegration.Controllers;
 using BasicIntegration.Dto;
 
 namespace BasicIntegration;
@@ -10,17 +9,28 @@ public class ServiceLogicRoot
 
   public ServiceLogicRoot(ILoggerFactory loggerFactory)
   {
-    SaveWeatherForecastEndpoint = new SaveWeatherForecastEndpoint(_controllerState,
+    SaveWeatherForecastEndpoint = new SaveWeatherForecastEndpoint(
+      _controllerState,
       loggerFactory.CreateLogger<SaveWeatherForecastEndpoint>());
-    RetrieveWeatherForecastEndpoint = new RetrieveWeatherForecastEndpoint(_controllerState,
+    RetrieveWeatherForecastEndpoint = new RetrieveWeatherForecastEndpoint(
+      _controllerState,
       loggerFactory.CreateLogger<RetrieveWeatherForecastEndpoint>());
+    WeatherForecastSignalRApi = new WeatherForecastSignalRApi(
+      _controllerState,
+      loggerFactory.CreateLogger<WeatherForecastSignalRApi>());
     _loggerFactory = loggerFactory;
   }
 
+  //Controllers
   public WeatherForecastController CreateWeatherForecastController() =>
     new(_loggerFactory.CreateLogger<WeatherForecastController>(),
       _controllerState);
 
-  public IEndpoint RetrieveWeatherForecastEndpoint { get; set; }
-  public IEndpoint SaveWeatherForecastEndpoint { get; init; }
+  //Minimal API:
+  public IEndpoint RetrieveWeatherForecastEndpoint { get; }
+  public IEndpoint SaveWeatherForecastEndpoint { get; }
+
+  //SignalR API:
+  public WeatherForecastSignalRApi WeatherForecastSignalRApi { get; }
+
 }

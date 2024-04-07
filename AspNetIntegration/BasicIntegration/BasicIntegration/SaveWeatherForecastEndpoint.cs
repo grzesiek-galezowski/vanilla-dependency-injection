@@ -2,7 +2,9 @@ using BasicIntegration.Dto;
 
 namespace BasicIntegration;
 
-public class SaveWeatherForecastEndpoint(List<WeatherForecastDto> controllerState, ILogger<SaveWeatherForecastEndpoint> logger) : IEndpoint
+public class SaveWeatherForecastEndpoint(
+  List<WeatherForecastDto> controllerState,
+  ILogger logger) : IEndpoint
 {
   public async Task Handle(HttpContext context)
   {
