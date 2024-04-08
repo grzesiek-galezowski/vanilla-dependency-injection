@@ -1,9 +1,12 @@
-using ApplicationLogic.AddNewTodoNote;
-using ApplicationLogic.Ports;
+using System.Collections.ObjectModel;
+using TodoApp.ApplicationLogic.AddNewTodoNote;
+using TodoApp.ApplicationLogic.Ports;
 
-namespace ApplicationLogic;
+namespace TodoApp.ApplicationLogic;
 
-public class TodoCommandFactory(ITodoNoteDao inMemoryTodoNoteDao) : ITodoCommandFactory
+public class TodoCommandFactory(
+  ITodoNoteDao inMemoryTodoNoteDao,
+  List<ReplacementConversion> conversions) : ITodoCommandFactory
 {
   public ITodoAppCommand CreateAddTodoCommand(
     NewTodoNoteDefinitionDto newTodoNoteDefinitionDto,
@@ -12,7 +15,7 @@ public class TodoCommandFactory(ITodoNoteDao inMemoryTodoNoteDao) : ITodoCommand
     return new AddTodoCommand(
       inMemoryTodoNoteDao,
       new NotifyRequesterOnSuccessfulNotePersistence(addTodoResponseInProgress),
-      new NoteDefinitionByDto(newTodoNoteDefinitionDto));
+      new NoteDefinitionByDto(newTodoNoteDefinitionDto, conversions));
   }
 
   public ITodoAppCommand CreateRetrieveTodoNoteCommand(

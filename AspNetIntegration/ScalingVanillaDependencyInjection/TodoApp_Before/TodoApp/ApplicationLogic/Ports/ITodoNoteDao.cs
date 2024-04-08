@@ -1,4 +1,4 @@
-namespace ApplicationLogic.Ports;
+namespace TodoApp.ApplicationLogic.Ports;
 
 public interface ITodoNoteDao
 {

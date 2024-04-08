@@ -1,6 +1,6 @@
-using ApplicationLogic.Ports;
+using TodoApp.ApplicationLogic.Ports;
 
-namespace ApplicationLogic.AddNewTodoNote;
+namespace TodoApp.ApplicationLogic.AddNewTodoNote;
 
 public interface ITodoNoteDefinition
 {
@@ -11,7 +11,7 @@ public interface ITodoNoteDefinition
   void Correct();
 }
 
-public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionDto) : ITodoNoteDefinition
+public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionDto, IEnumerable<ReplacementConversion> conversions) : ITodoNoteDefinition
 {
   public async Task PersistIn(
       ITodoNoteDao inMemoryTodoNoteDao,
@@ -26,9 +26,12 @@ public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionD
 
   public void Correct()
   {
-    newTodoNoteDefinitionDto = newTodoNoteDefinitionDto with
+    foreach (var conversion in conversions)
     {
-      Content = newTodoNoteDefinitionDto.Content.Replace("truck", "duck")
-    };
+      newTodoNoteDefinitionDto = newTodoNoteDefinitionDto with
+      {
+        Content = conversion.Apply(newTodoNoteDefinitionDto.Content)
+      };
+    }
   }
 }

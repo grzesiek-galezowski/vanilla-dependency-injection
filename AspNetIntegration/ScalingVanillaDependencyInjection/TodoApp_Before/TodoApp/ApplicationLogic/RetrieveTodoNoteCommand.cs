@@ -1,6 +1,6 @@
-using ApplicationLogic.Ports;
+using TodoApp.ApplicationLogic.Ports;
 
-namespace ApplicationLogic;
+namespace TodoApp.ApplicationLogic;
 
 public class RetrieveTodoNoteCommand(
   Guid id,

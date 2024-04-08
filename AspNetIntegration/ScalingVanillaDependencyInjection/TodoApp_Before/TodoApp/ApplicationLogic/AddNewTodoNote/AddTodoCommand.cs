@@ -1,6 +1,6 @@
-using ApplicationLogic.Ports;
+using TodoApp.ApplicationLogic.Ports;
 
-namespace ApplicationLogic.AddNewTodoNote;
+namespace TodoApp.ApplicationLogic.AddNewTodoNote;
 
 public class AddTodoCommand(
   ITodoNoteDao inMemoryTodoNoteDao,
