@@ -2,10 +2,10 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Headers;
-using TodoApp1;
-using TodoApp1Tests.TestDtos;
+using TodoApp;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.HostTests.Automation;
+namespace TodoAppTests.HostTests.Automation;
 
 public class AppDriver : IAsyncDisposable
 {

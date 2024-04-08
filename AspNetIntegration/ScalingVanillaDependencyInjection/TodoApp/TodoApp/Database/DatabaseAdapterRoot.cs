@@ -1,4 +1,4 @@
-namespace TodoApp1.Database;
+namespace TodoApp.Database;
 
 public class DatabaseAdapterRoot
 {

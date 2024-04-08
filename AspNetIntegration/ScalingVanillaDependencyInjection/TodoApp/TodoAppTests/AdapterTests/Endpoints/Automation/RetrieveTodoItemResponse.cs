@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Flurl.Http;
-using TodoApp1Tests.TestDtos;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints.Automation;
+namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
 public class RetrieveTodoItemResponse
 {

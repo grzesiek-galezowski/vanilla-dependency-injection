@@ -1,6 +1,6 @@
 using ApplicationLogic.Ports;
 
-namespace TodoApp1.Endpoints;
+namespace TodoApp.Endpoints;
 
 public class RetrieveTodoNoteEndpoint : IEndpoint
 {

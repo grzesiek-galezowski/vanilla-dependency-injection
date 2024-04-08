@@ -1,6 +1,6 @@
-﻿using ApplicationLogic.Ports;
+using ApplicationLogic.Ports;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints.Automation;
+namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
 internal class ConfigurableCommand : ITodoAppCommand
 {

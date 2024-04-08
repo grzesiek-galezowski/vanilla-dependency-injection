@@ -1,7 +1,7 @@
-﻿using ApplicationLogic.Ports;
+using ApplicationLogic.Ports;
 using Core.Maybe;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints.Automation;
+namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
 internal class FactoryForSuccessfulCommands : ITodoCommandFactory
 {

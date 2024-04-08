@@ -1,7 +1,7 @@
-﻿using ApplicationLogic.Ports;
-using TodoApp1.Database;
+using ApplicationLogic.Ports;
+using TodoApp.Database;
 
-namespace TodoApp1Tests.AdapterTests.Database;
+namespace TodoAppTests.AdapterTests.Database;
 
 public class DatabaseAdapterDriver
 {

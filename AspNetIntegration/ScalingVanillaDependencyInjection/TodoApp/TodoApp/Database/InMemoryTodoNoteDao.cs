@@ -2,7 +2,7 @@ using System.Text.Json;
 using ApplicationLogic.Ports;
 using Core.NullableReferenceTypesExtensions;
 
-namespace TodoApp1.Database;
+namespace TodoApp.Database;
 
 public class InMemoryTodoNoteDao : ITodoNoteDao
 {

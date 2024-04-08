@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TodoApp1Tests.TestDtos;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.HostTests.Automation;
+namespace TodoAppTests.HostTests.Automation;
 
 public class RetrieveTodoNoteResponse
 {

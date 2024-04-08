@@ -1,7 +1,7 @@
 using ApplicationLogic.Ports;
 using Microsoft.Net.Http.Headers;
 
-namespace TodoApp1.Endpoints;
+namespace TodoApp.Endpoints;
 
 public class EndpointsAdapterRoot : IEndpointsRoot
 {

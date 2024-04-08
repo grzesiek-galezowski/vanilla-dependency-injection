@@ -1,8 +1,8 @@
 using ApplicationLogic;
-using TodoApp1.Database;
-using TodoApp1.Endpoints;
+using TodoApp.Database;
+using TodoApp.Endpoints;
 
-namespace TodoApp1.Bootstrap;
+namespace TodoApp.Bootstrap;
 
 public class ServiceLogicRoot : IEndpointsRoot
 {

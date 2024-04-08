@@ -1,7 +1,7 @@
-﻿using ApplicationLogic.Ports;
+using ApplicationLogic.Ports;
 using FluentAssertions;
 
-namespace TodoApp1Tests.AdapterTests.Database;
+namespace TodoAppTests.AdapterTests.Database;
 
 public class DatabaseAdapterTests
 {

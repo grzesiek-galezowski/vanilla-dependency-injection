@@ -1,3 +1,3 @@
-namespace TodoApp1Tests.TestDtos;
+namespace TodoAppTests.TestDtos;
 
 public record NewTodoNoteDefinitionTestDto(string Title, string Content);

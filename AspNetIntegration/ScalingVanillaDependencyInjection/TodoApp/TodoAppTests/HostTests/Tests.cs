@@ -1,7 +1,7 @@
-using TodoApp1Tests.HostTests.Automation;
-using TodoApp1Tests.TestDtos;
+using TodoAppTests.HostTests.Automation;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.HostTests;
+namespace TodoAppTests.HostTests;
 
 public class Tests
 {

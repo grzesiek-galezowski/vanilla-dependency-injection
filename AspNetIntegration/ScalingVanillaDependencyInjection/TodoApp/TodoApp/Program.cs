@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Options;
-using TodoApp1.Bootstrap;
-using TodoApp1.Database;
-using TodoApp1.Endpoints;
+using TodoApp.Bootstrap;
+using TodoApp.Database;
+using TodoApp.Endpoints;
 
-namespace TodoApp1;
+namespace TodoApp;
 
 public class Program
 {

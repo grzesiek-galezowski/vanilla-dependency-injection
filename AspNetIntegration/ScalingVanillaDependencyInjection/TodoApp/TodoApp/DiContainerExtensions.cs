@@ -1,6 +1,6 @@
-using TodoApp1.Endpoints;
+using TodoApp.Endpoints;
 
-namespace TodoApp1;
+namespace TodoApp;
 
 internal static class DiContainerExtensions
 {

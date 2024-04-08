@@ -1,7 +1,7 @@
 using ApplicationLogic.Ports;
 using Core.NullableReferenceTypesExtensions;
 
-namespace TodoApp1.Endpoints;
+namespace TodoApp.Endpoints;
 
 public class AddTodoEndpoint : IEndpoint
 {

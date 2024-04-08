@@ -1,4 +1,4 @@
-namespace TodoApp1.Endpoints;
+namespace TodoApp.Endpoints;
 
 public interface IEndpoint
 {

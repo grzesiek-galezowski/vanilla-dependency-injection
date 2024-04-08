@@ -1,14 +1,14 @@
-﻿using ApplicationLogic.Ports;
+using ApplicationLogic.Ports;
 using Flurl.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using TodoApp1;
-using TodoApp1.Endpoints;
-using TodoApp1Tests.TestDtos;
+using TodoApp;
+using TodoApp.Endpoints;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints.Automation;
+namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
 public class EndpointsAdapterDriver : IAsyncDisposable
 {

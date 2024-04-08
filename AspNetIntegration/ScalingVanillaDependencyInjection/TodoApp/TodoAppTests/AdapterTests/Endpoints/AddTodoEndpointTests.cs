@@ -1,8 +1,7 @@
-﻿using FluentAssertions;
-using TodoApp1Tests.AdapterTests.Endpoints.Automation;
-using TodoApp1Tests.TestDtos;
+using TodoAppTests.AdapterTests.Endpoints.Automation;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints;
+namespace TodoAppTests.AdapterTests.Endpoints;
 
 public class AddTodoEndpointTests
 {

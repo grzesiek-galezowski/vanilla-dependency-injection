@@ -1,8 +1,8 @@
-﻿using Flurl.Http;
+using Flurl.Http;
 using Microsoft.Net.Http.Headers;
-using TodoApp1Tests.TestDtos;
+using TodoAppTests.TestDtos;
 
-namespace TodoApp1Tests.AdapterTests.Endpoints.Automation;
+namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
 public class AddTodoItemRequest
 {
