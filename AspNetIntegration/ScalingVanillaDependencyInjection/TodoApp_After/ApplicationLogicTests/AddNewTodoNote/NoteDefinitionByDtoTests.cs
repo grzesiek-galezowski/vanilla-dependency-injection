@@ -10,18 +10,33 @@ namespace ApplicationLogicTests.AddNewTodoNote;
 public class NoteDefinitionByDtoTests
 {
   [Test]
-  public async Task ShouldSaveNoteWithTheWordTruckChangedToDuckWhenAskedToCorrectItself()
+  public async Task ShouldSaveNoteWithContentCorrectedByTheWordConversions()
   {
     //GIVEN
-    var inappropriateContent = Any.StringContaining("truck");
+    var content1 = Any.String();
+    var content2 = Any.String();
+    var content3 = Any.String();
+    var content4 = Any.String();
     var dto = Any.Instance<NewTodoNoteDefinitionDto>() with
     {
-      Content = inappropriateContent
+      Content = content1
     };
-    var definition = new NoteDefinitionByDto(dto, Any.List<IWordConversion>());
+    var wordConversion1 = Substitute.For<IWordConversion>();
+    var wordConversion2 = Substitute.For<IWordConversion>();
+    var wordConversion3 = Substitute.For<IWordConversion>();
+    var definition = new NoteDefinitionByDto(dto,
+    [
+      wordConversion1,
+      wordConversion2,
+      wordConversion3,
+    ]);
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Any.Instance<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();
+
+    wordConversion1.Apply(content1).Returns(content2);
+    wordConversion2.Apply(content2).Returns(content3);
+    wordConversion3.Apply(content3).Returns(content4);
 
     definition.Correct();
 
@@ -33,7 +48,7 @@ public class NoteDefinitionByDtoTests
       .Save(
         dto with
         {
-          Content = inappropriateContent.Replace("truck", "duck")
+          Content = content4
         }, cancellationToken);
   }
 
