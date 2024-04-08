@@ -10,7 +10,7 @@ public class Program
   public static void Main(string[] args)
   {
     var builder = WebApplication.CreateBuilder(args);
-    builder.Services.AddSingleton(ctx => 
+    builder.Services.AddSingleton(ctx =>
       new ServiceLogicRoot(
         ctx.GetRequiredService<IOptions<DatabaseOptions>>().Value));
     builder.Services.AddSingleton<IEndpointsRoot>(
@@ -20,15 +20,10 @@ public class Program
 
     var app = builder.Build();
 
-    app.MapPost("/todo", async (HttpContext context) =>
-    {
-      await context.Endpoints().AddTodoEndpoint.Handle(context);
-    });
+    var endpointsRoot = app.Services.GetRequiredService<IEndpointsRoot>();
 
-    app.MapGet("/todo/{id}", async (HttpContext context) =>
-    {
-      await context.Endpoints().RetrieveTodoNoteEndpoint.Handle(context);
-    });
+    app.MapPost("/todo", endpointsRoot.AddTodoEndpoint.Handle);
+    app.MapGet("/todo/{id}", endpointsRoot.RetrieveTodoNoteEndpoint.Handle);
 
     app.Run();
   }

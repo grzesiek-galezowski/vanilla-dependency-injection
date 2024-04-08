@@ -19,7 +19,6 @@ public class AddTodoEndpoint : IEndpoint
           .OrThrow(); //bug better validation later
         var addTodoResponseInProgress = new AddTodoResponseInProgress(context);
 
-
         var addTodoCommand = _todoCommandFactory
           .CreateAddTodoCommand(newTodoNoteDefinitionDto, addTodoResponseInProgress);
         await addTodoCommand.Execute(context.RequestAborted);
