@@ -11,7 +11,9 @@ public interface ITodoNoteDefinition
   void Correct();
 }
 
-public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionDto, IEnumerable<IWordConversion> conversions) : ITodoNoteDefinition
+public class NoteDefinitionByDto(
+  NewTodoNoteDefinitionDto newTodoNoteDefinitionDto,
+  IWordConversion conversion) : ITodoNoteDefinition
 {
   public async Task PersistIn(
       ITodoNoteDao inMemoryTodoNoteDao,
@@ -26,12 +28,11 @@ public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionD
 
   public void Correct()
   {
-    foreach (var conversion in conversions)
+    var content = conversion.Apply(newTodoNoteDefinitionDto.Content);
+
+    newTodoNoteDefinitionDto = newTodoNoteDefinitionDto with
     {
-      newTodoNoteDefinitionDto = newTodoNoteDefinitionDto with
-      {
-        Content = conversion.Apply(newTodoNoteDefinitionDto.Content)
-      };
-    }
+      Content = content
+    };
   }
 }

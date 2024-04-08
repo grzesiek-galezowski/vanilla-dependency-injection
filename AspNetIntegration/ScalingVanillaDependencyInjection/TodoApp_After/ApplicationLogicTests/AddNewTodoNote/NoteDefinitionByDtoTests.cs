@@ -13,30 +13,19 @@ public class NoteDefinitionByDtoTests
   public async Task ShouldSaveNoteWithContentCorrectedByTheWordConversions()
   {
     //GIVEN
-    var content1 = Any.String();
-    var content2 = Any.String();
-    var content3 = Any.String();
-    var content4 = Any.String();
+    var initialContent = Any.String();
+    var contentAfterConversion = Any.String();
     var dto = Any.Instance<NewTodoNoteDefinitionDto>() with
     {
-      Content = content1
+      Content = initialContent
     };
-    var wordConversion1 = Substitute.For<IWordConversion>();
-    var wordConversion2 = Substitute.For<IWordConversion>();
-    var wordConversion3 = Substitute.For<IWordConversion>();
-    var definition = new NoteDefinitionByDto(dto,
-    [
-      wordConversion1,
-      wordConversion2,
-      wordConversion3,
-    ]);
+    var wordConversion = Substitute.For<IWordConversion>();
+    var definition = new NoteDefinitionByDto(dto, wordConversion);
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Any.Instance<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();
 
-    wordConversion1.Apply(content1).Returns(content2);
-    wordConversion2.Apply(content2).Returns(content3);
-    wordConversion3.Apply(content3).Returns(content4);
+    wordConversion.Apply(initialContent).Returns(contentAfterConversion);
 
     definition.Correct();
 
@@ -48,7 +37,7 @@ public class NoteDefinitionByDtoTests
       .Save(
         dto with
         {
-          Content = content4
+          Content = contentAfterConversion
         }, cancellationToken);
   }
 
@@ -57,7 +46,8 @@ public class NoteDefinitionByDtoTests
   {
     //GIVEN
     var dto = Any.Instance<NewTodoNoteDefinitionDto>();
-    var definition = new NoteDefinitionByDto(dto, Any.List<IWordConversion>());
+    IEnumerable<IWordConversion> conversions = Any.List<IWordConversion>();
+    var definition = new NoteDefinitionByDto(dto, new CompoundConversion(conversions));
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Substitute.For<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();

@@ -5,7 +5,7 @@ namespace ApplicationLogic;
 
 public class TodoCommandFactory(
   ITodoNoteDao inMemoryTodoNoteDao,
-  List<IWordConversion> conversions) : ITodoCommandFactory
+  IWordConversion conversion) : ITodoCommandFactory
 {
   public ITodoAppCommand CreateAddTodoCommand(
     NewTodoNoteDefinitionDto newTodoNoteDefinitionDto,
@@ -14,7 +14,7 @@ public class TodoCommandFactory(
     return new AddTodoCommand(
       inMemoryTodoNoteDao,
       new NotifyRequesterOnSuccessfulNotePersistence(addTodoResponseInProgress),
-      new NoteDefinitionByDto(newTodoNoteDefinitionDto, conversions));
+      new NoteDefinitionByDto(newTodoNoteDefinitionDto, conversion));
   }
 
   public ITodoAppCommand CreateRetrieveTodoNoteCommand(
