@@ -1,11 +1,6 @@
 namespace TodoApp.Database;
 
-public class DatabaseAdapterRoot
+public class DatabaseAdapterRoot(string filePath)
 {
-    public DatabaseAdapterRoot(string filePath)
-    {
-        TodoNoteDao = new InMemoryTodoNoteDao(filePath);
-    }
-
-    public InMemoryTodoNoteDao TodoNoteDao { get; }
+  public InMemoryTodoNoteDao TodoNoteDao { get; } = new(filePath);
 }

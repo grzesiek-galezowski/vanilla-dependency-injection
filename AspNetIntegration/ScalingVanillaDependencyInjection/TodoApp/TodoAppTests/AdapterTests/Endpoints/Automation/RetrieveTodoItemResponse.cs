@@ -4,23 +4,16 @@ using TodoAppTests.TestDtos;
 
 namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
-public class RetrieveTodoItemResponse
+public class RetrieveTodoItemResponse(IFlurlResponse response)
 {
-  private readonly IFlurlResponse _response;
-
-  public RetrieveTodoItemResponse(IFlurlResponse response)
-  {
-    _response = response;
-  }
-
   public void ShouldBeSuccessful()
   {
-    _response.StatusCode.Should().Be(200);
+    response.StatusCode.Should().Be(200);
   }
 
   public async Task ShouldContain(TodoNoteTestDto returnedDto)
   {
-    var todoNoteTestDto = await _response.GetJsonAsync<TodoNoteTestDto>();
+    var todoNoteTestDto = await response.GetJsonAsync<TodoNoteTestDto>();
     todoNoteTestDto.Should().Be(returnedDto);
   }
 }

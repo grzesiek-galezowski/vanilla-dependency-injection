@@ -4,15 +4,10 @@ using TodoAppTests.TestDtos;
 
 namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
-public class AddTodoItemRequest
+public class AddTodoItemRequest(IFlurlRequest request)
 {
-  private readonly IFlurlRequest _request;
-
-  public AddTodoItemRequest(IFlurlRequest request)
-  {
-    _request = request
-      .WithHeader(HeaderNames.Accept, "application/json");
-  }
+  private readonly IFlurlRequest _request = request
+    .WithHeader(HeaderNames.Accept, "application/json");
 
   public Task<IFlurlResponse> AttemptToExecuteWith(NewTodoNoteDefinitionTestDto dto)
   {

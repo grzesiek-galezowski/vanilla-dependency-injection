@@ -38,7 +38,7 @@ public class Tests
     //THEN
     await response.ShouldContainNoteBasedOn(newTodoNoteDefinitionDto, noteId);
   }
-  
+
   [Test]
   public async Task ShouldCorrectInappropriateWordsInContent()
   {
@@ -46,7 +46,8 @@ public class Tests
     var noteId = Any.Guid();
     var appLogicDriver = new AppLogicDriver();
     var newTodoNoteDefinitionDto = Any.Instance<NewTodoNoteDefinitionDto>()
-      with { Content = "I was ran over by a truck"};
+      with
+    { Content = "I was ran over by a truck" };
     appLogicDriver.SetupNextDatabaseNoteId(noteId);
     await appLogicDriver.AddTodoNote(newTodoNoteDefinitionDto);
 
@@ -55,7 +56,7 @@ public class Tests
 
     //THEN
     await response.ShouldContainNoteBasedOn(
-      newTodoNoteDefinitionDto with { Content = "I was ran over by a duck"}, 
+      newTodoNoteDefinitionDto with { Content = "I was ran over by a duck" },
       noteId);
   }
 }

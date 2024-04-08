@@ -2,14 +2,7 @@ using TodoAppTests.TestDtos;
 
 namespace TodoAppTests.HostTests.Automation;
 
-public class CreateTodoNoteResponse
+public class CreateTodoNoteResponse(TodoNoteMetadataTestDto todoNoteMetadataDto)
 {
-  private readonly TodoNoteMetadataTestDto _todoNoteMetadataDto;
-
-  public CreateTodoNoteResponse(TodoNoteMetadataTestDto todoNoteMetadataDto)
-  {
-    _todoNoteMetadataDto = todoNoteMetadataDto;
-  }
-
-  public Guid Id => _todoNoteMetadataDto.Id;
+  public Guid Id => todoNoteMetadataDto.Id;
 }

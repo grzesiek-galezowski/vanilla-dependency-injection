@@ -3,16 +3,9 @@ using Microsoft.Net.Http.Headers;
 
 namespace TodoApp.Endpoints;
 
-public class EndpointsAdapterRoot : IEndpointsRoot
+public class EndpointsAdapterRoot(ITodoCommandFactory todoCommandFactory) : IEndpointsRoot
 {
-    public EndpointsAdapterRoot(ITodoCommandFactory todoCommandFactory)
-    {
-        RetrieveTodoNoteEndpoint = new RetrieveTodoNoteEndpoint(todoCommandFactory);
-        AddTodoEndpoint = 
-          new HeaderValidatingEndpoint(HeaderNames.Accept, "application/json", 
-            new AddTodoEndpoint(todoCommandFactory));
-    }
-
-    public IEndpoint RetrieveTodoNoteEndpoint { get; }
-    public IEndpoint AddTodoEndpoint { get; }
+  public IEndpoint RetrieveTodoNoteEndpoint { get; } = new RetrieveTodoNoteEndpoint(todoCommandFactory);
+  public IEndpoint AddTodoEndpoint { get; } = new HeaderValidatingEndpoint(HeaderNames.Accept, "application/json",
+    new AddTodoEndpoint(todoCommandFactory));
 }

@@ -2,6 +2,6 @@ namespace TodoApp.Endpoints;
 
 public interface IEndpointsRoot
 {
-    IEndpoint AddTodoEndpoint { get; }
-    IEndpoint RetrieveTodoNoteEndpoint { get; }
+  IEndpoint AddTodoEndpoint { get; }
+  IEndpoint RetrieveTodoNoteEndpoint { get; }
 }

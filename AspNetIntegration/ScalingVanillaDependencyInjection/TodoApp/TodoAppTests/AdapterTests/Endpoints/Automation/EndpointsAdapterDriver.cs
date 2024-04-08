@@ -37,7 +37,7 @@ public class EndpointsAdapterDriver : IAsyncDisposable
 
   public async Task<AddTodoItemResponse> AttemptToAddATodoItem(NewTodoNoteDefinitionTestDto dto)
   {
-    return await AttemptToAddATodoItem(dto, r =>r);
+    return await AttemptToAddATodoItem(dto, r => r);
   }
 
   public async Task<AddTodoItemResponse> AttemptToAddATodoItem(

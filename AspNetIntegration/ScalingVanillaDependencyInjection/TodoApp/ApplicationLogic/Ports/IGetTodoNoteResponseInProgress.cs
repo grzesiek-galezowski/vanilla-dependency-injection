@@ -2,5 +2,5 @@ namespace ApplicationLogic.Ports;
 
 public interface IGetTodoNoteResponseInProgress
 {
-    Task Success(TodoNoteDto note, CancellationToken cancellationToken);
+  Task Success(TodoNoteDto note, CancellationToken cancellationToken);
 }

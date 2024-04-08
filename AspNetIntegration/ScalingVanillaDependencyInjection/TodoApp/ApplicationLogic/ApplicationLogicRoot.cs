@@ -2,12 +2,7 @@ using ApplicationLogic.Ports;
 
 namespace ApplicationLogic;
 
-public class ApplicationLogicRoot
+public class ApplicationLogicRoot(ITodoNoteDao todoNoteDao)
 {
-    public ApplicationLogicRoot(ITodoNoteDao todoNoteDao)
-    {
-        TodoCommandFactory = new TodoCommandFactory(todoNoteDao);
-    }
-
-    public ITodoCommandFactory TodoCommandFactory { get; }
+  public ITodoCommandFactory TodoCommandFactory { get; } = new TodoCommandFactory(todoNoteDao);
 }

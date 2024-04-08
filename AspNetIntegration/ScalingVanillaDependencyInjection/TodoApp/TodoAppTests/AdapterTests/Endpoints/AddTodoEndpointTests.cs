@@ -33,7 +33,7 @@ public class AddTodoEndpointTests
     //THEN
     addTodoItemResponse.ShouldBeBadRequest();
   }
-  
+
   [Test]
   public async Task ShouldRespondWithBadRequestWhenSendingAddTodoRequestWithWrongAcceptHeader()
   {

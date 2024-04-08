@@ -4,29 +4,22 @@ using TodoAppTests.TestDtos;
 
 namespace TodoAppTests.AdapterTests.Endpoints.Automation;
 
-public class AddTodoItemResponse
+public class AddTodoItemResponse(IFlurlResponse response)
 {
-    private readonly IFlurlResponse _response;
+  public void ShouldBeSuccessful()
+  {
+    response.StatusCode.Should().Be(200);
+  }
 
-    public AddTodoItemResponse(IFlurlResponse response)
-    {
-        _response = response;
-    }
+  public async Task ShouldContainFilledMetadata()
+  {
+    var todoNoteMetadataTestDto = await response.GetJsonAsync<TodoNoteMetadataTestDto>();
+    todoNoteMetadataTestDto.Should().NotBeNull();
+    todoNoteMetadataTestDto.Id.Should().NotBeEmpty();
+  }
 
-    public void ShouldBeSuccessful()
-    {
-        _response.StatusCode.Should().Be(200);
-    }
-
-    public async Task ShouldContainFilledMetadata()
-    {
-        var todoNoteMetadataTestDto = await _response.GetJsonAsync<TodoNoteMetadataTestDto>();
-        todoNoteMetadataTestDto.Should().NotBeNull();
-        todoNoteMetadataTestDto.Id.Should().NotBeEmpty();
-    }
-
-    public void ShouldBeBadRequest()
-    {
-      _response.StatusCode.Should().Be(400);
-    }
+  public void ShouldBeBadRequest()
+  {
+    response.StatusCode.Should().Be(400);
+  }
 }

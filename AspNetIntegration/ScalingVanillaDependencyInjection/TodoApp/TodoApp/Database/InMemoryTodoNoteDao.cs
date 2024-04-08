@@ -4,15 +4,8 @@ using Core.NullableReferenceTypesExtensions;
 
 namespace TodoApp.Database;
 
-public class InMemoryTodoNoteDao : ITodoNoteDao
+public class InMemoryTodoNoteDao(string filePath) : ITodoNoteDao
 {
-  private readonly string _filePath;
-
-  public InMemoryTodoNoteDao(string filePath)
-  {
-    _filePath = filePath;
-  }
-
   public async Task<TodoNoteDto> ReadNoteById(Guid noteId, CancellationToken cancellationToken)
   {
     var notes = await ReadTodoNoteDtos(cancellationToken);
@@ -33,15 +26,15 @@ public class InMemoryTodoNoteDao : ITodoNoteDao
   private async Task Save(IEnumerable<TodoNoteDto> notes, CancellationToken cancellationToken)
   {
     var serializedDto = JsonSerializer.Serialize(notes);
-    await File.WriteAllTextAsync(_filePath, serializedDto, cancellationToken);
+    await File.WriteAllTextAsync(filePath, serializedDto, cancellationToken);
   }
 
   private async Task<TodoNoteDto[]> ReadTodoNoteDtos(CancellationToken cancellationToken)
   {
-    var fileText = await File.ReadAllTextAsync(_filePath, cancellationToken);
+    var fileText = await File.ReadAllTextAsync(filePath, cancellationToken);
     if (fileText.Length == 0)
     {
-      return new TodoNoteDto[] { };
+      return [];
     }
     var notes = JsonSerializer.Deserialize<TodoNoteDto[]>(fileText).OrThrow();
     return notes;

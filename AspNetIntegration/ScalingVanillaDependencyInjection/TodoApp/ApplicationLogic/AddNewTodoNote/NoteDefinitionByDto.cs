@@ -4,38 +4,31 @@ namespace ApplicationLogic.AddNewTodoNote;
 
 public interface ITodoNoteDefinition
 {
-    Task PersistIn(ITodoNoteDao inMemoryTodoNoteDao,
-      IAfterTodoNotePersistenceSteps afterPersistenceSteps,
-      CancellationToken cancellationToken);
+  Task PersistIn(ITodoNoteDao inMemoryTodoNoteDao,
+    IAfterTodoNotePersistenceSteps afterPersistenceSteps,
+    CancellationToken cancellationToken);
 
-    void Correct();
+  void Correct();
 }
 
-public class NoteDefinitionByDto : ITodoNoteDefinition
+public class NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionDto) : ITodoNoteDefinition
 {
-    private NewTodoNoteDefinitionDto _newTodoNoteDefinitionDto;
-
-    public NoteDefinitionByDto(NewTodoNoteDefinitionDto newTodoNoteDefinitionDto)
-    {
-        _newTodoNoteDefinitionDto = newTodoNoteDefinitionDto;
-    }
-
-    public async Task PersistIn(
+  public async Task PersistIn(
       ITodoNoteDao inMemoryTodoNoteDao,
       IAfterTodoNotePersistenceSteps afterPersistenceSteps,
       CancellationToken cancellationToken)
-    {
-        var todoNoteMetadataDto = await inMemoryTodoNoteDao.Save(
-          _newTodoNoteDefinitionDto,
-          cancellationToken);
-        await afterPersistenceSteps.ExecuteFor(todoNoteMetadataDto, cancellationToken);
-    }
+  {
+    var todoNoteMetadataDto = await inMemoryTodoNoteDao.Save(
+      newTodoNoteDefinitionDto,
+      cancellationToken);
+    await afterPersistenceSteps.ExecuteFor(todoNoteMetadataDto, cancellationToken);
+  }
 
-    public void Correct()
+  public void Correct()
+  {
+    newTodoNoteDefinitionDto = newTodoNoteDefinitionDto with
     {
-      _newTodoNoteDefinitionDto = _newTodoNoteDefinitionDto with
-      {
-        Content = _newTodoNoteDefinitionDto.Content.Replace("truck", "duck")
-      };
-    }
+      Content = newTodoNoteDefinitionDto.Content.Replace("truck", "duck")
+    };
+  }
 }

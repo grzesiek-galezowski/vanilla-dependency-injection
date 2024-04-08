@@ -4,28 +4,21 @@ using TodoAppTests.TestDtos;
 
 namespace TodoAppTests.HostTests.Automation;
 
-public class AttemptToCreateTodoNoteResponse
+public class AttemptToCreateTodoNoteResponse(IFlurlResponse flurlResponse)
 {
-    private readonly IFlurlResponse _flurlResponse;
+  public void ShouldBeSuccessful()
+  {
+    flurlResponse.StatusCode.Should().Be(200);
+  }
 
-    public AttemptToCreateTodoNoteResponse(IFlurlResponse flurlResponse)
-    {
-        _flurlResponse = flurlResponse;
-    }
+  public async Task ShouldContainValidId()
+  {
+    var metadata = await DeserializeDto();
+    metadata.Id.Should().NotBeEmpty();
+  }
 
-    public void ShouldBeSuccessful()
-    {
-        _flurlResponse.StatusCode.Should().Be(200);
-    }
-
-    public async Task ShouldContainValidId()
-    {
-        var metadata = await DeserializeDto();
-        metadata.Id.Should().NotBeEmpty();
-    }
-
-    private Task<TodoNoteMetadataTestDto> DeserializeDto()
-    {
-      return _flurlResponse.GetJsonAsync<TodoNoteMetadataTestDto>();
-    }
+  private Task<TodoNoteMetadataTestDto> DeserializeDto()
+  {
+    return flurlResponse.GetJsonAsync<TodoNoteMetadataTestDto>();
+  }
 }

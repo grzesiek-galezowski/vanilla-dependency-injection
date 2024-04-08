@@ -21,7 +21,7 @@ public class NoteDefinitionByDtoTests
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Any.Instance<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();
-    
+
     definition.Correct();
 
     //WHEN
@@ -35,7 +35,7 @@ public class NoteDefinitionByDtoTests
           Content = inappropriateContent.Replace("truck", "duck")
         }, cancellationToken);
   }
-  
+
   [Test]
   public async Task ShouldExecuteNextStepsWithTheResultOfNotePersistence()
   {

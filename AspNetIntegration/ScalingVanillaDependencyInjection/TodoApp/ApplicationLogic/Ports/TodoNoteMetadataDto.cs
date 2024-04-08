@@ -1,3 +1,3 @@
 namespace ApplicationLogic.Ports;
 
-public record TodoNoteMetadataDto(Guid Id); 
+public record TodoNoteMetadataDto(Guid Id);
