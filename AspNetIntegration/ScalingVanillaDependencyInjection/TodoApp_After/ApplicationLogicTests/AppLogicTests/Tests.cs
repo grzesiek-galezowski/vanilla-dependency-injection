@@ -1,4 +1,4 @@
-﻿using ApplicationLogic.Ports;
+using ApplicationLogic.Ports;
 using ApplicationLogicTests.AppLogicTests.Automation;
 using TddXt.AnyRoot;
 

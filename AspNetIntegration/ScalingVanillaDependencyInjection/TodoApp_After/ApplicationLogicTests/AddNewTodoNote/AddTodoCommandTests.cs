@@ -1,4 +1,4 @@
-﻿using ApplicationLogic.AddNewTodoNote;
+using ApplicationLogic.AddNewTodoNote;
 using ApplicationLogic.Ports;
 using NSubstitute;
 using TddXt.AnyRoot.Invokable;

@@ -1,6 +1,7 @@
-﻿using ApplicationLogic.AddNewTodoNote;
+using ApplicationLogic.AddNewTodoNote;
 using ApplicationLogic.Ports;
 using NSubstitute;
+using TddXt.AnyRoot.Collections;
 using TddXt.AnyRoot.Invokable;
 using TddXt.AnyRoot.Strings;
 
@@ -17,7 +18,7 @@ public class NoteDefinitionByDtoTests
     {
       Content = inappropriateContent
     };
-    var definition = new NoteDefinitionByDto(dto);
+    var definition = new NoteDefinitionByDto(dto, Any.List<IWordConversion>());
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Any.Instance<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();
@@ -41,7 +42,7 @@ public class NoteDefinitionByDtoTests
   {
     //GIVEN
     var dto = Any.Instance<NewTodoNoteDefinitionDto>();
-    var definition = new NoteDefinitionByDto(dto);
+    var definition = new NoteDefinitionByDto(dto, Any.List<IWordConversion>());
     var dao = Substitute.For<ITodoNoteDao>();
     var steps = Substitute.For<IAfterTodoNotePersistenceSteps>();
     var cancellationToken = Any.CancellationToken();

@@ -1,10 +1,8 @@
-using System.Text.Json;
 using ApplicationLogic.Ports;
-using Core.NullableReferenceTypesExtensions;
 
 namespace TodoApp.Database;
 
-public class InMemoryTodoNoteDao(string filePath) : ITodoNoteDao
+public class InMemoryTodoNoteDao(FileStorage fileStorage, IdGenerator idGenerator, DataConversions dataConversions) : ITodoNoteDao
 {
   public async Task<TodoNoteDto> ReadNoteById(Guid noteId, CancellationToken cancellationToken)
   {
@@ -16,27 +14,15 @@ public class InMemoryTodoNoteDao(string filePath) : ITodoNoteDao
     NewTodoNoteDefinitionDto newTodoNoteDefinitionDto,
     CancellationToken cancellationToken)
   {
-    var newGuid = Guid.NewGuid();
-    var todoNoteDto = new TodoNoteDto(newTodoNoteDefinitionDto.Title, newTodoNoteDefinitionDto.Content, newGuid);
+    var newGuid = idGenerator.Generate();
+    var todoNoteDto = dataConversions.ToTodoNoteDtoFrom(newTodoNoteDefinitionDto, newGuid);
     var notes = (await ReadTodoNoteDtos(cancellationToken)).Append(todoNoteDto);
-    await Save(notes, cancellationToken);
+    await fileStorage.Save(notes, cancellationToken);
     return new TodoNoteMetadataDto(newGuid);
-  }
-
-  private async Task Save(IEnumerable<TodoNoteDto> notes, CancellationToken cancellationToken)
-  {
-    var serializedDto = JsonSerializer.Serialize(notes);
-    await File.WriteAllTextAsync(filePath, serializedDto, cancellationToken);
   }
 
   private async Task<TodoNoteDto[]> ReadTodoNoteDtos(CancellationToken cancellationToken)
   {
-    var fileText = await File.ReadAllTextAsync(filePath, cancellationToken);
-    if (fileText.Length == 0)
-    {
-      return [];
-    }
-    var notes = JsonSerializer.Deserialize<TodoNoteDto[]>(fileText).OrThrow();
-    return notes;
+    return await fileStorage.GetValue<TodoNoteDto[]>([], cancellationToken);
   }
 }

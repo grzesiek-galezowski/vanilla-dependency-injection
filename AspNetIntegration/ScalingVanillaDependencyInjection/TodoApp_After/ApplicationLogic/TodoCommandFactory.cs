@@ -3,7 +3,9 @@ using ApplicationLogic.Ports;
 
 namespace ApplicationLogic;
 
-public class TodoCommandFactory(ITodoNoteDao inMemoryTodoNoteDao) : ITodoCommandFactory
+public class TodoCommandFactory(
+  ITodoNoteDao inMemoryTodoNoteDao,
+  List<IWordConversion> conversions) : ITodoCommandFactory
 {
   public ITodoAppCommand CreateAddTodoCommand(
     NewTodoNoteDefinitionDto newTodoNoteDefinitionDto,
@@ -12,7 +14,7 @@ public class TodoCommandFactory(ITodoNoteDao inMemoryTodoNoteDao) : ITodoCommand
     return new AddTodoCommand(
       inMemoryTodoNoteDao,
       new NotifyRequesterOnSuccessfulNotePersistence(addTodoResponseInProgress),
-      new NoteDefinitionByDto(newTodoNoteDefinitionDto));
+      new NoteDefinitionByDto(newTodoNoteDefinitionDto, conversions));
   }
 
   public ITodoAppCommand CreateRetrieveTodoNoteCommand(

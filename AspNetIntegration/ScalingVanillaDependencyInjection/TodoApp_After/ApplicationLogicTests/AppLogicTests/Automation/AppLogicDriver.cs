@@ -1,4 +1,4 @@
-﻿using ApplicationLogic;
+using ApplicationLogic;
 using ApplicationLogic.Ports;
 using NSubstitute;
 
