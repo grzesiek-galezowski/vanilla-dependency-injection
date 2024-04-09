@@ -15,11 +15,12 @@ public class ServiceLogicRoot : IEndpointsRoot
         new FileStorage(databaseOptions.Path),
         new IdGenerator(),
         new DataConversions()),
+      new CompoundConversion(
       [
         new ReplacementConversion("truck", "duck"),
         new ReplacementConversion("dick", "thick"),
         new ReplacementConversion("freaking", "flarking")
-      ]);
+      ]));
 
     AddTodoEndpoint = new HeaderValidatingEndpoint(
       HeaderNames.Accept,
