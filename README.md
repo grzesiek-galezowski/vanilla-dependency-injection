@@ -12,9 +12,12 @@ Resources related to vanilla dependency injection. Moved from the training examp
 * [Yacoub Massad - Why DI containers fail with “complex” object graphs]( https://criticalsoftwareblog.com/2015/08/23/why-di-containers-fail-with-complex-object-graphs/)
 * [Nat Pryce - Dependency "Injection" Considered Harmful](http://www.natpryce.com/articles/000783.html)
 * [Dan North - Why Every Element of SOLID is Wrong](https://speakerdeck.com/tastapod/why-every-element-of-solid-is-wrong) - source of the phrase "new is the new new" and "Assemble into small components that fit in your head".
+* [Vaughn Vernon - 
+Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/your-brain-on-inversion-of-control-and-dependency-injection/) - the section `Dependency Injection without an IoCC`
 
 * [Mark Seemann - Type-safe DI Composition](https://blog.ploeh.dk/2022/01/10/type-safe-di-composition/)
 
 # Supporting sources
 
 * [Mark Seemann - Dependency Whac-a-mole](https://blog.ploeh.dk/2023/10/02/dependency-whac-a-mole/)
+* [Jimmy Bogard - You Probably Don't Need to Worry About MediatR](https://www.jimmybogard.com/you-probably-dont-need-to-worry-about-mediatr/) - the section `[Violates] the Explicit Dependencies Principle`
