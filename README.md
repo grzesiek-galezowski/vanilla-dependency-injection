@@ -3,7 +3,7 @@ Resources related to vanilla dependency injection. Moved from the training examp
 
 # Notable sources on DI and Vanilla DI vs containers:
 
-https://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/
+* [Krzysztof Koźmic - IoC container solves a problem you might not have but it’s a nice problem to have](https://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/)
 
 * [Mark Seemann - When to use a DI container?](https://blog.ploeh.dk/2012/11/06/WhentouseaDIContainer/)
 * [Mark Seemann - Pure Dependency Injection](https://blog.ploeh.dk/2014/06/10/pure-di/)
