@@ -1,11 +1,19 @@
 # vanilla-dependency-injection
 Resources related to vanilla dependency injection. Moved from the training examples repository.
 
-# TODO:
+# Notable sources on DI and Vanilla DI vs containers:
 
-* asp.net core example
-    * replacement (controllers)
-    * humble object (SignalR)
-    * Minimal API
-* Refactoring example before splitting into components
-    * Also example after (maybe taken from the TDD demo in TrainingExamples repo), showing how each of the components can be used in tests   
+https://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/
+
+* [Mark Seemann - When to use a DI container?](https://blog.ploeh.dk/2012/11/06/WhentouseaDIContainer/)
+* [Mark Seemann - Pure Dependency Injection](https://blog.ploeh.dk/2014/06/10/pure-di/)
+* [Vanilla Dependency Injection Manifesto](https://github.com/vanilla-manifesto/vanilla-di-manifesto)
+* [Nikola Malovic - Inversion Of Control, Single Responsibility Principle and Nikola’s laws of dependency injection](https://vuscode.wordpress.com/2009/10/16/inversion-of-control-single-responsibility-principle-and-nikola-s-laws-of-dependency-injection/)
+* [Yacoub Massad - Why DI containers fail with “complex” object graphs]( https://criticalsoftwareblog.com/2015/08/23/why-di-containers-fail-with-complex-object-graphs/)
+* [Nat Pryce - Dependency "Injection" Considered Harmful](http://www.natpryce.com/articles/000783.html)
+* [Dan North - Why Every Element of SOLID is Wrong](https://speakerdeck.com/tastapod/why-every-element-of-solid-is-wrong) - source of the phrase "new is the new new" and "Assemble into small components that fit in your head".
+
+
+# Supporting sources
+
+* [Mark Seemann - Dependency Whac-a-mole](https://blog.ploeh.dk/2023/10/02/dependency-whac-a-mole/)
