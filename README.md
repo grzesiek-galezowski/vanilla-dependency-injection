@@ -13,6 +13,7 @@ Resources related to vanilla dependency injection. Moved from the training examp
 * [Nat Pryce - Dependency "Injection" Considered Harmful](http://www.natpryce.com/articles/000783.html)
 * [Dan North - Why Every Element of SOLID is Wrong](https://speakerdeck.com/tastapod/why-every-element-of-solid-is-wrong) - source of the phrase "new is the new new" and "Assemble into small components that fit in your head".
 
+* [Mark Seemann - Type-safe DI Composition](https://blog.ploeh.dk/2022/01/10/type-safe-di-composition/)
 
 # Supporting sources
 
