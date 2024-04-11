@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -18,7 +20,7 @@ class MultipleConstructors
     var resolvedInstance = container.Resolve<ObjectWithTwoConstructors>();
 
     //THEN
-    Assert.IsInstanceOf<Constructor1Argument>(resolvedInstance.Arg);
+    resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
   }
 
   [Test]
@@ -30,7 +32,7 @@ class MultipleConstructors
     var resolvedInstance = new ObjectWithTwoConstructors(new Constructor1Argument());
 
     //THEN
-    Assert.IsInstanceOf<Constructor1Argument>(resolvedInstance.Arg);
+    resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
   }
 
   public class ObjectWithTwoConstructors

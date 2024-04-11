@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -18,17 +20,17 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation
                 new BreastPlate(4)),
             new Sword(6)));
 
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate, world.Enemy.Armor.BreastPlate);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate.Defense, world.Enemy.Armor.BreastPlate.Defense);
-    Assert.AreNotSame(world.Hero.Sword, world.Enemy.Sword);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+    world.Enemy.Armor.BreastPlate.Should().NotBeSameAs(world.Hero.Armor.BreastPlate);
+    world.Enemy.Armor.BreastPlate.Defense.Should().NotBe(world.Hero.Armor.BreastPlate.Defense);
+    world.Enemy.Sword.Should().NotBeSameAs(world.Hero.Sword);
 
-    Assert.AreEqual(4, world.Hero.Sword.Attack);
-    Assert.AreEqual(2, world.Hero.Armor.BreastPlate.Defense);
-    Assert.AreEqual(6, world.Enemy.Sword.Attack);
-    Assert.AreEqual(4, world.Enemy.Armor.BreastPlate.Defense);
+    world.Hero.Sword.Attack.Should().Be(4);
+    world.Hero.Armor.BreastPlate.Defense.Should().Be(2);
+    world.Enemy.Sword.Attack.Should().Be(6);
+    world.Enemy.Armor.BreastPlate.Defense.Should().Be(4);
   }
 
   [Test]
@@ -40,17 +42,17 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation
         Soldier(6, 4));
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate, world.Enemy.Armor.BreastPlate);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate.Defense, world.Enemy.Armor.BreastPlate.Defense);
-    Assert.AreNotSame(world.Hero.Sword, world.Enemy.Sword);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+    world.Enemy.Armor.BreastPlate.Should().NotBeSameAs(world.Hero.Armor.BreastPlate);
+    world.Enemy.Armor.BreastPlate.Defense.Should().NotBe(world.Hero.Armor.BreastPlate.Defense);
+    world.Enemy.Sword.Should().NotBeSameAs(world.Hero.Sword);
 
-    Assert.AreEqual(4, world.Hero.Sword.Attack);
-    Assert.AreEqual(2, world.Hero.Armor.BreastPlate.Defense);
-    Assert.AreEqual(6, world.Enemy.Sword.Attack);
-    Assert.AreEqual(4, world.Enemy.Armor.BreastPlate.Defense);
+    world.Hero.Sword.Attack.Should().Be(4);
+    world.Hero.Armor.BreastPlate.Defense.Should().Be(2);
+    world.Enemy.Sword.Attack.Should().Be(6);
+    world.Enemy.Armor.BreastPlate.Defense.Should().Be(4);
   }
 
   [Test]
@@ -109,17 +111,17 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation
     var world = container.Resolve<World>();
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate, world.Enemy.Armor.BreastPlate);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate.Defense, world.Enemy.Armor.BreastPlate.Defense);
-    Assert.AreNotSame(world.Hero.Sword, world.Enemy.Sword);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+    world.Enemy.Armor.BreastPlate.Should().NotBeSameAs(world.Hero.Armor.BreastPlate);
+    world.Enemy.Armor.BreastPlate.Defense.Should().NotBe(world.Hero.Armor.BreastPlate.Defense);
+    world.Enemy.Sword.Should().NotBeSameAs(world.Hero.Sword);
 
-    Assert.AreEqual(4, world.Hero.Sword.Attack);
-    Assert.AreEqual(2, world.Hero.Armor.BreastPlate.Defense);
-    Assert.AreEqual(6, world.Enemy.Sword.Attack);
-    Assert.AreEqual(4, world.Enemy.Armor.BreastPlate.Defense);
+    world.Hero.Sword.Attack.Should().Be(4);
+    world.Hero.Armor.BreastPlate.Defense.Should().Be(2);
+    world.Enemy.Sword.Attack.Should().Be(6);
+    world.Enemy.Armor.BreastPlate.Defense.Should().Be(4);
   }
 
   [Test]
@@ -149,17 +151,17 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation
     var world = container.Resolve<World>();
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate, world.Enemy.Armor.BreastPlate);
-    Assert.AreNotSame(world.Hero.Armor.BreastPlate.Defense, world.Enemy.Armor.BreastPlate.Defense);
-    Assert.AreNotSame(world.Hero.Sword, world.Enemy.Sword);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+    world.Enemy.Armor.BreastPlate.Should().NotBeSameAs(world.Hero.Armor.BreastPlate);
+    world.Enemy.Armor.BreastPlate.Defense.Should().NotBe(world.Hero.Armor.BreastPlate.Defense);
+    world.Enemy.Sword.Should().NotBeSameAs(world.Hero.Sword);
 
-    Assert.AreEqual(4, world.Hero.Sword.Attack);
-    Assert.AreEqual(2, world.Hero.Armor.BreastPlate.Defense);
-    Assert.AreEqual(6, world.Enemy.Sword.Attack);
-    Assert.AreEqual(4, world.Enemy.Armor.BreastPlate.Defense);
+    world.Hero.Sword.Attack.Should().Be(4);
+    world.Hero.Armor.BreastPlate.Defense.Should().Be(2);
+    world.Enemy.Sword.Attack.Should().Be(6);
+    world.Enemy.Armor.BreastPlate.Defense.Should().Be(4);
   }
 
   private static Character Soldier(int x1, int x2)

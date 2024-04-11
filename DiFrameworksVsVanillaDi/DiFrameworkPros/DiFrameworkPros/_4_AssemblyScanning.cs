@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Autofac;
 using Autofac.Core.Registration;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Scrutor;
@@ -30,9 +31,9 @@ public class AssemblyScanning
     var i1 = container.Resolve<Interface1>();
     var i2 = container.Resolve<Interface2>();
 
-    Assert.IsInstanceOf<MyRepository>(i1);
-    Assert.IsInstanceOf<MyRepository>(i2);
-    Assert.AreEqual(i2, i1);
+    i1.Should().BeOfType<MyRepository>();
+    i2.Should().BeOfType<MyRepository>();
+    i1.Should().BeSameAs(i2);
 
     Assert.Throws<ComponentNotRegisteredException>(
       () => container.Resolve<MyRepository2>()); //not following convention
@@ -60,9 +61,9 @@ public class AssemblyScanning
     var i1 = container.GetRequiredService<Interface1>();
     var i2 = container.GetRequiredService<Interface2>();
 
-    Assert.IsInstanceOf<MyRepository>(i1);
-    Assert.IsInstanceOf<MyRepository>(i2);
-    Assert.AreEqual(i2, i1);
+    i1.Should().BeOfType<MyRepository>();
+    i2.Should().BeOfType<MyRepository>();
+    i1.Should().BeSameAs(i2);
 
     Assert.Throws<InvalidOperationException>(
       () => container.GetRequiredService<MyRepository2>()); //not following convention

@@ -1,4 +1,6 @@
 using Autofac.Core;
+using FluentAssertions;
+using NUnit.Framework.Legacy;
 
 namespace DiFrameworkCons;
 
@@ -19,11 +21,10 @@ public class MissingDependency
       var one = container.Resolve<One>();
     });
 
-    StringAssert.Contains(
+    dependencyResolutionException!.ToString().Should().Contain(
       "None of the constructors found on type 'DiFrameworkCons.MissingDependency+One' " +
       "can be invoked with the available services and parameters:\r\n" +
-      "Cannot resolve parameter 'Two Two' of constructor 'Void .ctor(Two)'.",
-      dependencyResolutionException!.ToString());
+      "Cannot resolve parameter 'Two Two' of constructor 'Void .ctor(Two)'.");
   }
 
   [Test]
@@ -43,15 +44,14 @@ public class MissingDependency
       });
     });
 
-    StringAssert.Contains(
+    dependencyResolutionException!.ToString().Should().Contain(
       "Some services are not able to be constructed " +
       "(Error while validating the service descriptor " +
       "'ServiceType: DiFrameworkCons.MissingDependency+One " +
       "Lifetime: Transient ImplementationType: DiFrameworkCons.MissingDependency+One': " +
       "Unable to resolve service for type " +
       "'DiFrameworkCons.MissingDependency+Two' " +
-      "while attempting to activate 'DiFrameworkCons.MissingDependency+One'.)",
-      dependencyResolutionException!.ToString());
+      "while attempting to activate 'DiFrameworkCons.MissingDependency+One'.)");
   }
 
   [Test]

@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -24,15 +26,15 @@ public class DecoratorsWithMultipleChains
     //WHEN
 
     //THEN
-    Assert.IsInstanceOf<B>(chain1.Next);
-    Assert.IsInstanceOf<C1>(chain1.Next.Next);
-    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
-    Assert.IsNull(chain1.Next.Next!.Next!.Next);
+    chain1.Next.Should().BeOfType<B>();
+    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next.Next!.Next.Should().BeOfType<D>();
+    chain1.Next.Next!.Next!.Next.Should().BeNull();
 
-    Assert.IsInstanceOf<B>(chain2.Next);
-    Assert.IsInstanceOf<C2>(chain2.Next.Next);
-    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
-    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+    chain2.Next.Should().BeOfType<B>();
+    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next.Next!.Next.Should().BeOfType<D>();
+    chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
 
   /// <summary>
@@ -80,15 +82,15 @@ public class DecoratorsWithMultipleChains
     var chain2 = container.ResolveNamed<A>("chain2");
 
     //THEN
-    Assert.IsInstanceOf<B>(chain1.Next);
-    Assert.IsInstanceOf<C1>(chain1.Next.Next);
-    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
-    Assert.IsNull(chain1.Next.Next!.Next!.Next);
+    chain1.Next.Should().BeOfType<B>();
+    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next.Next!.Next.Should().BeOfType<D>();
+    chain1.Next.Next!.Next!.Next.Should().BeNull();
 
-    Assert.IsInstanceOf<B>(chain2.Next);
-    Assert.IsInstanceOf<C2>(chain2.Next.Next);
-    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
-    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+    chain2.Next.Should().BeOfType<B>();
+    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next.Next!.Next.Should().BeOfType<D>();
+    chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
 
   /// <summary>
@@ -131,15 +133,15 @@ public class DecoratorsWithMultipleChains
     var chain2 = container.ResolveNamed<IComponent>("A2");
 
     //THEN
-    Assert.IsInstanceOf<B>(chain1.Next);
-    Assert.IsInstanceOf<C1>(chain1.Next.Next);
-    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
-    Assert.IsNull(chain1.Next.Next!.Next!.Next);
+    chain1.Next.Should().BeOfType<B>();
+    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next.Next!.Next.Should().BeOfType<D>();
+    chain1.Next.Next!.Next!.Next.Should().BeNull();
 
-    Assert.IsInstanceOf<B>(chain2.Next);
-    Assert.IsInstanceOf<C2>(chain2.Next.Next);
-    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
-    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+    chain2.Next.Should().BeOfType<B>();
+    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next.Next!.Next.Should().BeOfType<D>();
+    chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
 
   /// <summary>
@@ -190,15 +192,15 @@ public class DecoratorsWithMultipleChains
     var chain2 = container.ResolveNamed<IComponent>("chain2");
 
     //THEN
-    Assert.IsInstanceOf<B>(chain1.Next);
-    Assert.IsInstanceOf<C1>(chain1.Next!.Next);
-    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
-    Assert.IsNull(chain1.Next.Next!.Next!.Next);
+    chain1.Next.Should().BeOfType<B>();
+    chain1.Next!.Next.Should().BeOfType<C1>();
+    chain1.Next.Next!.Next.Should().BeOfType<D>();
+    chain1.Next.Next!.Next!.Next.Should().BeNull();
 
-    Assert.IsInstanceOf<B>(chain2.Next);
-    Assert.IsInstanceOf<C2>(chain2.Next!.Next);
-    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
-    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+    chain2.Next.Should().BeOfType<B>();
+    chain2.Next!.Next.Should().BeOfType<C2>();
+    chain2.Next.Next!.Next.Should().BeOfType<D>();
+    chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
 
   /// <summary>
@@ -232,14 +234,14 @@ public class DecoratorsWithMultipleChains
     var chain2 = container.GetRequiredKeyedService<A>("chain2");
 
     //THEN
-    Assert.IsInstanceOf<B>(chain1.Next);
-    Assert.IsInstanceOf<C1>(chain1.Next.Next);
-    Assert.IsInstanceOf<D>(chain1.Next.Next!.Next);
+    chain1.Next.Should().BeOfType<B>();
+    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next.Next!.Next.Should().BeOfType<D>();
 
-    Assert.IsInstanceOf<B>(chain2.Next);
-    Assert.IsInstanceOf<C2>(chain2.Next.Next);
-    Assert.IsInstanceOf<D>(chain2.Next.Next!.Next);
-    Assert.IsNull(chain2.Next.Next!.Next!.Next);
+    chain2.Next.Should().BeOfType<B>();
+    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next.Next!.Next.Should().BeOfType<D>();
+    chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
 
   public interface IComponent

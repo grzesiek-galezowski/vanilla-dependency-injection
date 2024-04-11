@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -20,8 +22,8 @@ public class DependencyAsMultipleInterfaces
     var cacheUser = new UserOfReaderAndWriter(cache, cache);
 
     //THEN
-    Assert.AreSame(cacheUser.ReadCache, cacheUser.WriteCache);
-    Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
+    cacheUser.WriteCache.Should().BeSameAs(cacheUser.ReadCache);
+    cacheUser.WriteCache.Number.Should().Be(cacheUser.ReadCache.Number);
   }
 
   /// <summary>
@@ -45,8 +47,8 @@ public class DependencyAsMultipleInterfaces
     var cacheUser = container.Resolve<UserOfReaderAndWriter>();
 
     //THEN
-    Assert.AreSame(cacheUser.ReadCache, cacheUser.WriteCache);
-    Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
+    cacheUser.WriteCache.Should().BeSameAs(cacheUser.ReadCache);
+    cacheUser.WriteCache.Number.Should().Be(cacheUser.ReadCache.Number);
   }
 
   /// <summary>
@@ -73,8 +75,8 @@ public class DependencyAsMultipleInterfaces
     var cacheUser = container.GetRequiredService<UserOfReaderAndWriter>();
 
     //THEN
-    Assert.AreSame(cacheUser.ReadCache, cacheUser.WriteCache);
-    Assert.AreEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
+    cacheUser.WriteCache.Should().BeSameAs(cacheUser.ReadCache);
+    cacheUser.WriteCache.Number.Should().Be(cacheUser.ReadCache.Number);
   }
 
   /// <summary>
@@ -100,8 +102,8 @@ public class DependencyAsMultipleInterfaces
     var cacheUser = container.GetRequiredService<UserOfReaderAndWriter>();
 
     //THEN
-    Assert.AreNotSame(cacheUser.ReadCache, cacheUser.WriteCache);
-    Assert.AreNotEqual(cacheUser.ReadCache.Number, cacheUser.WriteCache.Number);
+    cacheUser.WriteCache.Should().NotBeSameAs(cacheUser.ReadCache);
+    cacheUser.WriteCache.Number.Should().NotBe(cacheUser.ReadCache.Number);
   }
 }
 

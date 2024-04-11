@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -33,13 +35,13 @@ public class EventsAndOnActivated
 
     //THEN
     dependency1.DoSomething();
-    Assert.AreEqual(dependency1.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency1.InstanceId);
 
     dependency2.DoSomething();
-    Assert.AreEqual(dependency2.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency2.InstanceId);
 
     dependency3.DoSomething();
-    Assert.AreEqual(dependency3.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency3.InstanceId);
   }
 
   /// <summary>
@@ -73,13 +75,13 @@ public class EventsAndOnActivated
 
     //THEN
     dependency1.DoSomething();
-    Assert.AreEqual(dependency1.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency1.InstanceId);
 
     dependency2.DoSomething();
-    Assert.AreEqual(dependency2.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency2.InstanceId);
 
     dependency3.DoSomething();
-    Assert.AreEqual(dependency3.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency3.InstanceId);
   }
 
   /// <summary>
@@ -107,13 +109,13 @@ public class EventsAndOnActivated
 
     //THEN
     dependency1.DoSomething();
-    Assert.AreEqual(dependency1.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency1.InstanceId);
 
     dependency2.DoSomething();
-    Assert.AreEqual(dependency2.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency2.InstanceId);
 
     dependency3.DoSomething();
-    Assert.AreEqual(dependency3.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency3.InstanceId);
   }
 
   /// <summary>
@@ -141,13 +143,13 @@ public class EventsAndOnActivated
 
     //THEN
     dependency1.DoSomething();
-    Assert.AreEqual(dependency1.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency1.InstanceId);
 
     dependency2.DoSomething();
-    Assert.AreEqual(dependency2.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency2.InstanceId);
 
     dependency3.DoSomething();
-    Assert.AreEqual(dependency3.InstanceId, observer.LastReceived);
+    observer.LastReceived.Should().Be(dependency3.InstanceId);
   }
 }
 

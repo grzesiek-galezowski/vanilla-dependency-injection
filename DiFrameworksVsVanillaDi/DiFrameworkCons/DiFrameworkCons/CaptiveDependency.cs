@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -44,12 +46,12 @@ public class CaptiveDependency
       var captor1 = scope.Resolve<Captor>();
       var captor2 = scope.Resolve<Captor>();
       //THEN
-      Assert.AreEqual("Lol0", text1);
-      Assert.AreEqual("Lol0", text2);
+      text1.Should().Be("Lol0");
+      text2.Should().Be("Lol0");
 
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
 
     using (var scope = container.BeginLifetimeScope())
@@ -59,12 +61,12 @@ public class CaptiveDependency
       var captor1 = scope.Resolve<Captor>();
       var captor2 = scope.Resolve<Captor>();
       //THEN
-      Assert.AreEqual("Lol2", text1);
-      Assert.AreEqual("Lol2", text2);
+      text1.Should().Be("Lol2");
+      text2.Should().Be("Lol2");
 
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
 
     using (var scope = container.BeginLifetimeScope())
@@ -74,12 +76,12 @@ public class CaptiveDependency
       var captor1 = scope.Resolve<Captor>();
       var captor2 = scope.Resolve<Captor>();
       //THEN
-      Assert.AreEqual("Lol3", text1);
-      Assert.AreEqual("Lol3", text2);
+      text1.Should().Be("Lol3");
+      text2.Should().Be("Lol3");
 
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
   }
 
@@ -107,12 +109,12 @@ public class CaptiveDependency
       var captor1 = scope.ServiceProvider.GetRequiredService<Captor>();
       var captor2 = scope.ServiceProvider.GetRequiredService<Captor>();
       //THEN
-      Assert.AreEqual("Lol0", text1);
-      Assert.AreEqual("Lol0", text2);
+      text1.Should().Be("Lol0");
+      text2.Should().Be("Lol0");
 
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
 
     using (var scope = container.CreateScope())
@@ -122,11 +124,11 @@ public class CaptiveDependency
       var captor1 = scope.ServiceProvider.GetRequiredService<Captor>();
       var captor2 = scope.ServiceProvider.GetRequiredService<Captor>();
       //THEN
-      Assert.AreEqual("Lol2", text1);
-      Assert.AreEqual("Lol2", text2);
+      text1.Should().Be("Lol2");
+      text2.Should().Be("Lol2");
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
 
     using (var scope = container.CreateScope())
@@ -136,12 +138,12 @@ public class CaptiveDependency
       var captor1 = scope.ServiceProvider.GetRequiredService<Captor>();
       var captor2 = scope.ServiceProvider.GetRequiredService<Captor>();
       //THEN
-      Assert.AreEqual("Lol3", text1);
-      Assert.AreEqual("Lol3", text2);
+      text1.Should().Be("Lol3");
+      text2.Should().Be("Lol3");
 
       //captor still holds "Lol1"
-      Assert.AreEqual("Lol1", captor1.T.Str);
-      Assert.AreEqual("Lol1", captor2.T.Str);
+      captor1.T.Str.Should().Be("Lol1");
+      captor2.T.Str.Should().Be("Lol1");
     }
   }
 
@@ -172,10 +174,9 @@ public class CaptiveDependency
     });
 
     //There is no information about the transitive transient dependency
-    Assert.AreEqual(
+    e!.Message.Should().Be(
       "Cannot consume scoped service 'System.String' " +
-      "from singleton 'DiFrameworkCons.CaptiveDependency+Captor'.",
-      e!.Message);
+      "from singleton 'DiFrameworkCons.CaptiveDependency+Captor'.");
   }
 
   /// <summary>
@@ -198,9 +199,8 @@ public class CaptiveDependency
       var captor1 = container.GetRequiredService<Captor>();
     });
 
-    Assert.AreEqual(
-      "Cannot resolve scoped service 'System.String' from root provider.",
-      e!.Message);
+    e!.Message.Should().Be(
+      "Cannot resolve scoped service 'System.String' from root provider.");
   }
 
   [Test]

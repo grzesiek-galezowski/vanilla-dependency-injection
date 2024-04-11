@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -17,7 +19,7 @@ class MultipleRegistrations
     var resolvedInstance = container.Resolve<ObjectWithConstructorArgument>();
 
     //THEN
-    Assert.IsInstanceOf<Constructor2Argument>(resolvedInstance.Arg);
+    resolvedInstance.Arg.Should().BeOfType<Constructor2Argument>();
   }
 
 
@@ -39,7 +41,7 @@ class MultipleRegistrations
     var resolvedInstance = container.Resolve<ObjectWithConstructorArgument>();
 
     //THEN
-    Assert.IsInstanceOf<Constructor1Argument>(resolvedInstance.Arg);
+    resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
   }
 
 

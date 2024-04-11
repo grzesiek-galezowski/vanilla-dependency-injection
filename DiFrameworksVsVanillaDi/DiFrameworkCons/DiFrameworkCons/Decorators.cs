@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -21,10 +23,10 @@ public class Decorators
   {
     var answer = new SynchronizedAnswer(new TracedAnswer(new Answer()), 1);
 
-    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-    Assert.AreEqual(1, answer.X);
+    answer.Should().BeOfType<SynchronizedAnswer>();
+    answer.NestedAnswer.Should().BeOfType<TracedAnswer>();
+    answer.NestedAnswer.NestedAnswer.Should().BeOfType<Answer>();
+    answer.X.Should().Be(1);
   }
 
 
@@ -57,10 +59,10 @@ public class Decorators
 
     using var container = builder.Build();
     var answer = container.Resolve<IAnswer>();
-    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-    Assert.AreEqual(1, ((SynchronizedAnswer)answer).X);
+    answer.Should().BeOfType<SynchronizedAnswer>();
+    answer.NestedAnswer.Should().BeOfType<TracedAnswer>();
+    answer.NestedAnswer.NestedAnswer.Should().BeOfType<Answer>();
+    ((SynchronizedAnswer)answer).X.Should().Be(1);
   }
 
   /// <summary>
@@ -80,10 +82,10 @@ public class Decorators
 
     using var container = builder.Build();
     var answer = container.Resolve<IAnswer>();
-    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-    Assert.AreEqual(1, ((SynchronizedAnswer)answer).X);
+    answer.Should().BeOfType<SynchronizedAnswer>();
+    answer.NestedAnswer.Should().BeOfType<TracedAnswer>();
+    answer.NestedAnswer.NestedAnswer.Should().BeOfType<Answer>();
+    ((SynchronizedAnswer)answer).X.Should().Be(1);
   }
 
   /// <summary>
@@ -106,10 +108,10 @@ public class Decorators
 
     using var container = builder.BuildServiceProvider();
     var answer = container.GetRequiredService<IAnswer>();
-    Assert.IsInstanceOf<SynchronizedAnswer>(answer);
-    Assert.IsInstanceOf<TracedAnswer>(answer.NestedAnswer);
-    Assert.IsInstanceOf<Answer>(answer.NestedAnswer.NestedAnswer);
-    Assert.AreEqual(1, ((SynchronizedAnswer)answer).X);
+    answer.Should().BeOfType<SynchronizedAnswer>();
+    answer.NestedAnswer.Should().BeOfType<TracedAnswer>();
+    answer.NestedAnswer.NestedAnswer.Should().BeOfType<Answer>();
+    ((SynchronizedAnswer)answer).X.Should().Be(1);
   }
 
   public interface IAnswer

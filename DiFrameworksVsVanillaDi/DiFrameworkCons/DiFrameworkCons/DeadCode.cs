@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 /// <summary>
@@ -28,7 +30,7 @@ public class DeadCode
     var resolvedInstance = container.Resolve<DependencyConsumer>();
 
     //THEN
-    Assert.NotNull(resolvedInstance);
+    resolvedInstance.Should().NotBeNull();
   }
 
   [Test]
@@ -46,7 +48,7 @@ public class DeadCode
     var resolvedInstance = container.GetRequiredService<DependencyConsumer>();
 
     //THEN
-    Assert.NotNull(resolvedInstance);
+    resolvedInstance.Should().NotBeNull();
   }
 
   /// <summary>
@@ -63,7 +65,7 @@ public class DeadCode
     //WHEN
 
     //THEN
-    Assert.NotNull(consumer);
+    consumer.Should().NotBeNull();
   }
 }
 

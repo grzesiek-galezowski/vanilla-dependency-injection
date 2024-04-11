@@ -1,4 +1,6 @@
 using Autofac.Core;
+using FluentAssertions;
+using NUnit.Framework.Legacy;
 using SimpleInjector;
 
 namespace DiFrameworkCons;
@@ -27,17 +29,13 @@ public class CircularDependencies
     using var container = containerBuilder.Build();
     //WHEN
     //THEN
-    var dependencyResolutionException = Assert.Throws<DependencyResolutionException>(() =>
-    {
-      var one = container.Resolve<One>();
-    });
-
-    StringAssert.Contains(
-      "Autofac.Core.DependencyResolutionException: An exception was thrown while activating DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three",
-      dependencyResolutionException!.ToString());
-    StringAssert.Contains(
-      "Circular component dependency detected: DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One.",
-      dependencyResolutionException!.ToString());
+    new Action(() => { container.Resolve<One>(); })
+      .Should().ThrowExactly<DependencyResolutionException>()
+      .Which.ToString().Should().ContainAll(
+      [
+        "Autofac.Core.DependencyResolutionException: An exception was thrown while activating DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three",
+        "Circular component dependency detected: DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One."
+      ]);
   }
 
   /// <summary>
@@ -53,22 +51,20 @@ public class CircularDependencies
       .AddTransient<One>()
       .AddTransient<Two>()
       .AddTransient<Three>();
-    var dependencyResolutionException = Assert.Throws<AggregateException>(() =>
-    {
-      using var container = containerBuilder.BuildServiceProvider(
-        new ServiceProviderOptions
-        {
-          ValidateOnBuild = true,
-          ValidateScopes = true,
-        });
-    });
     //WHEN
     //THEN
-
-    StringAssert.Contains(
-      "A circular dependency was detected for the service of type 'DiFrameworkCons.CircularDependencies+One'.\r\n" +
-      "DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One",
-      dependencyResolutionException!.ToString());
+    new Action(() =>
+      {
+        using var container = containerBuilder.BuildServiceProvider(
+          new ServiceProviderOptions
+          {
+            ValidateOnBuild = true,
+            ValidateScopes = true,
+          });
+      }).Should().ThrowExactly<AggregateException>()
+      .Which.ToString().Should().Contain(
+        "A circular dependency was detected for the service of type 'DiFrameworkCons.CircularDependencies+One'.\r\n" +
+        "DiFrameworkCons.CircularDependencies+One -> DiFrameworkCons.CircularDependencies+Two -> DiFrameworkCons.CircularDependencies+Three -> DiFrameworkCons.CircularDependencies+One");
   }
 
   /// <summary>
@@ -93,7 +89,7 @@ public class CircularDependencies
       });
     //WHEN
     //THEN
-    //uncomment to hang this test: var one = container.GetRequiredService<One>();
+    //TODO: uncomment to hang this test: var one = container.GetRequiredService<One>();
   }
 
   /// <summary>
@@ -139,7 +135,7 @@ public class CircularDependencies
     One one = null!;
     var two = new Two(new Three(one));
     one = new One(two);
-    Assert.IsNull(one.Two.Three.One);
+    one.Two.Three.One.Should().BeNull();
   }
 
   public record One(Two Two);

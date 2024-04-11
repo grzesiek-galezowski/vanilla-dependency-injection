@@ -1,5 +1,6 @@
 using System;
 using Autofac;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
@@ -45,8 +46,8 @@ internal class _7_Modules
       logic.PerformAction();
 
       //THEN
-      Assert.AreEqual("Hello",
-        ((ListOutput)container.Resolve<IApplicationLogicOutput>()).Content);
+      ((ListOutput)container.Resolve<IApplicationLogicOutput>()).Content
+        .Should().Be("Hello");
     }
 
     private class ApplicationLogicModule : Module
@@ -107,8 +108,7 @@ internal class _7_Modules
       logic.PerformAction();
 
       //THEN
-      Assert.AreEqual("Hello",
-        ((ListOutput)container.GetRequiredService<IApplicationLogicOutput>()).Content);
+      ((ListOutput)container.GetRequiredService<IApplicationLogicOutput>()).Content.Should().Be("Hello");
     }
 
     private static class MsDiApplicationLogicModule
@@ -160,8 +160,7 @@ internal class _7_Modules
       applicationLogicModule.ApplicationLogic.PerformAction();
 
       //THEN
-      Assert.AreEqual("Hello",
-        ((ListOutput)outputModule.Output).Content);
+      ((ListOutput)outputModule.Output).Content.Should().Be("Hello");
     }
 
     private class ApplicationLogicModule

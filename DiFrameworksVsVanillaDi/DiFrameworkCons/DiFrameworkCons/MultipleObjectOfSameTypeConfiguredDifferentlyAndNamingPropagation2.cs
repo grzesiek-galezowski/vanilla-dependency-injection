@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -18,14 +20,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
           new BreastPlate()),
         new ShortSword()));
 
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
 
-    Assert.IsInstanceOf<ChainMail>(world.Hero.Armor.BodyArmor);
-    Assert.IsInstanceOf<BreastPlate>(world.Enemy.Armor.BodyArmor);
-    Assert.IsInstanceOf<LongSword>(world.Hero.Weapon);
-    Assert.IsInstanceOf<ShortSword>(world.Enemy.Weapon);
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
   [Test]
@@ -37,14 +39,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       Soldier(new BreastPlate(), new ShortSword()));
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
 
-    Assert.IsInstanceOf<ChainMail>(world.Hero.Armor.BodyArmor);
-    Assert.IsInstanceOf<BreastPlate>(world.Enemy.Armor.BodyArmor);
-    Assert.IsInstanceOf<LongSword>(world.Hero.Weapon);
-    Assert.IsInstanceOf<ShortSword>(world.Enemy.Weapon);
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
   [Test]
@@ -102,14 +104,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     var world = container.Resolve<World>();
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
 
-    Assert.IsInstanceOf<ChainMail>(world.Hero.Armor.BodyArmor);
-    Assert.IsInstanceOf<BreastPlate>(world.Enemy.Armor.BodyArmor);
-    Assert.IsInstanceOf<LongSword>(world.Hero.Weapon);
-    Assert.IsInstanceOf<ShortSword>(world.Enemy.Weapon);
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
   [Test]
@@ -149,14 +151,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     var world = container.GetRequiredService<World>();
 
     //THEN
-    Assert.AreNotSame(world.Hero, world.Enemy);
-    Assert.AreNotSame(world.Hero.Armor, world.Enemy.Armor);
-    Assert.AreNotSame(world.Hero.Armor.Helmet, world.Enemy.Armor.Helmet);
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
 
-    Assert.IsInstanceOf<ChainMail>(world.Hero.Armor.BodyArmor);
-    Assert.IsInstanceOf<BreastPlate>(world.Enemy.Armor.BodyArmor);
-    Assert.IsInstanceOf<LongSword>(world.Hero.Weapon);
-    Assert.IsInstanceOf<ShortSword>(world.Enemy.Weapon);
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
   //[Test]

@@ -2,8 +2,10 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using Autofac;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace DiFrameworkPros;
 
@@ -48,7 +50,7 @@ public class _6_LazyLoading
     //THEN
     //VerySlowDependency takes 10 seconds to create.
     //Passing this assertion means control never reached this class
-    Assert.Less(stopWatch.Elapsed, TimeSpan.FromSeconds(5));
+    stopWatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
   }
 
   [Test]
@@ -71,7 +73,7 @@ public class _6_LazyLoading
     //THEN
     //VerySlowDependency takes 10 seconds to create.
     //Passing this assertion means runtime execution never reached this class
-    Assert.Less(stopWatch.Elapsed, TimeSpan.FromSeconds(5));
+    stopWatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
   }
 
   /// <summary>
@@ -100,7 +102,7 @@ public class _6_LazyLoading
     //THEN
     //VerySlowDependency takes 10 seconds to create.
     //Passing this assertion means control never reached this class
-    Assert.Less(stopWatch.Elapsed, TimeSpan.FromSeconds(5));
+    stopWatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
   }
 
   public interface IVerySlowDependency

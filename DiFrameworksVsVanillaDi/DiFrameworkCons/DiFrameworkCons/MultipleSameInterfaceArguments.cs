@@ -1,5 +1,6 @@
 using Autofac.Core;
 using Autofac.Features.AttributeFilters;
+using FluentAssertions;
 
 //todo add descriptions
 
@@ -39,8 +40,8 @@ public class TwoImplementationsOfTheSameInterface
 
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveService>();
-    Assert.IsInstanceOf<LocalDataStorage>(archiveService.LocalStorage);
-    Assert.IsInstanceOf<RemoteDataStorage>(archiveService.RemoteStorage);
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
   [Test]
@@ -60,8 +61,8 @@ public class TwoImplementationsOfTheSameInterface
             (info, context) => info.Name == "remoteStorage",
             (info, context) => context.ResolveKeyed<IDataStorage>(Storages.Remote))
     );
-    Assert.IsInstanceOf<LocalDataStorage>(archiveService.LocalStorage);
-    Assert.IsInstanceOf<RemoteDataStorage>(archiveService.RemoteStorage);
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
   [Test]
@@ -80,8 +81,8 @@ public class TwoImplementationsOfTheSameInterface
 
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveService>();
-    Assert.IsInstanceOf<LocalDataStorage>(archiveService.LocalStorage);
-    Assert.IsInstanceOf<RemoteDataStorage>(archiveService.RemoteStorage);
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
   [Test]
@@ -94,8 +95,8 @@ public class TwoImplementationsOfTheSameInterface
 
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveServiceAttributed>();
-    Assert.IsInstanceOf<LocalDataStorage>(archiveService.LocalStorage);
-    Assert.IsInstanceOf<RemoteDataStorage>(archiveService.RemoteStorage);
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
   [Test]
@@ -111,8 +112,8 @@ public class TwoImplementationsOfTheSameInterface
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveService>();
 
-    Assert.IsInstanceOf<LocalDataStorage>(archiveService.LocalStorage);
-    Assert.IsInstanceOf<RemoteDataStorage>(archiveService.RemoteStorage);
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
 

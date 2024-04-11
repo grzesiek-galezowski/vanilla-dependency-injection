@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -15,9 +17,9 @@ internal class MultipleLifestylesOfInstancesTheSameClass
     );
 
     //THEN
-    Assert.AreSame(p2.ThrottledOutbox, p1.ThrottledOutbox);
-    Assert.AreNotSame(p2.ThrottledOutbox, p3.ThrottledOutbox);
-    Assert.AreNotSame(p1.ThrottledOutbox, p3.ThrottledOutbox);
+    p1.ThrottledOutbox.Should().BeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p1.ThrottledOutbox);
   }
 
   [Test]
@@ -51,9 +53,9 @@ internal class MultipleLifestylesOfInstancesTheSameClass
 
 
     //THEN
-    Assert.AreSame(p2.ThrottledOutbox, p1.ThrottledOutbox);
-    Assert.AreNotSame(p2.ThrottledOutbox, p3.ThrottledOutbox);
-    Assert.AreNotSame(p1.ThrottledOutbox, p3.ThrottledOutbox);
+    p1.ThrottledOutbox.Should().BeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p1.ThrottledOutbox);
   }
 
   [Test]
@@ -83,9 +85,9 @@ internal class MultipleLifestylesOfInstancesTheSameClass
     var p3 = container.Resolve<EmergencyProcess>();
 
     //THEN
-    Assert.AreSame(p2.ThrottledOutbox, p1.ThrottledOutbox);
-    Assert.AreNotSame(p2.ThrottledOutbox, p3.ThrottledOutbox);
-    Assert.AreNotSame(p1.ThrottledOutbox, p3.ThrottledOutbox);
+    p1.ThrottledOutbox.Should().BeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p2.ThrottledOutbox);
+    p3.ThrottledOutbox.Should().NotBeSameAs(p1.ThrottledOutbox);
   }
 }
 

@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -17,7 +19,7 @@ public class Literals
     var resolvedInstance = container.Resolve<DependencyConsumer>();
 
     //THEN
-    Assert.AreEqual(2, resolvedInstance.X);
+    resolvedInstance.X.Should().Be(2);
   }
 
   [Test]
@@ -29,7 +31,7 @@ public class Literals
     //WHEN
 
     //THEN
-    Assert.NotNull(consumer);
+    consumer.Should().NotBeNull();
   }
 
   public record DependencyConsumer(Dependency Dependency, int X);
