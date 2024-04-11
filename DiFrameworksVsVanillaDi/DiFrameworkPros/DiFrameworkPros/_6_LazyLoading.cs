@@ -5,7 +5,6 @@ using Autofac;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace DiFrameworkPros;
 

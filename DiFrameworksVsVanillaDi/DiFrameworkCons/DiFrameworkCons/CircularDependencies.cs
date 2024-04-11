@@ -1,7 +1,7 @@
 using Autofac.Core;
 using FluentAssertions;
-using NUnit.Framework.Legacy;
 using SimpleInjector;
+using static FluentAssertions.FluentActions;
 
 namespace DiFrameworkCons;
 
@@ -29,7 +29,7 @@ public class CircularDependencies
     using var container = containerBuilder.Build();
     //WHEN
     //THEN
-    new Action(() => { container.Resolve<One>(); })
+    Invoking(() => { container.Resolve<One>(); })
       .Should().ThrowExactly<DependencyResolutionException>()
       .Which.ToString().Should().ContainAll(
       [
@@ -53,7 +53,7 @@ public class CircularDependencies
       .AddTransient<Three>();
     //WHEN
     //THEN
-    new Action(() =>
+    Invoking(() =>
       {
         using var container = containerBuilder.BuildServiceProvider(
           new ServiceProviderOptions
@@ -108,17 +108,12 @@ public class CircularDependencies
     container.Register(() => new Two(container.GetInstance<Three>()));
     container.Register<Three>();
 
-    Assert.Throws<InvalidOperationException>(() =>
-    {
-      container.Verify(VerificationOption.VerifyAndDiagnose);
-    });
+    Invoking(() => container.Verify(VerificationOption.VerifyAndDiagnose))
+    .Should().Throw<InvalidOperationException>();
 
     //WHEN
     //THEN
-    Assert.Catch<ActivationException>(() =>
-    {
-      var instance = container.GetInstance<One>();
-    });
+    Invoking(() => container.GetInstance<One>()).Should().Throw<ActivationException>();
   }
 
   /// <summary>

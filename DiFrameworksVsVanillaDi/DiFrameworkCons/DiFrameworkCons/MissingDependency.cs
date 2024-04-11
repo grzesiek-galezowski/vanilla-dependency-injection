@@ -1,6 +1,6 @@
 using Autofac.Core;
 using FluentAssertions;
-using NUnit.Framework.Legacy;
+using static FluentAssertions.FluentActions;
 
 namespace DiFrameworkCons;
 
@@ -16,15 +16,14 @@ public class MissingDependency
     using var container = containerBuilder.Build();
     //WHEN
     //THEN
-    var dependencyResolutionException = Assert.Throws<DependencyResolutionException>(() =>
-    {
-      var one = container.Resolve<One>();
-    });
-
-    dependencyResolutionException!.ToString().Should().Contain(
-      "None of the constructors found on type 'DiFrameworkCons.MissingDependency+One' " +
-      "can be invoked with the available services and parameters:\r\n" +
-      "Cannot resolve parameter 'Two Two' of constructor 'Void .ctor(Two)'.");
+    Invoking(() =>
+      {
+        var one = container.Resolve<One>();
+      }).Should().Throw<DependencyResolutionException>()
+      .Which.ToString().Should().Contain(
+        "None of the constructors found on type 'DiFrameworkCons.MissingDependency+One' " +
+        "can be invoked with the available services and parameters:\r\n" +
+        "Cannot resolve parameter 'Two Two' of constructor 'Void .ctor(Two)'.");
   }
 
   [Test]
@@ -35,23 +34,22 @@ public class MissingDependency
     var containerBuilder = new ServiceCollection();
     containerBuilder.AddTransient<One>();
 
-    var dependencyResolutionException = Assert.Throws<AggregateException>(() =>
-    {
-      using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
+    Invoking(() =>
       {
-        ValidateOnBuild = true,
-        ValidateScopes = true
-      });
-    });
-
-    dependencyResolutionException!.ToString().Should().Contain(
-      "Some services are not able to be constructed " +
-      "(Error while validating the service descriptor " +
-      "'ServiceType: DiFrameworkCons.MissingDependency+One " +
-      "Lifetime: Transient ImplementationType: DiFrameworkCons.MissingDependency+One': " +
-      "Unable to resolve service for type " +
-      "'DiFrameworkCons.MissingDependency+Two' " +
-      "while attempting to activate 'DiFrameworkCons.MissingDependency+One'.)");
+        using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
+        {
+          ValidateOnBuild = true,
+          ValidateScopes = true
+        });
+      }).Should().Throw<AggregateException>()
+      .Which.ToString().Should().Contain(
+        "Some services are not able to be constructed " +
+        "(Error while validating the service descriptor " +
+        "'ServiceType: DiFrameworkCons.MissingDependency+One " +
+        "Lifetime: Transient ImplementationType: DiFrameworkCons.MissingDependency+One': " +
+        "Unable to resolve service for type " +
+        "'DiFrameworkCons.MissingDependency+Two' " +
+        "while attempting to activate 'DiFrameworkCons.MissingDependency+One'.)");
   }
 
   [Test]
@@ -67,17 +65,12 @@ public class MissingDependency
     });
     //WHEN
     //THEN
-    var dependencyResolutionException = Assert.Throws<InvalidOperationException>(() =>
-    {
-      var one = container.GetRequiredService<One>();
-    });
-
-    StringAssert.Contains(
-      "No service for type 'DiFrameworkCons.MissingDependency+Two' has been registered.",
-      dependencyResolutionException!.ToString());
+    Invoking(() => container.GetRequiredService<One>())
+      .Should().Throw<InvalidOperationException>().Which.ToString().Should()
+      .Contain("No service for type 'DiFrameworkCons.MissingDependency+Two' has been registered.");
   }
 
-  //bug add vanilla DI example
+  //BUG: add vanilla DI example
 
   public record One(Two Two);
   public record Two;

@@ -6,6 +6,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Scrutor;
+using static FluentAssertions.FluentActions;
 
 namespace DiFrameworkPros;
 
@@ -35,8 +36,8 @@ public class AssemblyScanning
     i2.Should().BeOfType<MyRepository>();
     i1.Should().BeSameAs(i2);
 
-    Assert.Throws<ComponentNotRegisteredException>(
-      () => container.Resolve<MyRepository2>()); //not following convention
+    Invoking(container.Resolve<MyRepository2>)
+      .Should().Throw<ComponentNotRegisteredException>(); //not following convention
   }
 
 
@@ -65,8 +66,8 @@ public class AssemblyScanning
     i2.Should().BeOfType<MyRepository>();
     i1.Should().BeSameAs(i2);
 
-    Assert.Throws<InvalidOperationException>(
-      () => container.GetRequiredService<MyRepository2>()); //not following convention
+    Invoking(container.GetRequiredService<MyRepository2>)
+      .Should().Throw<InvalidOperationException>(); //not following convention
   }
 
   //Vanilla dependency injection doesn't have any alternative. The whole point of

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using static FluentAssertions.FluentActions;
 
 namespace DiFrameworkCons;
 
@@ -168,15 +169,12 @@ public class CaptiveDependency
     using var container = builder.BuildServiceProvider(true); //scope validation enabled
 
     //WHEN
-    var e = Assert.Throws<InvalidOperationException>(() =>
-    {
-      var captor1 = container.GetRequiredService<Captor>();
-    });
-
-    //There is no information about the transitive transient dependency
-    e!.Message.Should().Be(
-      "Cannot consume scoped service 'System.String' " +
-      "from singleton 'DiFrameworkCons.CaptiveDependency+Captor'.");
+    Invoking(() => container.GetRequiredService<Captor>())
+      .Should().Throw<InvalidOperationException>()
+      //There is no information about the transitive transient dependency:
+      .Which.Message.Should().Be(
+        "Cannot consume scoped service 'System.String' " +
+        "from singleton 'DiFrameworkCons.CaptiveDependency+Captor'.");
   }
 
   /// <summary>
@@ -194,13 +192,9 @@ public class CaptiveDependency
     using var container = builder.BuildServiceProvider(true); //scope validation enabled
 
     //WHEN
-    var e = Assert.Throws<InvalidOperationException>(() =>
-    {
-      var captor1 = container.GetRequiredService<Captor>();
-    });
-
-    e!.Message.Should().Be(
-      "Cannot resolve scoped service 'System.String' from root provider.");
+    Invoking(() => container.GetRequiredService<Captor>())
+      .Should().Throw<InvalidOperationException>()
+      .WithMessage("Cannot resolve scoped service 'System.String' from root provider.");
   }
 
   [Test]
@@ -216,7 +210,7 @@ public class CaptiveDependency
       var requiredService = scope.Resolve<Singleton>();
     }
 
-    Assert.Throws<Exception>(() => provider.Dispose());
+    Invoking(provider.Dispose).Should().Throw<Exception>();
   }
 
   [Test]
@@ -232,7 +226,7 @@ public class CaptiveDependency
       var requiredService = scope.ServiceProvider.GetRequiredService<Singleton>();
     }
 
-    Assert.Throws<Exception>(() => provider.Dispose());
+    Invoking(provider.Dispose).Should().Throw<Exception>();
   }
 
   public class Scoped : IDisposable
@@ -283,12 +277,12 @@ public class CaptiveDependency
     using var container = builder.BuildServiceProvider(true); //scope validation enabled
 
     //WHEN
-    Assert.DoesNotThrow(() =>
+    Invoking(() =>
     {
-      //this doesn't throw exception because we handwired a special instance of normally
-      //scoped dependency to the singleton Captor.
-      var captor1 = container.GetRequiredService<Captor>();
-    });
+        //this doesn't throw exception because we handwired a special instance of normally
+        //scoped dependency to the singleton Captor.
+        var captor1 = container.GetRequiredService<Captor>();
+    }).Should().NotThrow();
 
   }
 
