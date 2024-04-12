@@ -21,3 +21,21 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
 
 * [Mark Seemann - Dependency Whac-a-mole](https://blog.ploeh.dk/2023/10/02/dependency-whac-a-mole/)
 * [Jimmy Bogard - You Probably Don't Need to Worry About MediatR](https://www.jimmybogard.com/you-probably-dont-need-to-worry-about-mediatr/) - the section `[Violates] the Explicit Dependencies Principle`
+
+
+Topics:
+1. Where Vanilla DI is better/worse than a container?
+  1. Autowiring
+  2. Captive dependencies
+  3. Circular dependencies
+  4. Dead code detection
+  5. Decorators/composites
+  6. Extracting code into libraries
+  7. Passing literals into constructors
+  8. Handling missing dependencies
+  9. Multiple constructors
+  10. Multiple lifestyles for different instances of a type
+  11. Similar subgraphs differing with leaves.
+  12. 
+1. How to do Vanilla DI well and scale it?
+1. How to integrate Vanilla DI into ASP.NET Core?
