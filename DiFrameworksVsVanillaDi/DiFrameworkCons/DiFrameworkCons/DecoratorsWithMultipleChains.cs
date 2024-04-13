@@ -132,12 +132,12 @@ public class DecoratorsWithMultipleChains
 
     //THEN
     chain1.Next.Should().BeOfType<B>();
-    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next!.Next.Should().BeOfType<C1>();
     chain1.Next.Next!.Next.Should().BeOfType<D>();
     chain1.Next.Next!.Next!.Next.Should().BeNull();
 
     chain2.Next.Should().BeOfType<B>();
-    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next!.Next.Should().BeOfType<C2>();
     chain2.Next.Next!.Next.Should().BeOfType<D>();
     chain2.Next.Next!.Next!.Next.Should().BeNull();
   }

@@ -17,42 +17,42 @@ public class LifetimeScopeManagement
   public void ShouldDisposeOfCreatedDependenciesUsingAutofac()
   {
     var containerBuilder = new ContainerBuilder();
-    containerBuilder.RegisterType<Lol>();
+    containerBuilder.RegisterType<DisposableDependency>();
     using (var container = containerBuilder.Build())
     {
-      var lol1 = container.Resolve<Lol>();
-      var lol2 = container.Resolve<Lol>();
+      var dependency1 = container.Resolve<DisposableDependency>();
+      var dependency2 = container.Resolve<DisposableDependency>();
       Console.WriteLine("opening scope");
-      using (var nested = container.BeginLifetimeScope("nested"))
+      using (var nested = container.BeginLifetimeScope())
       {
-        var lol3 = nested.Resolve<Lol>();
-        var lol4 = nested.Resolve<Lol>();
+        var dependency3 = nested.Resolve<DisposableDependency>();
+        var dependency4 = nested.Resolve<DisposableDependency>();
         Console.WriteLine("closing scope");
-      } // lol3.Dispose(), lol3.Dispose()
+      } // dependency3.Dispose(), dependency4.Dispose()
       Console.WriteLine("closed scope");
-      var lol5 = container.Resolve<Lol>();
-    } // lol1.Dispose(), lol2.Dispose(), lol3.Dispose()
+      var dependency5 = container.Resolve<DisposableDependency>();
+    } // dependency1.Dispose(), dependency2.Dispose(), dependency5.Dispose()
   }
 
   [Test]
   public void ShouldDisposeOfCreatedDependenciesUsingMsDi()
   {
     var containerBuilder = new ServiceCollection();
-    containerBuilder.AddTransient<Lol>();
+    containerBuilder.AddTransient<DisposableDependency>();
     using (var container = containerBuilder.BuildServiceProvider())
     {
-      var lol1 = container.GetRequiredService<Lol>();
-      var lol2 = container.GetRequiredService<Lol>();
+      var dependency1 = container.GetRequiredService<DisposableDependency>();
+      var dependency2 = container.GetRequiredService<DisposableDependency>();
       Console.WriteLine("opening scope");
       using (var nested = container.CreateScope())
       {
-        var lol3 = nested.ServiceProvider.GetRequiredService<Lol>();
-        var lol4 = nested.ServiceProvider.GetRequiredService<Lol>();
+        var dependency3 = nested.ServiceProvider.GetRequiredService<DisposableDependency>();
+        var dependency4 = nested.ServiceProvider.GetRequiredService<DisposableDependency>();
         Console.WriteLine("closing scope");
-      } // lol3.Dispose(), lol3.Dispose()
+      } // dependency3.Dispose(), dependency4.Dispose()
       Console.WriteLine("closed scope");
-      var lol5 = container.GetRequiredService<Lol>();
-    } // lol1.Dispose(), lol2.Dispose(), lol3.Dispose()
+      var lol5 = container.GetRequiredService<DisposableDependency>();
+    } // dependency1.Dispose(), dependency2.Dispose(), dependency5.Dispose()
   }
 
   /// <summary>
@@ -66,21 +66,21 @@ public class LifetimeScopeManagement
   public void ShouldDisposeOfCreatedDependenciesUsingVanillaDependencyInjection()
   {
     {
-      var lol1 = new Lol();
-      var lol2 = new Lol();
+      var dependency1 = new DisposableDependency();
+      var dependency2 = new DisposableDependency();
       Console.WriteLine("opening scope");
       {
-        var lol3 = new Lol();
-        var lol4 = new Lol();
+        var dependency3 = new DisposableDependency();
+        var dependency4 = new DisposableDependency();
         Console.WriteLine("closing scope");
-        lol3.Dispose();
-        lol4.Dispose();
+        dependency3.Dispose();
+        dependency4.Dispose();
       }
-      var lol5 = new Lol();
+      var dependency5 = new DisposableDependency();
 
-      lol1.Dispose();
-      lol2.Dispose();
-      lol5.Dispose();
+      dependency1.Dispose();
+      dependency2.Dispose();
+      dependency5.Dispose();
     } 
   }
 
@@ -96,34 +96,33 @@ public class LifetimeScopeManagement
   {
     {
       using var disposables = new Disposables();
-      var lol1 = new Lol();
-      var lol2 = new Lol();
-      disposables.Add(lol1);
-      disposables.Add(lol2);
+      var dependency1 = new DisposableDependency();
+      var dependency2 = new DisposableDependency();
+      disposables.Add(dependency1);
+      disposables.Add(dependency2);
 
       Console.WriteLine("opening scope");
       {
         using var disposables2 = new Disposables();
-        var lol3 = new Lol();
-        var lol4 = new Lol();
-        disposables2.Add(lol3);
-        disposables2.Add(lol4);
+        var dependency3 = new DisposableDependency();
+        var dependency4 = new DisposableDependency();
+        disposables2.Add(dependency3);
+        disposables2.Add(dependency4);
 
         Console.WriteLine("closing scope");
       }
-      var lol5 = new Lol();
-      disposables.Add(lol5);
+      var dependency5 = new DisposableDependency();
+      disposables.Add(dependency5);
     } 
   }
-
 }
 
-file class Lol : IDisposable
+file class DisposableDependency : IDisposable
 {
   private static int _counter = 0;
   private readonly int _currentId;
 
-  public Lol()
+  public DisposableDependency()
   {
     _currentId = _counter++;
     Console.WriteLine("_____CREATED______" + _currentId);

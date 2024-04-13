@@ -18,33 +18,31 @@ public class AutoWiring
   [Test]
   public void ShouldAutoWireBasicDependenciesUsingAutofac()
   {
-    var containerBuilder = new ContainerBuilder();
-    containerBuilder.RegisterType<Person>().SingleInstance();
-    containerBuilder.RegisterType<Kitchen>().SingleInstance();
-    containerBuilder.RegisterType<Knife>().SingleInstance();
-    containerBuilder.RegisterType<Logger>().InstancePerDependency();
-    containerBuilder.RegisterType<LoggingChannel>().SingleInstance();
+    var builder = new ContainerBuilder();
+    builder.RegisterType<Person>().SingleInstance();
+    builder.RegisterType<Kitchen>().SingleInstance();
+    builder.RegisterType<Knife>().SingleInstance();
+    builder.RegisterType<Logger>().InstancePerDependency();
+    builder.RegisterType<LoggingChannel>().SingleInstance();
 
-    using (var container = containerBuilder.Build())
-    {
-      var person = container.Resolve<Person>();
-    }
+    using var container = builder.Build();
+
+    var person = container.Resolve<Person>();
   }
-  
+
   [Test]
   public void ShouldAutoWireBasicDependenciesUsingMsDi()
   {
-    var containerBuilder = new ServiceCollection();
-    containerBuilder.AddSingleton<Person>();
-    containerBuilder.AddSingleton<Kitchen>();
-    containerBuilder.AddSingleton<Knife>();
-    containerBuilder.AddTransient<Logger>();
-    containerBuilder.AddSingleton<LoggingChannel>();
+    var builder = new ServiceCollection();
+    builder.AddSingleton<Person>();
+    builder.AddSingleton<Kitchen>();
+    builder.AddSingleton<Knife>();
+    builder.AddTransient<Logger>();
+    builder.AddSingleton<LoggingChannel>();
 
-    using (var container = containerBuilder.BuildServiceProvider())
-    {
-      var person = container.GetRequiredService<Person>();
-    }
+    using var container = builder.BuildServiceProvider();
+
+    var person = container.GetRequiredService<Person>();
   }
 
   /// <summary>
@@ -72,17 +70,19 @@ public class AutoWiring
   public void ShouldManuallyWireBasicDependencies2()
   {
     var loggingChannel = new LoggingChannel(); // this could also be a field
-    Logger GetLogger()
-    {
-      return new Logger(loggingChannel);
-    }
-    
+
     var person = new Person(
       new Kitchen(
         new Knife(
           GetLogger()),
         GetLogger()),
       GetLogger());
+    return;
+
+    Logger GetLogger()
+    {
+      return new Logger(loggingChannel);
+    }
   }
 
   /// <summary>

@@ -48,6 +48,7 @@ public class CircularDependencies
       .AddTransient<One>()
       .AddTransient<Two>()
       .AddTransient<Three>();
+
     //WHEN
     //THEN
     Invoking(() =>

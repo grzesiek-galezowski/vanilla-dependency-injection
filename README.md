@@ -26,19 +26,34 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
 # Topics
 
 1. Vanilla DI vs a DI container
-    1. Autowiring
-    1. Managing scopes
-    1. Circular dependencies
-    1. Dead code detection
+    1. Autowiring (`_1_Autowiring.cs` and handcoded)
+        1. When is not helping
+        1. When is helping - reusing recipe
+        1. When is not helping again - multiple recipes for the same type
+        1. Minimizing recipe reuse problem in Vanilla DI with local functions
+    1. Managing scopes (`_2_LifetimeScopeMagament.cs`)
+        1. Container example
+        1. Vanilla DI and manual Dispose
+        1. Disposal subsystem
+    1. Handling missing dependencies (`MissingDependency.cs`)
+        1. Container - runtime
+        1. Vanilla DI - compile time
+    1. Circular dependencies (`CircularDependencies.cs`)
+        1. Uncomment assertions
+        1. CD without container validations
+        1. CD with container validations
+        1. CD with container and lambdas (!!)
+        1. Conclusion: avoid lambdas in MsDi
+        1. CD with Vanilla DI
+    1. Dead code detection (`_DeadCode.cs_`)
+    1. Extracting code into libraries (`ExtractingLibrary.cs`)
+    1. Multiple lifestyles for different instances of a type (`MultipleLifestylesOfInstancesTheSameClass.cs`)
     1. Decorators/composites
-    1. Extracting code into libraries
-    1. Passing literals into constructors
-    1. Handling missing dependencies
-    1. Multiple constructors & factory methods
-    1. Multiple lifestyles for different instances of a type
     1. Similar subgraphs differing with leaves.
     1. Captive dependencies
-    1. Graph readability
+    1. [Optional - can also be discussed in aspnet core example] Graph readability
+    1. [Optional - needs more code] Multiple constructors & factory methods
+    1. [Optional - needs more code] Passing literals into constructors
 1. How to integrate Vanilla DI into ASP.NET Core?
     1. Composition root object
     1. Minimal API

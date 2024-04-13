@@ -177,7 +177,7 @@ public class MyDependency : IMyDependency
     InstanceId = _lastInstanceId++;
   }
 
-  public event Action<int> SomeKindOfEvent;
+  public event Action<int>? SomeKindOfEvent;
 
   public void DoSomething()
   {

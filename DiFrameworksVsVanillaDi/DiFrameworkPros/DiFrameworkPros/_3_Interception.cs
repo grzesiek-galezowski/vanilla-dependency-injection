@@ -43,14 +43,15 @@ public class Interception
   [Test]
   public void ShouldEnableInterception()
   {
-    Dependency CreateDependency()
-      => ProxyGenerator.CreateClassProxyWithTarget(new Dependency(), new CallLogger());
-
     var dependency1 = CreateDependency();
     var dependency2 = CreateDependency();
 
     dependency1.DoSomething();
     dependency2.DoSomething();
+    return;
+
+    static Dependency CreateDependency()
+      => ProxyGenerator.CreateClassProxyWithTarget(new Dependency(), new CallLogger());
   }
 
   public interface IDependency
