@@ -1,6 +1,4 @@
-using Autofac.Core;
 using Autofac.Features.AttributeFilters;
-using FluentAssertions;
 
 //todo add descriptions
 
@@ -117,9 +115,7 @@ public class TwoImplementationsOfTheSameInterface
   }
 
 
-  public class LocalDataStorage : IDataStorage
-  {
-  }
+  public class LocalDataStorage : IDataStorage;
 
   public class ArchiveService
   {
@@ -147,13 +143,9 @@ public class TwoImplementationsOfTheSameInterface
     }
   }
 
-  public class RemoteDataStorage : IDataStorage
-  {
-  }
+  public class RemoteDataStorage : IDataStorage;
 
-  public interface IDataStorage
-  {
-  }
+  public interface IDataStorage;
 
   public enum Storages
   {

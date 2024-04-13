@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -49,10 +47,7 @@ class MultipleConstructors
     }
   }
 
-  public interface ConstructorArgument
-  {
-
-  }
+  public interface ConstructorArgument;
 
   public record Constructor1Argument : ConstructorArgument;
   public record Constructor2Argument : ConstructorArgument;

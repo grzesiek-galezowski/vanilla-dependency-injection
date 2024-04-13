@@ -1,7 +1,4 @@
-using Autofac.Core;
-using FluentAssertions;
 using SimpleInjector;
-using static FluentAssertions.FluentActions;
 
 namespace DiFrameworkCons;
 

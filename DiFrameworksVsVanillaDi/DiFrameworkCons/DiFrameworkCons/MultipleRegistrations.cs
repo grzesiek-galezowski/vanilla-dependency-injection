@@ -1,17 +1,15 @@
-using FluentAssertions;
-
 namespace DiFrameworkCons;
 
 //todo add descriptions
-class MultipleRegistrations
+public class MultipleRegistrations
 {
   [Test]
   public void ShouldResolveLastRegisteredImplementationFromContainer()
   {
     //GIVEN
     var builder = new ContainerBuilder();
-    builder.RegisterType<Constructor1Argument>().As<ConstructorArgument>().SingleInstance();
-    builder.RegisterType<Constructor2Argument>().As<ConstructorArgument>().SingleInstance();
+    builder.RegisterType<Constructor1Argument>().As<IConstructorArgument>().SingleInstance();
+    builder.RegisterType<Constructor2Argument>().As<IConstructorArgument>().SingleInstance();
     builder.RegisterType<ObjectWithConstructorArgument>().SingleInstance();
     using var container = builder.Build();
 
@@ -30,10 +28,10 @@ class MultipleRegistrations
     var builder = new ContainerBuilder();
     builder.Register<Constructor1Argument>(context =>
     {
-      Assert.Fail("should not be called");
-      return null;
-    }).As<ConstructorArgument>().SingleInstance();
-    builder.RegisterType<Constructor1Argument>().As<ConstructorArgument>().InstancePerDependency();
+      Execute.Assertion.FailWith("should not be called");
+      return null!;
+    }).As<IConstructorArgument>().SingleInstance();
+    builder.RegisterType<Constructor1Argument>().As<IConstructorArgument>().InstancePerDependency();
     builder.RegisterType<ObjectWithConstructorArgument>().SingleInstance();
     using var container = builder.Build();
 
@@ -46,9 +44,9 @@ class MultipleRegistrations
 
 
 
-  public record ObjectWithConstructorArgument(ConstructorArgument Arg);
+  public record ObjectWithConstructorArgument(IConstructorArgument Arg);
 
-  public interface ConstructorArgument { }
-  public record Constructor1Argument : ConstructorArgument;
-  public record Constructor2Argument : ConstructorArgument;
+  public interface IConstructorArgument;
+  public record Constructor1Argument : IConstructorArgument;
+  public record Constructor2Argument : IConstructorArgument;
 }

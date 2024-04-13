@@ -104,9 +104,7 @@ public class _6_LazyLoading
     stopWatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
   }
 
-  public interface IVerySlowDependency
-  {
-  }
+  public interface IVerySlowDependency;
 
   private class VerySlowDependency : IVerySlowDependency
   {
@@ -116,18 +114,11 @@ public class _6_LazyLoading
     }
   }
 
-  public interface IControllerINeed
-  {
+  public interface IControllerINeed;
 
-  }
+  public class ControllerINeed : IControllerINeed;
 
-  public class ControllerINeed : IControllerINeed
-  {
-  }
-
-  public interface IControllerIDoNotNeed
-  {
-  }
+  public interface IControllerIDoNotNeed;
 
   private class ControllerIDoNotNeedButItNeedsSlowDependency : IControllerIDoNotNeed
   {

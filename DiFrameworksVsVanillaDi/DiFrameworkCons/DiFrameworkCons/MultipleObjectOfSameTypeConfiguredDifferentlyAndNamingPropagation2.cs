@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace DiFrameworkCons;
 
 //todo add descriptions
@@ -210,18 +208,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       weapon);
   }
 
-  internal interface BodyArmor
-  {
-  }
+  internal interface BodyArmor;
   public record World(Character Hero, Character Enemy);
   public record Character(Armor Armor, HandWeapon Weapon);
   public record Armor(Helmet Helmet, BodyArmor BodyArmor);
   public record BreastPlate : BodyArmor;
   public record ChainMail: BodyArmor;
   public record Helmet;
-  public interface HandWeapon
-  {
-  }
+  public interface HandWeapon;
   public record ShortSword : HandWeapon;
   public record LongSword : HandWeapon;
 
