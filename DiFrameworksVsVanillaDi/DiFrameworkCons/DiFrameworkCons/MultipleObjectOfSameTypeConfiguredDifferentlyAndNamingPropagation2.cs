@@ -191,18 +191,18 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
   {
     //GIVEN
-    var firstCategory = Guid.NewGuid().ToString();
-    var secondCategory = Guid.NewGuid().ToString();
+    var firstCategory = "hero";
+    var secondCategory = "enemy";
   
     var builder = new ContainerBuilder();
     builder.RegisterType<World>()
       .As<World>()
       .WithParameter(
         (info, _) => info.Position == 0,
-        (_, context) => context.ResolveNamed<Character>($"{firstCategory}Character"))
+        (_, context) => context.ResolveNamed<Character>(firstCategory))
       .WithParameter(
         (info, _) => info.Position == 1,
-        (_, context) => context.ResolveNamed<Character>($"{secondCategory}Character"))
+        (_, context) => context.ResolveNamed<Character>(secondCategory))
       .SingleInstance();
   
     builder.RegisterModule(new SoldierAutofacModule<LongSword, ChainMail>(firstCategory));
@@ -224,7 +224,7 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
-  private static Character Soldier(BodyArmor bodyArmor, HandWeapon weapon)
+  private static Character Soldier(IBodyArmor bodyArmor, IHandWeapon weapon)
   {
     return new Character(
       new Armor(
@@ -233,20 +233,20 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       weapon);
   }
 
-  internal interface BodyArmor;
+  internal interface IBodyArmor;
   public record World(Character Hero, Character Enemy);
-  public record Character(Armor Armor, HandWeapon Weapon);
-  public record Armor(Helmet Helmet, BodyArmor BodyArmor);
-  public record BreastPlate : BodyArmor;
-  public record ChainMail: BodyArmor;
+  public record Character(Armor Armor, IHandWeapon Weapon);
+  public record Armor(Helmet Helmet, IBodyArmor BodyArmor);
+  public record BreastPlate : IBodyArmor;
+  public record ChainMail: IBodyArmor;
   public record Helmet;
-  public interface HandWeapon;
-  public record ShortSword : HandWeapon;
-  public record LongSword : HandWeapon;
+  public interface IHandWeapon;
+  public record ShortSword : IHandWeapon;
+  public record LongSword : IHandWeapon;
 
   public class SoldierAutofacModule<THandWeapon, TBodyArmor> : Module
-    where THandWeapon : HandWeapon
-    where TBodyArmor : BodyArmor  
+    where THandWeapon : IHandWeapon
+    where TBodyArmor : IBodyArmor  
   {
     private readonly string _category;
 
@@ -260,33 +260,35 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       builder.RegisterType<Character>()
         .WithParameter(
           (info, _) => info.Position == 0,
-          (_, context) => context.ResolveNamed<Armor>($"{_category}Armor")
+          (_, context) => context.ResolveNamed<Armor>(_category)
         )
         .WithParameter(
           (info, _) => info.Position == 1,
-          (_, context) => context.ResolveNamed<THandWeapon>($"{_category}HandWeapon")
+          (_, context) => context.ResolveNamed<THandWeapon>(_category)
         )
-        .Named<Character>($"{_category}Character")
+        .Named<Character>(_category)
         .SingleInstance();
 
       builder.RegisterType<Armor>()
         .WithParameter(
           (info, _) => info.Position == 0,
-          (_, context) => context.ResolveNamed<Helmet>($"{_category}Helmet"))
+          (_, context) => context.ResolveNamed<Helmet>(_category))
         .WithParameter(
           (info, _) => info.Position == 1,
-          (_, context) => context.ResolveNamed<TBodyArmor>($"{_category}BodyArmor"))
-        .Named<Armor>($"{_category}Armor")
+          (_, context) => context.ResolveNamed<TBodyArmor>(_category))
+        .Named<Armor>(_category)
         .SingleInstance();
 
       builder.RegisterType<THandWeapon>()
-        .Named<THandWeapon>($"{_category}HandWeapon")
+        .Named<THandWeapon>(_category)
         .SingleInstance();
+
       builder.RegisterType<Helmet>()
-        .Named<Helmet>($"{_category}Helmet")
+        .Named<Helmet>(_category)
         .SingleInstance();
+
       builder.RegisterType<TBodyArmor>()
-        .Named<TBodyArmor>($"{_category}BodyArmor")
+        .Named<TBodyArmor>(_category)
         .SingleInstance();
     }
   }
@@ -295,8 +297,8 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   {
     public static void RegisterIn<THandWeapon, TBodyArmor>(
       ServiceCollection builder, string category)
-      where THandWeapon : class, HandWeapon
-      where TBodyArmor : class, BodyArmor
+      where THandWeapon : class, IHandWeapon
+      where TBodyArmor : class, IBodyArmor
     {
       builder.AddKeyedSingleton(
         category,
