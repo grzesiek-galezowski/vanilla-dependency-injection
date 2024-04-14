@@ -117,25 +117,27 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   {
     //GIVEN
     var builder = new ServiceCollection();
+    var enemyKey = "enemy";
+
     builder.AddSingleton(c => ActivatorUtilities.CreateInstance<World>(
       c,
       c.GetRequiredService<Character>(),
-      c.GetRequiredKeyedService<Character>("secondCharacter")));
+      c.GetRequiredKeyedService<Character>(enemyKey)));
     builder.AddSingleton(
       ctx => ActivatorUtilities.CreateInstance<Character>(
         ctx,
         ctx.GetRequiredService<LongSword>()));
     builder.AddKeyedSingleton(
-      "secondCharacter",
-      (ctx, o) => ActivatorUtilities.CreateInstance<Character>(
+      enemyKey,
+      (ctx, key) => ActivatorUtilities.CreateInstance<Character>(
         ctx,
-        ctx.GetRequiredKeyedService<Armor>("secondArmor"),
+        ctx.GetRequiredKeyedService<Armor>(key),
         ctx.GetRequiredService<ShortSword>()));
     builder.AddSingleton(ctx => ActivatorUtilities.CreateInstance<Armor>(
       ctx,
       ctx.GetRequiredService<ChainMail>()));
     builder.AddKeyedSingleton(
-      "secondArmor",
+      enemyKey,
       (ctx, o) => ActivatorUtilities.CreateInstance<Armor>(
         ctx, ctx.GetRequiredService<BreastPlate>()));
     builder.AddTransient<Helmet>();
@@ -168,8 +170,8 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       c,
       c.GetRequiredKeyedService<Character>("hero"),
       c.GetRequiredKeyedService<Character>("enemy")));
-    SoldierMsDiModule.RegisterIn<LongSword, ChainMail>(builder, "hero");
-    SoldierMsDiModule.RegisterIn<ShortSword, BreastPlate>(builder, "enemy");
+    SoldierMsDiModule<LongSword, ChainMail>.RegisterIn(builder, "hero");
+    SoldierMsDiModule<ShortSword, BreastPlate>.RegisterIn(builder, "enemy");
 
     using var container = builder.BuildServiceProvider();
 
@@ -293,12 +295,12 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     }
   }
 
-  public static class SoldierMsDiModule
+  public static class SoldierMsDiModule<THandWeapon, TBodyArmor>
+    where THandWeapon : class, IHandWeapon
+    where TBodyArmor : class, IBodyArmor
   {
-    public static void RegisterIn<THandWeapon, TBodyArmor>(
+    public static void RegisterIn(
       ServiceCollection builder, string category)
-      where THandWeapon : class, IHandWeapon
-      where TBodyArmor : class, IBodyArmor
     {
       builder.AddKeyedSingleton(
         category,
