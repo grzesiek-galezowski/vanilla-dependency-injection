@@ -58,7 +58,7 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
     1. [Optional - can also be discussed in aspnet core example] Graph readability
     1. [Optional - needs more code] Multiple constructors & factory methods
     1. [Optional - needs more code] Passing literals into constructors
-1. How to integrate Vanilla DI into ASP.NET Core?
+1. How to integrate Vanilla DI into ASP.NET Core? (`BasicIntegration`)
     1. Composition root object
     1. Minimal API
     1. Controllers
