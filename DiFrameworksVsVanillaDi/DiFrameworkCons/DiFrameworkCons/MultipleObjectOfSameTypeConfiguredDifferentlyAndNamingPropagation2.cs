@@ -160,6 +160,34 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   }
 
   [Test]
+  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingMsDi()
+  {
+    //GIVEN
+    var builder = new ServiceCollection();
+    builder.AddSingleton(c => ActivatorUtilities.CreateInstance<World>(
+      c,
+      c.GetRequiredKeyedService<Character>("hero"),
+      c.GetRequiredKeyedService<Character>("enemy")));
+    SoldierMsDiModule.RegisterIn<LongSword, ChainMail>(builder, "hero");
+    SoldierMsDiModule.RegisterIn<ShortSword, BreastPlate>(builder, "enemy");
+
+    using var container = builder.BuildServiceProvider();
+
+    //WHEN
+    var world = container.GetRequiredService<World>();
+
+    //THEN
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
+  }
+
+  [Test]
   public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
   {
     //GIVEN
@@ -177,8 +205,8 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
         (_, context) => context.ResolveNamed<Character>($"{secondCategory}Character"))
       .SingleInstance();
   
-    builder.RegisterModule(new SoldierModule<LongSword, ChainMail>(firstCategory));
-    builder.RegisterModule(new SoldierModule<ShortSword, BreastPlate>(secondCategory));
+    builder.RegisterModule(new SoldierAutofacModule<LongSword, ChainMail>(firstCategory));
+    builder.RegisterModule(new SoldierAutofacModule<ShortSword, BreastPlate>(secondCategory));
   
     using var container = builder.Build();
   
@@ -216,13 +244,13 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   public record ShortSword : HandWeapon;
   public record LongSword : HandWeapon;
 
-  public class SoldierModule<THandWeapon, TBodyArmor> : Module
+  public class SoldierAutofacModule<THandWeapon, TBodyArmor> : Module
     where THandWeapon : HandWeapon
     where TBodyArmor : BodyArmor  
   {
     private readonly string _category;
 
-    public SoldierModule(string category)
+    public SoldierAutofacModule(string category)
     {
       _category = category;
     }
@@ -260,7 +288,38 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       builder.RegisterType<TBodyArmor>()
         .Named<TBodyArmor>($"{_category}BodyArmor")
         .SingleInstance();
+    }
+  }
 
+  public static class SoldierMsDiModule
+  {
+    public static void RegisterIn<THandWeapon, TBodyArmor>(
+      ServiceCollection builder, string category)
+      where THandWeapon : class, HandWeapon
+      where TBodyArmor : class, BodyArmor
+    {
+      builder.AddKeyedSingleton(
+        category,
+        (ctx, o) => ActivatorUtilities.CreateInstance<Character>(
+          ctx,
+          ctx.GetRequiredKeyedService<Armor>(category),
+          ctx.GetRequiredKeyedService<THandWeapon>(category)));
+      builder.AddKeyedSingleton(
+        category,
+        (ctx, o) => ActivatorUtilities.CreateInstance<Armor>(
+          ctx, ctx.GetRequiredKeyedService<TBodyArmor>(category)));
+
+      if (!builder.Contains(
+            new ServiceDescriptor(
+              typeof(Helmet),
+              typeof(Helmet),
+              ServiceLifetime.Transient)))
+      {
+        builder.AddTransient<Helmet>();
+      }
+
+      builder.AddKeyedSingleton<TBodyArmor>(category);
+      builder.AddKeyedSingleton<THandWeapon>(category);
     }
   }
 }
