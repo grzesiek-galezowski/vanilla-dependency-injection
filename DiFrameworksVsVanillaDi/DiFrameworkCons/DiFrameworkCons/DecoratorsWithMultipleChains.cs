@@ -21,8 +21,6 @@ public class DecoratorsWithMultipleChains
     var chain1 = new A(new B(new C1(new D())));
     var chain2 = new A(new B(new C2(new D())));
 
-    //WHEN
-
     //THEN
     chain1.Next.Should().BeOfType<B>();
     chain1.Next.Next.Should().BeOfType<C1>();
