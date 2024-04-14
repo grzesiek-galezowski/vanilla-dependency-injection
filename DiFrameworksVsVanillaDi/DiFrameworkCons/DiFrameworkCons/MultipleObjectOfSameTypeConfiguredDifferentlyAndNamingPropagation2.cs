@@ -159,45 +159,42 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
 
-  //[Test]
-  //public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModules()
-  //{
-  //  //GIVEN
-  //  var firstCategory = Guid.NewGuid().ToString();
-  //  var secondCategory = Guid.NewGuid().ToString();
-  //
-  //  var builder = new ContainerBuilder();
-  //  builder.RegisterType<World>()
-  //    .As<World>()
-  //    .WithParameter(
-  //      (info, _) => info.Position == 0,
-  //      (_, context) => context.ResolveNamed<Character>($"{firstCategory}Character"))
-  //    .WithParameter(
-  //      (info, _) => info.Position == 1,
-  //      (_, context) => context.ResolveNamed<Character>($"{secondCategory}Character"))
-  //    .SingleInstance();
-  //
-  //  builder.RegisterModule(new SoldierModule(4, 2, firstCategory));
-  //  builder.RegisterModule(new SoldierModule(6, 4, secondCategory));
-  //
-  //  using var container = builder.Build();
-  //
-  //  //WHEN
-  //  var world = container.Resolve<World>();
-  //
-  //  //THEN
-  //  world.Hero.Should().NotBeSameAs(world.Enemy);
-  //  world.Hero.Armor.Should().NotBeSameAs(world.Enemy.Armor);
-  //  world.Hero.Armor.Helmet.Should().NotBeSameAs(world.Enemy.Armor.Helmet);
-  //  world.Hero.Armor.BodyArmor.Should().NotBeSameAs(world.Enemy.Armor.BodyArmor);
-  //  world.Hero.Armor.BodyArmor.Defense.Should().NotBeSameAs(world.Enemy.Armor.BodyArmor.Defense);
-  //  world.Hero.Weapon.Should().NotBeSameAs(world.Enemy.Weapon);
-  //
-  //  world.Hero.Weapon.Attack.Should().Be(4);
-  //  world.Hero.Armor.BodyArmor.Defense.Should().Be(2);
-  //  world.Enemy.Weapon.Attack.Should().Be(6);
-  //  world.Enemy.Armor.BodyArmor.Defense.Should().Be(4);
-  //}
+  [Test]
+  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
+  {
+    //GIVEN
+    var firstCategory = Guid.NewGuid().ToString();
+    var secondCategory = Guid.NewGuid().ToString();
+  
+    var builder = new ContainerBuilder();
+    builder.RegisterType<World>()
+      .As<World>()
+      .WithParameter(
+        (info, _) => info.Position == 0,
+        (_, context) => context.ResolveNamed<Character>($"{firstCategory}Character"))
+      .WithParameter(
+        (info, _) => info.Position == 1,
+        (_, context) => context.ResolveNamed<Character>($"{secondCategory}Character"))
+      .SingleInstance();
+  
+    builder.RegisterModule(new SoldierModule<LongSword, ChainMail>(firstCategory));
+    builder.RegisterModule(new SoldierModule<ShortSword, BreastPlate>(secondCategory));
+  
+    using var container = builder.Build();
+  
+    //WHEN
+    var world = container.Resolve<World>();
+
+    //THEN
+    world.Enemy.Should().NotBeSameAs(world.Hero);
+    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
+    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
+
+    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
+    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
+    world.Hero.Weapon.Should().BeOfType<LongSword>();
+    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
+  }
 
   private static Character Soldier(BodyArmor bodyArmor, HandWeapon weapon)
   {
@@ -219,16 +216,14 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   public record ShortSword : HandWeapon;
   public record LongSword : HandWeapon;
 
-  public class SoldierModule : Module
+  public class SoldierModule<THandWeapon, TBodyArmor> : Module
+    where THandWeapon : HandWeapon
+    where TBodyArmor : BodyArmor  
   {
-    private readonly int _swordAttack;
-    private readonly int _breastplateDefense;
     private readonly string _category;
 
-    public SoldierModule(int swordAttack, int breastplateDefense, string category)
+    public SoldierModule(string category)
     {
-      _swordAttack = swordAttack;
-      _breastplateDefense = breastplateDefense;
       _category = category;
     }
 
@@ -241,7 +236,7 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
         )
         .WithParameter(
           (info, _) => info.Position == 1,
-          (_, context) => context.ResolveNamed<ShortSword>($"{_category}Sword")
+          (_, context) => context.ResolveNamed<THandWeapon>($"{_category}HandWeapon")
         )
         .Named<Character>($"{_category}Character")
         .SingleInstance();
@@ -252,20 +247,18 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
           (_, context) => context.ResolveNamed<Helmet>($"{_category}Helmet"))
         .WithParameter(
           (info, _) => info.Position == 1,
-          (_, context) => context.ResolveNamed<BreastPlate>($"{_category}BreastPlate"))
+          (_, context) => context.ResolveNamed<TBodyArmor>($"{_category}BodyArmor"))
         .Named<Armor>($"{_category}Armor")
         .SingleInstance();
 
-      builder.RegisterType<ShortSword>()
-        .Named<ShortSword>($"{_category}Sword")
-        .WithParameter("Attack", _swordAttack)
+      builder.RegisterType<THandWeapon>()
+        .Named<THandWeapon>($"{_category}HandWeapon")
         .SingleInstance();
       builder.RegisterType<Helmet>()
         .Named<Helmet>($"{_category}Helmet")
         .SingleInstance();
-      builder.RegisterType<BreastPlate>()
-        .Named<BreastPlate>($"{_category}BreastPlate")
-        .WithParameter("Defense", _breastplateDefense)
+      builder.RegisterType<TBodyArmor>()
+        .Named<TBodyArmor>($"{_category}BodyArmor")
         .SingleInstance();
 
     }

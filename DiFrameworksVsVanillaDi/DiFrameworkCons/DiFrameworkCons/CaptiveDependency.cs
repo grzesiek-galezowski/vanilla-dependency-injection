@@ -16,9 +16,9 @@ public class CaptiveDependency
   /// within a request scope and it captivates a scoped instance, the scoped instance
   /// is not disposed of until the singleton dies.
   ///
-  /// This problem is exclusive to DI Containers. Some of them have special runtime checks
+  /// ---This problem is exclusive to DI Containers. Some of them have special runtime checks
   /// to detect this situation. In Vanilla DI it's possible to pass unsafe dependency,
-  /// but that can only happen as a conscious decision, not a configuration mistake.
+  /// but that can only happen as a conscious decision, not a configuration mistake.---
   ///
   /// Autofac doesn't have strict validity checks built-in.
   /// See https://autofac.readthedocs.io/en/stable/lifetime/captive-dependencies.html
