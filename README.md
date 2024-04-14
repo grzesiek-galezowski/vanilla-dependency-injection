@@ -45,12 +45,16 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
         1. CD with container and lambdas (!!)
         1. Conclusion: avoid lambdas in MsDi
         1. CD with Vanilla DI
-    1. Dead code detection (`_DeadCode.cs_`)
+    1. Dead code detection (`DeadCode.cs_`)
     1. Extracting code into libraries (`ExtractingLibrary.cs`)
+    1. Simple vs complex dependency graphs
     1. Multiple lifestyles for different instances of a type (`MultipleLifestylesOfInstancesTheSameClass.cs`)
-    1. Decorators/composites
+    1. Decorators/composites (`DecoratorsWithMultipleChains.cs`)
+        1. Optional - different syntaxes for containers (autofac, scrutor)
     1. Similar subgraphs differing with leaves.
-    1. Captive dependencies
+        1. `MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2.cs` - with polymorphism
+            1. TODO implement the module part
+        1. `MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation.cs` - with literals
     1. [Optional - can also be discussed in aspnet core example] Graph readability
     1. [Optional - needs more code] Multiple constructors & factory methods
     1. [Optional - needs more code] Passing literals into constructors
