@@ -30,10 +30,11 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
         1. When is not helping
         1. When is helping - reusing recipe
         1. When is not helping again - multiple recipes for the same type
-        1. Minimizing recipe reuse problem in Vanilla DI with local functions
+        1. Minimizing recipe reuse problem in Vanilla DI with local functions - `_1_Autowiring.cs`
     1. Managing scopes (`_2_LifetimeScopeMagament.cs`)
         1. Container example
         1. Vanilla DI and manual Dispose
+        1. What if Dispose throws an exception?
         1. Disposal subsystem
     1. Handling missing dependencies (`MissingDependency.cs`)
         1. Container - runtime
