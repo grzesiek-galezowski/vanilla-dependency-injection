@@ -34,7 +34,7 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
     1. Managing scopes (`_2_LifetimeScopeMagament.cs`)
         1. Container example
         1. Vanilla DI and manual Dispose
-        1. What if Dispose throws an exception?
+        1. [What if Dispose throws an exception?](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065#dispose-methods)
         1. Disposal subsystem
     1. Handling missing dependencies (`MissingDependency.cs`)
         1. Container - runtime
