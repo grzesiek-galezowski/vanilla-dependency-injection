@@ -37,7 +37,9 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
         1. [What if Dispose throws an exception?](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065#dispose-methods)
         1. Disposal subsystem
     1. Handling missing dependencies (`MissingDependency.cs`)
-        1. Container - runtime
+        1. Container - without validation
+        1. Container - with validation
+        1. Container - with lambda registration
         1. Vanilla DI - compile time
     1. Circular dependencies (`CircularDependencies.cs`)
         1. Uncomment assertions
