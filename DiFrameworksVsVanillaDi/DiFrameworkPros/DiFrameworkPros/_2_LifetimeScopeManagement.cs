@@ -20,18 +20,21 @@ public class LifetimeScopeManagement
     containerBuilder.RegisterType<DisposableDependency>();
     using (var container = containerBuilder.Build())
     {
-      var dependency1 = container.Resolve<DisposableDependency>();
-      var dependency2 = container.Resolve<DisposableDependency>();
+      container.Resolve<DisposableDependency>(); //0
+      container.Resolve<DisposableDependency>(); //1
+
       Console.WriteLine("opening scope");
       using (var nested = container.BeginLifetimeScope())
       {
-        var dependency3 = nested.Resolve<DisposableDependency>();
-        var dependency4 = nested.Resolve<DisposableDependency>();
+        nested.Resolve<DisposableDependency>();  //2
+        nested.Resolve<DisposableDependency>();  //3
         Console.WriteLine("closing scope");
-      } // dependency3.Dispose(), dependency4.Dispose()
+      } // 3.Dispose(), 2.Dispose()
       Console.WriteLine("closed scope");
-      var dependency5 = container.Resolve<DisposableDependency>();
-    } // dependency1.Dispose(), dependency2.Dispose(), dependency5.Dispose()
+
+      container.Resolve<DisposableDependency>(); //4
+
+    } // 4.Dispose(), 1.Dispose(), 0.Dispose()
   }
 
   [Test]
@@ -41,18 +44,19 @@ public class LifetimeScopeManagement
     containerBuilder.AddTransient<DisposableDependency>();
     using (var container = containerBuilder.BuildServiceProvider())
     {
-      var dependency1 = container.GetRequiredService<DisposableDependency>();
-      var dependency2 = container.GetRequiredService<DisposableDependency>();
+      container.GetRequiredService<DisposableDependency>(); //0
+      container.GetRequiredService<DisposableDependency>(); //1
+
       Console.WriteLine("opening scope");
       using (var nested = container.CreateScope())
       {
-        var dependency3 = nested.ServiceProvider.GetRequiredService<DisposableDependency>();
-        var dependency4 = nested.ServiceProvider.GetRequiredService<DisposableDependency>();
+        nested.ServiceProvider.GetRequiredService<DisposableDependency>(); //2
+        nested.ServiceProvider.GetRequiredService<DisposableDependency>(); //3
         Console.WriteLine("closing scope");
-      } // dependency3.Dispose(), dependency4.Dispose()
+      } // 3.Dispose(), 2.Dispose()
       Console.WriteLine("closed scope");
-      var lol5 = container.GetRequiredService<DisposableDependency>();
-    } // dependency1.Dispose(), dependency2.Dispose(), dependency5.Dispose()
+      container.GetRequiredService<DisposableDependency>(); //4
+    } // 4.Dispose(), 1.Dispose(), 0.Dispose()
   }
 
   /// <summary>
