@@ -50,6 +50,7 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
         1. CD with Vanilla DI
     1. Dead code detection (`DeadCode.cs_`)
     1. Extracting code into libraries (`ExtractingLibrary.cs`)
+    1. Extracting dependencies from constructor (handcode)
     1. Simple vs complex dependency graphs
     1. Multiple lifestyles for different instances of a type (`MultipleLifestylesOfInstancesTheSameClass.cs`)
     1. Decorators/composites (`DecoratorsWithMultipleChains.cs`)
