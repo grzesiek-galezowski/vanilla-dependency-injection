@@ -127,7 +127,5 @@ file class CompositionRoot
 file class Person(Kitchen kitchen, Logger logger);
 file class Kitchen(Knife knife, Logger logger);
 file class Knife(Logger logger);
-
 file class Logger(LoggingChannel loggingChannel);
-
 file class LoggingChannel;
