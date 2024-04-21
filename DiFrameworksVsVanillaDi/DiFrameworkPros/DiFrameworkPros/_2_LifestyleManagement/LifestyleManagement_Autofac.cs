@@ -1,0 +1,48 @@
+using System;
+using Autofac;
+using FluentAssertions;
+using NUnit.Framework;
+
+namespace DiFrameworkPros._2_LifestyleManagement;
+
+public static class LifestyleManagement_Autofac
+{
+  [Test]
+  public static void ShouldDisposeOfCreatedDependenciesUsingAutofac()
+  {
+    var log = new Log();
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder.RegisterInstance(log);
+    containerBuilder.RegisterType<DisposableDependency>();
+    using (var container = containerBuilder.Build())
+    {
+      container.Resolve<DisposableDependency>(); //0
+      container.Resolve<DisposableDependency>(); //1
+
+      Console.WriteLine("opening scope");
+      using (var nested = container.BeginLifetimeScope())
+      {
+        nested.Resolve<DisposableDependency>();  //2
+        nested.Resolve<DisposableDependency>();  //3
+        Console.WriteLine("closing scope");
+      } // 3.Dispose(), 2.Dispose()
+      Console.WriteLine("closed scope");
+
+      container.Resolve<DisposableDependency>(); //4
+    } // 4.Dispose(), 1.Dispose(), 0.Dispose()
+
+    log.Entries.Should()
+      .Equal([
+        "_____CREATED______0",
+        "_____CREATED______1",
+        "_____CREATED______2",
+        "_____CREATED______3",
+        "_____DISPOSED______3",
+        "_____DISPOSED______2",
+        "_____CREATED______4",
+        "_____DISPOSED______4",
+        "_____DISPOSED______1",
+        "_____DISPOSED______0"
+      ]);
+  }
+}
