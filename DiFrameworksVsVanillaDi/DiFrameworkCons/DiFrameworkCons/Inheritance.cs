@@ -19,7 +19,7 @@ public class Lol
 
 public abstract class AbstractReport
 {
-  private readonly List<string> _lines = new();
+  private readonly List<string> _lines = [];
 
   public void Setup()
   {
@@ -78,6 +78,6 @@ public static class MonthlyIncomes
 {
   public static List<string> PullDataForLastMonth()
   {
-    return new List<string> { "1", "2" };
+    return ["1", "2"];
   }
 }

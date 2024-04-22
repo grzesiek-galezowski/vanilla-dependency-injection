@@ -19,14 +19,14 @@ public static class LifestyleManagement_MsDi
       container.GetRequiredService<DisposableDependency>(); //0
       container.GetRequiredService<DisposableDependency>(); //1
 
-      Console.WriteLine("opening scope");
+      log.OpeningScope();
       using (var nested = container.CreateScope())
       {
         nested.ServiceProvider.GetRequiredService<DisposableDependency>(); //2
         nested.ServiceProvider.GetRequiredService<DisposableDependency>(); //3
-        Console.WriteLine("closing scope");
+        log.ClosingScope();
       } // 3.Dispose(), 2.Dispose()
-      Console.WriteLine("closed scope");
+      log.ClosedScope(); ;
       container.GetRequiredService<DisposableDependency>(); //4
     } // 4.Dispose(), 1.Dispose(), 0.Dispose()
 
@@ -34,10 +34,13 @@ public static class LifestyleManagement_MsDi
       .Equal([
         "_____CREATED______0",
         "_____CREATED______1",
+        "opening scope",
         "_____CREATED______2",
         "_____CREATED______3",
+        "closing scope",
         "_____DISPOSED______3",
         "_____DISPOSED______2",
+        "closed scope",
         "_____CREATED______4",
         "_____DISPOSED______4",
         "_____DISPOSED______1",

@@ -47,4 +47,19 @@ internal class Log
   {
     Write("_____DISPOSED______" + currentId);
   }
+
+  public void OpeningScope()
+  {
+    Write("opening scope");
+  }
+
+  public void ClosingScope()
+  {
+    Write("closing scope");
+  }
+
+  public void ClosedScope()
+  {
+    Write("closed scope");
+  }
 }

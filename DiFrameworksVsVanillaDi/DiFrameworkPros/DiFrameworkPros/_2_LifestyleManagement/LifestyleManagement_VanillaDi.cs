@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -21,14 +22,15 @@ public class LifestyleManagement_VanillaDi
     {
       var dependency1 = new DisposableDependency(log);
       var dependency2 = new DisposableDependency(log);
-      Console.WriteLine("opening scope");
+      log.OpeningScope();
       {
         var dependency3 = new DisposableDependency(log);
         var dependency4 = new DisposableDependency(log);
-        Console.WriteLine("closing scope");
+        log.ClosingScope();
         dependency4.Dispose();
         dependency3.Dispose();
       }
+      log.ClosedScope();
       var dependency5 = new DisposableDependency(log);
 
       dependency5.Dispose();
@@ -40,10 +42,13 @@ public class LifestyleManagement_VanillaDi
       .Equal([
         "_____CREATED______0",
         "_____CREATED______1",
+        "opening scope",
         "_____CREATED______2",
         "_____CREATED______3",
+        "closing scope",
         "_____DISPOSED______3",
         "_____DISPOSED______2",
+        "closed scope",
         "_____CREATED______4",
         "_____DISPOSED______4",
         "_____DISPOSED______1",
@@ -69,27 +74,45 @@ public class LifestyleManagement_VanillaDi
       disposables.Add(dependency1);
       disposables.Add(dependency2);
 
-      Console.WriteLine("opening scope");
+      log.OpeningScope();
       {
         using var disposables2 = new Disposables();
         var dependency3 = new DisposableDependency(log);
         var dependency4 = new DisposableDependency(log);
         disposables2.Add(dependency3);
         disposables2.Add(dependency4);
-
-        Console.WriteLine("closing scope");
+        log.ClosingScope();
       }
+      log.ClosedScope();
       var dependency5 = new DisposableDependency(log);
       disposables.Add(dependency5);
     }
+
+    log.Entries.Should()
+      .Equal([
+        "_____CREATED______0",
+        "_____CREATED______1",
+        "opening scope",
+        "_____CREATED______2",
+        "_____CREATED______3",
+        "closing scope",
+        "_____DISPOSED______3",
+        "_____DISPOSED______2",
+        "closed scope",
+        "_____CREATED______4",
+        "_____DISPOSED______4",
+        "_____DISPOSED______1",
+        "_____DISPOSED______0"
+      ]);
   }
 }
 
 file class Disposables : IDisposable
 {
-  private readonly List<IDisposable> _disposables = new();
+  private readonly List<IDisposable> _disposables = [];
 
-  public void Add(IDisposable disposable) => _disposables.Add(disposable);
+  public void Add(IDisposable disposable)
+    => _disposables.Insert(0, disposable);
 
   public void Dispose()
   {
