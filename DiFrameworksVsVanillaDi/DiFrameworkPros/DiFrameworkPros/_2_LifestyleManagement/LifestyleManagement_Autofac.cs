@@ -1,4 +1,3 @@
-using System;
 using Autofac;
 using FluentAssertions;
 using NUnit.Framework;
