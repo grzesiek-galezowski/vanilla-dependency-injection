@@ -1,5 +1,4 @@
 using Castle.DynamicProxy;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._3_Interception;
 

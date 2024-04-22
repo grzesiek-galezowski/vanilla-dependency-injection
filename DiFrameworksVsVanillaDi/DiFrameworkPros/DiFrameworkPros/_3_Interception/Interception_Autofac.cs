@@ -1,6 +1,5 @@
 using Autofac;
 using Autofac.Extras.DynamicProxy;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._3_Interception;
 

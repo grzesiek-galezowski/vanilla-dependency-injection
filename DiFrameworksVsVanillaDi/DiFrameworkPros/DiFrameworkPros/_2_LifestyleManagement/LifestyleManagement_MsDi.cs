@@ -1,6 +1,4 @@
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._2_LifestyleManagement;
 

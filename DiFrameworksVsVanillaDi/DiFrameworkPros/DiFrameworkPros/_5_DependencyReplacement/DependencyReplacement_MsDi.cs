@@ -1,7 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using NSubstitute;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._5_DependencyReplacement;
 

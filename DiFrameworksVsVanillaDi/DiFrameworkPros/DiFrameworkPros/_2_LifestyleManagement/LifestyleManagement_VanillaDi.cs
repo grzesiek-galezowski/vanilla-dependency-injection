@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._2_LifestyleManagement;
 

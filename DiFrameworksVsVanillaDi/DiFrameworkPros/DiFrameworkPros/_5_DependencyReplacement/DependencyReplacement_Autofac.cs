@@ -1,6 +1,4 @@
 using Autofac;
-using NSubstitute;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._5_DependencyReplacement;
 

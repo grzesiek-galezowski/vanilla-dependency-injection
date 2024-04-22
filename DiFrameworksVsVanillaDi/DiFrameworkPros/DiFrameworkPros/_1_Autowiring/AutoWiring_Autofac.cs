@@ -1,5 +1,4 @@
 using Autofac;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._1_Autowiring;
 

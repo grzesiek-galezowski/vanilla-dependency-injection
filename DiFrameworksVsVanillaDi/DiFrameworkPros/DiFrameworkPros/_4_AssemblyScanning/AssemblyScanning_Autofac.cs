@@ -1,8 +1,6 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Core.Registration;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._4_AssemblyScanning;
 

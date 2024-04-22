@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._2_LifestyleManagement;
 

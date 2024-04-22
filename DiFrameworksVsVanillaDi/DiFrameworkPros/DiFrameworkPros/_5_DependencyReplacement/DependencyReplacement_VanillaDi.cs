@@ -1,6 +1,3 @@
-using NSubstitute;
-using NUnit.Framework;
-
 namespace DiFrameworkPros._5_DependencyReplacement;
 
 public class DependencyReplacement_VanillaDi

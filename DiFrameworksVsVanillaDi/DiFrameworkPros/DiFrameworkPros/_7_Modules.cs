@@ -1,8 +1,5 @@
-using System;
 using Autofac;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 namespace DiFrameworkPros;
 

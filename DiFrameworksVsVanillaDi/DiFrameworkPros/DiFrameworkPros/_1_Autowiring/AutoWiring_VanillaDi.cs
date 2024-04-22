@@ -1,5 +1,3 @@
-using NUnit.Framework;
-
 namespace DiFrameworkPros._1_Autowiring;
 
 public class AutoWiring_VanillaDi

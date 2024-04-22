@@ -1,5 +1,4 @@
 using Castle.DynamicProxy;
-using System;
 
 public interface IDependency
 {

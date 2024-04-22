@@ -1,6 +1,4 @@
 using Autofac;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace DiFrameworkPros._2_LifestyleManagement;
 
