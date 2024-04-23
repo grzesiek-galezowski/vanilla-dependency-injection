@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.TODO;
 
 //todo do something with this example - what exactly does it show?
 public class Lol
