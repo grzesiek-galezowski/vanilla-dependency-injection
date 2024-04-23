@@ -1,5 +1,7 @@
 using System.Threading;
 
+namespace DiFrameworkPros._6_LazyLoading;
+
 public interface IVerySlowDependency;
 
 class VerySlowDependency : IVerySlowDependency

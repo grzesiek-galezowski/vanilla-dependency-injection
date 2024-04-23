@@ -1,5 +1,7 @@
 using Castle.DynamicProxy;
 
+namespace DiFrameworkPros._3_Interception;
+
 public interface IDependency
 {
   void DoSomething();

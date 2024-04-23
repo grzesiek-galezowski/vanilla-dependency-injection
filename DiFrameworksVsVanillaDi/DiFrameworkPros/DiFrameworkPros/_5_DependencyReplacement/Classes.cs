@@ -1,3 +1,5 @@
+namespace DiFrameworkPros._5_DependencyReplacement;
+
 public interface ITroublesomeDependency
 {
   void DoSomething();

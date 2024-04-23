@@ -1,4 +1,4 @@
-namespace DiFrameworkPros._1_Autowiring;
+namespace DiFrameworkPros._1_AutomaticDependencyResolution;
 
 internal class Person(Kitchen kitchen, Logger logger);
 internal class Kitchen(Knife knife, Logger logger);

@@ -26,12 +26,12 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
 # Topics
 
 1. Vanilla DI vs a DI container
-    1. Autowiring (`_1_Autowiring.cs` and handcoded)
+    1. Automatic dependency resolution (`_1_AutomaticDependencyResolution` and handcoded)
         1. When is not helping
         1. When is helping - reusing recipe
         1. When is not helping again - multiple recipes for the same type
-        1. Minimizing recipe reuse problem in Vanilla DI with local functions - `_1_Autowiring.cs`
-    1. Managing scopes (`_2_LifetimeScopeMagament.cs`)
+        1. Minimizing recipe reuse problem in Vanilla DI with local functions - `_1_AutomaticDependencyResolution`
+    1. Managing scopes (`_2_LifestyleMagament`)
         1. Container example
         1. Vanilla DI and manual Dispose
         1. [What if Dispose throws an exception?](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065#dispose-methods)

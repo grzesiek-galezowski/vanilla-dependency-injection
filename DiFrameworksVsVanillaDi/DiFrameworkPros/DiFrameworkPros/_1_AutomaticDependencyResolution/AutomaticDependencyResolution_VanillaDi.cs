@@ -1,6 +1,6 @@
-namespace DiFrameworkPros._1_Autowiring;
+namespace DiFrameworkPros._1_AutomaticDependencyResolution;
 
-public class AutoWiring_VanillaDi
+public class AutomaticDependencyResolution_VanillaDi
 {
   /// <summary>
   /// This example shows that manual DI is at disadvantage

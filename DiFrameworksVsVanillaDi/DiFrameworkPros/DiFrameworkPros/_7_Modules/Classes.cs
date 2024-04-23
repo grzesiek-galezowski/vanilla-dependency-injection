@@ -1,3 +1,5 @@
+namespace DiFrameworkPros._7_Modules;
+
 internal class ListOutput : IApplicationLogicOutput
 {
   public string Content { get; private set; } = string.Empty;
