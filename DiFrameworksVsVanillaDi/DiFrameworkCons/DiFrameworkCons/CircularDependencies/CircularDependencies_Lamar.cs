@@ -1,6 +1,8 @@
 using Lamar;
-using Lamar.IoC;
 using Container = Lamar.Container;
+#if NCRUNCH
+using Lamar.IoC;
+#endif
 
 namespace DiFrameworkCons.CircularDependencies;
 
@@ -24,15 +26,18 @@ public static class CircularDependencies_Lamar
 
         });
       }).Should().ThrowExactly<InvalidOperationException>()
-      .Which.ToString().Should().Contain(
-        "Bi-directional dependencies detected to new One(Two)");
+      .Which.ToString().Should().ContainAny([
+        "Bi-directional dependencies detected to new One(Two)",
+        "Bi-directional dependencies detected to new Two(Three)",
+        "Bi-directional dependencies detected to new Three(One)"]
+        );
   }
 
   /// <summary>
   /// With lambda registration, cycles get detected later
   /// </summary>
   [Test]
-  public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithMsDiLambdaRegistration()
+  public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithLamarLambdaRegistration()
   {
     var container = new Container(builder =>
     {

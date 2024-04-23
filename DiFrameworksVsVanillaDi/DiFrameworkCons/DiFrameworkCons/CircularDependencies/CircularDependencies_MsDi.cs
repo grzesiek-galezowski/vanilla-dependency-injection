@@ -54,6 +54,14 @@ public static class CircularDependencies_MsDi
       });
     //WHEN
     //THEN
-    //TODO: uncomment to hang this test: var one = container.GetRequiredService<One>();
+
+#if NCRUNCH
+    Invoking(() =>
+      {
+        var one = container.GetRequiredService<One>();
+      })
+      .Should().Throw<Exception>()
+      .WithMessage("*NCrunch has detected a stack overflow*");
+#endif
   }
 }
