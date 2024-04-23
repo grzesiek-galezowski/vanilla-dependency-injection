@@ -34,7 +34,10 @@ public static class CircularDependencies_Lamar
   }
 
   /// <summary>
-  /// With lambda registration, cycles get detected later
+  /// With lambda registration, cycles get detected later.
+  /// Interesting thing about Lamar is that even though it has
+  /// a verification method similar to SimpleInjector, it does not
+  /// detect circular dependencies but rather falls into stack overflow.
   /// </summary>
   [Test]
   public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithLamarLambdaRegistration()
