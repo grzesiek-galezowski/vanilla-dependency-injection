@@ -1,4 +1,4 @@
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.Decorators.WithMultipleChains;
 
 /// <summary>
 /// Even more challenging for a DI container is a situation where
