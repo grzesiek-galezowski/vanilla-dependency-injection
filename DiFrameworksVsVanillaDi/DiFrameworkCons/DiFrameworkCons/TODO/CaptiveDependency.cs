@@ -1,4 +1,4 @@
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.TODO;
 
 /// <summary>
 /// TODO revise this. Seemann & Van Deursen say captive dependencies
@@ -171,7 +171,7 @@ public class CaptiveDependency
       //There is no information about the transitive transient dependency:
       .Which.Message.Should().Be(
         "Cannot consume scoped service 'System.String' " +
-        "from singleton 'DiFrameworkCons.CaptiveDependency+Captor'.");
+        "from singleton 'DiFrameworkCons.TODO.CaptiveDependency+Captor'.");
   }
 
   /// <summary>

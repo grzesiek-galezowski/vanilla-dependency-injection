@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DiFrameworkPros._2_LifestyleManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
 internal class DisposableDependency : IDisposable
 {

@@ -16,6 +16,9 @@ public static class AutomaticDependencyResolution_MsDi
 
     using var container = builder.BuildServiceProvider();
 
-    var person = container.GetRequiredService<Person>();
+    var person1 = container.GetRequiredService<Person>();
+    var person2 = container.GetRequiredService<Person>();
+
+    person1.Should().BeSameAs(person2);
   }
 }

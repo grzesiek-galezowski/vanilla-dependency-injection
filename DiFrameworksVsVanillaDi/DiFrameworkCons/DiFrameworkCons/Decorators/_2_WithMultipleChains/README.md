@@ -1,0 +1,1 @@
+Even more challenging for a DI container is a situation where we want to have multiple chains of decorators with slight differences.

@@ -1,8 +1,8 @@
 using Autofac;
 
-namespace DiFrameworkPros._2_LifestyleManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
-public static class LifestyleManagement_Autofac
+public static class LifetimeScopeManagement_Autofac
 {
   [Test]
   public static void ShouldDisposeOfCreatedDependenciesUsingAutofac()

@@ -16,6 +16,9 @@ public static class AutomaticDependencyResolution_Autofac
 
     using var container = builder.Build();
 
-    var person = container.Resolve<Person>();
+    var person1 = container.Resolve<Person>();
+    var person2 = container.Resolve<Person>();
+
+    person1.Should().BeSameAs(person2);
   }
 }

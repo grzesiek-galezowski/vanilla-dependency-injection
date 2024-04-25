@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiFrameworkPros._2_LifestyleManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
-public static class LifestyleManagement_MsDi
+public static class LifetimeScopeManagement_MsDi
 {
   [Test]
   public static void ShouldDisposeOfCreatedDependenciesUsingMsDi()

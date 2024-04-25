@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.Decorators.Simple;
+namespace DiFrameworkCons.Decorators._1_Simple;
 
 public static class Decorators_Autofac
 {

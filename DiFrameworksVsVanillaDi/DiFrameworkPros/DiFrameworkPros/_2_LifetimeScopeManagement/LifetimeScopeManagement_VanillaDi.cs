@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace DiFrameworkPros._2_LifestyleManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
-public class LifestyleManagement_VanillaDi
+public class LifetimeScopeManagement_VanillaDi
 {
   /// <summary>
   /// In case of manual DI, dependencies have to be disposed by hand.

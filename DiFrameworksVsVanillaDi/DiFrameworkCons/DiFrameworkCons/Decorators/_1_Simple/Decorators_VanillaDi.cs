@@ -1,6 +1,6 @@
-namespace DiFrameworkCons.Decorators.Simple;
+namespace DiFrameworkCons.Decorators._1_Simple;
 
-public class Decorators
+public class Decorators_VanillaDi
 {
   /// <summary>
   /// In Vanilla DI, this is pretty straightforward. It's really no different

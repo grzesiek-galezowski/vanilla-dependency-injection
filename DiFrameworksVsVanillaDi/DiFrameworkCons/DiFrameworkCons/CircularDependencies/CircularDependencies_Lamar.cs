@@ -6,11 +6,13 @@ using Lamar.IoC;
 
 namespace DiFrameworkCons.CircularDependencies;
 
-public static class CircularDependencies_Lamar
+public class CircularDependencies_Lamar
 {
   /// <summary>
   /// Lamar also detects circular dependencies during runtime
-  /// and throws an exception the path.
+  /// and throws an exception. When each type is
+  /// registered, it can detect circular dependencies during
+  /// container build.
   /// </summary>
   [Test]
   public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithLamar()
@@ -19,10 +21,10 @@ public static class CircularDependencies_Lamar
       {
         _ = new Container(builder =>
         {
-          builder
-            .AddTransient<One>()
-            .AddTransient<Two>()
-            .AddTransient<Three>();
+          
+          builder.AddTransient<One>()
+          .AddTransient<Two>()
+          .AddTransient<Three>();
 
         });
       }).Should().ThrowExactly<InvalidOperationException>()
@@ -31,6 +33,35 @@ public static class CircularDependencies_Lamar
         "Bi-directional dependencies detected to new Two(Three)",
         "Bi-directional dependencies detected to new Three(One)"]
         );
+  }
+
+  /// <summary>
+  /// However, when using auto wiring, container validation does not work
+  /// and the dependency is only detected at resolution time.
+  /// </summary>
+  [Test]
+  public static void ShouldThrowExceptionWhenResolvingCircularDependency()
+  {
+    var container = new Container(_ =>
+    {
+
+    });
+
+    //configuration validation passes since there is no configuration
+    container.AssertConfigurationIsValid();
+
+    Invoking(() =>
+      {
+        container.GetRequiredService<One>();
+      })
+      .Should().ThrowExactly<InvalidOperationException>()
+      .WithMessage(
+        "Detected some kind of bi-directional dependency while trying " +
+        "to discover and plan a missing service registration. " +
+        "Examining types: " +
+        "DiFrameworkCons.CircularDependencies.One, " +
+        "DiFrameworkCons.CircularDependencies.Two, " +
+        "DiFrameworkCons.CircularDependencies.Three");
   }
 
   /// <summary>
