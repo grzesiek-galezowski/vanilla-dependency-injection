@@ -1,3 +1,5 @@
+using Autofac.Core;
+
 namespace DiFrameworkCons.CircularDependencies;
 
 public static class CircularDependencies_Autofac

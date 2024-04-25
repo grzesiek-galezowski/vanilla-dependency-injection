@@ -189,7 +189,7 @@ public class CaptiveDependency
     using var container = builder.BuildServiceProvider(true); //scope validation enabled
 
     //WHEN
-    Invoking(() => container.GetRequiredService<Captor>())
+    Invoking(container.GetRequiredService<Captor>)
       .Should().Throw<InvalidOperationException>()
       .WithMessage("Cannot resolve scoped service 'System.String' from root provider.");
   }

@@ -25,6 +25,6 @@ public static class CircularDependencies_SimpleInjector
 
     //WHEN
     //THEN
-    Invoking(() => container.GetInstance<One>()).Should().Throw<ActivationException>();
+    Invoking(container.GetInstance<One>).Should().Throw<ActivationException>();
   }
 }

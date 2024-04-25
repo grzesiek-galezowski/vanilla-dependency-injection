@@ -1,3 +1,4 @@
+using Autofac.Core;
 using Autofac.Features.AttributeFilters;
 
 //todo add descriptions
