@@ -14,7 +14,7 @@ public static class AutomaticDependencyResolution_Lamar
   public static void ShouldAutomaticallyResolvePublicTransientDependenciesUsingLamar()
   {
     var container = new Container(_ => { });
-
+    
     var person1 = container.GetRequiredService<Person>();
     var person2 = container.GetRequiredService<Person>();
 
