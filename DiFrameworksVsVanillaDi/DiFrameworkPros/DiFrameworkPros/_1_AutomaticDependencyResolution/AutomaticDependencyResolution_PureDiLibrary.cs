@@ -30,7 +30,7 @@ public class AutomaticDependencyResolution_PureDiLibrary
     var person2 = container.Johnny;
     person1.Should().BeSameAs(person2);
 
-    //transient
+    //transients
     var logger1 = container.Resolve<Logger>();
     var logger2 = container.NewLogger;
     var logger3 = container.NewLogger;
