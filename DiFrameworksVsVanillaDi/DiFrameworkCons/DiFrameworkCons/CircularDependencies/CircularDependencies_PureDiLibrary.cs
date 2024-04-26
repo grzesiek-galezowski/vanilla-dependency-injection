@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using Pure.DI;
 
 namespace DiFrameworkCons.CircularDependencies;
