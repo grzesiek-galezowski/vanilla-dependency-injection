@@ -1,0 +1,3 @@
+This example is supposed to show that it's easier to extract a library from manually composed code - just extract the subgraph into a new method, extract some elements as arguments.
+
+It's much harder to do this with the DI container. That's because, unless the library is an extension to a particular container or asp.net core, we don't want the library to be coupled to specific container because users of other containers or users of Vanilla DI will be in trouble.

@@ -1,6 +1,6 @@
 namespace DiFrameworkCons;
 
-//todo add descriptions
+//todo add descriptions, change this to the example from the live stream
 public class Literals
 {
   [Test]
