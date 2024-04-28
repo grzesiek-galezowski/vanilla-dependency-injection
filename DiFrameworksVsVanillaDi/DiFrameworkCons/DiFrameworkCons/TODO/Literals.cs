@@ -1,4 +1,4 @@
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.TODO;
 
 //todo add descriptions, change this to the example from the live stream
 public class Literals

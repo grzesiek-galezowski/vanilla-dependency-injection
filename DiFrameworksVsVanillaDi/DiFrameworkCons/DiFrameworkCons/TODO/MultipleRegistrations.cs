@@ -1,4 +1,4 @@
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.TODO;
 
 //todo add descriptions
 public class MultipleRegistrations
