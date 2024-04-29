@@ -1,54 +1,9 @@
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.MultipleRecipesForTheSameTypesAndNamingPropagation.DifferingBySubtype;
 
-//todo add descriptions
-class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
+public static class WorldWithPolymorphism_Autofac
 {
   [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromVanillaDi()
-  {
-    var world = new World(
-      new Character(
-        new Armor(
-          new Helmet(),
-          new ChainMail()),
-        new LongSword()),
-      new Character(
-        new Armor(
-          new Helmet(),
-          new BreastPlate()),
-        new ShortSword()));
-
-    world.Enemy.Should().NotBeSameAs(world.Hero);
-    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
-    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
-
-    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
-    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
-    world.Hero.Weapon.Should().BeOfType<LongSword>();
-    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
-  }
-
-  [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromVanillaDiDried()
-  {
-    //GIVEN
-    var world = new World(
-      Soldier(new ChainMail(), new LongSword()),
-      Soldier(new BreastPlate(), new ShortSword()));
-
-    //THEN
-    world.Enemy.Should().NotBeSameAs(world.Hero);
-    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
-    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
-
-    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
-    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
-    world.Hero.Weapon.Should().BeOfType<LongSword>();
-    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
-  }
-
-  [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromAutofacContainer()
+  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromAutofacContainer()
   {
     //GIVEN
     var builder = new ContainerBuilder();
@@ -113,7 +68,7 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   }
 
   [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromMsDi()
+  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromMsDi()
   {
     //GIVEN
     var builder = new ServiceCollection();
@@ -162,71 +117,7 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
   }
 
   [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromMsDiAndActivatorUtilities()
-  {
-    //GIVEN
-    var builder = new ServiceCollection();
-
-    //Works only if created objects are transients
-    //and does not allow reusing the nested instances created by ActivatorUtilities
-    builder.AddSingleton(c => ActivatorUtilities.CreateInstance<World>(c,
-      ActivatorUtilities.CreateInstance<Character>(c,
-        ActivatorUtilities.CreateInstance<Armor>(c,
-          ActivatorUtilities.CreateInstance<ChainMail>(c)),
-        ActivatorUtilities.CreateInstance<LongSword>(c)),
-      ActivatorUtilities.CreateInstance<Character>(c,
-        ActivatorUtilities.CreateInstance<Armor>(c,
-          ActivatorUtilities.CreateInstance<BreastPlate>(c)),
-        ActivatorUtilities.CreateInstance<ShortSword>(c))));
-    builder.AddTransient<Helmet>();
-
-    using var container = builder.BuildServiceProvider();
-
-    //WHEN
-    var world = container.GetRequiredService<World>();
-
-    //THEN
-    world.Enemy.Should().NotBeSameAs(world.Hero);
-    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
-    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
-
-    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
-    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
-    world.Hero.Weapon.Should().BeOfType<LongSword>();
-    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
-  }
-
-  [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingMsDi()
-  {
-    //GIVEN
-    var builder = new ServiceCollection();
-    builder.AddSingleton(c => ActivatorUtilities.CreateInstance<World>(
-      c,
-      c.GetRequiredKeyedService<Character>("hero"),
-      c.GetRequiredKeyedService<Character>("enemy")));
-
-    SoldierMsDiModule<LongSword, ChainMail>.RegisterIn(builder, "hero");
-    SoldierMsDiModule<ShortSword, BreastPlate>.RegisterIn(builder, "enemy");
-
-    using var container = builder.BuildServiceProvider();
-
-    //WHEN
-    var world = container.GetRequiredService<World>();
-
-    //THEN
-    world.Enemy.Should().NotBeSameAs(world.Hero);
-    world.Enemy.Armor.Should().NotBeSameAs(world.Hero.Armor);
-    world.Enemy.Armor.Helmet.Should().NotBeSameAs(world.Hero.Armor.Helmet);
-
-    world.Hero.Armor.BodyArmor.Should().BeOfType<ChainMail>();
-    world.Enemy.Armor.BodyArmor.Should().BeOfType<BreastPlate>();
-    world.Hero.Weapon.Should().BeOfType<LongSword>();
-    world.Enemy.Weapon.Should().BeOfType<ShortSword>();
-  }
-
-  [Test]
-  public void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
+  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
   {
     //GIVEN
     var firstCategory = "hero";
@@ -261,26 +152,6 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
     world.Hero.Weapon.Should().BeOfType<LongSword>();
     world.Enemy.Weapon.Should().BeOfType<ShortSword>();
   }
-
-  private static Character Soldier(IBodyArmor bodyArmor, IHandWeapon weapon)
-  {
-    return new Character(
-      new Armor(
-        new Helmet(),
-        bodyArmor),
-      weapon);
-  }
-
-  internal interface IBodyArmor;
-  public record World(Character Hero, Character Enemy);
-  public record Character(Armor Armor, IHandWeapon Weapon);
-  public record Armor(Helmet Helmet, IBodyArmor BodyArmor);
-  public record BreastPlate : IBodyArmor;
-  public record ChainMail: IBodyArmor;
-  public record Helmet;
-  public interface IHandWeapon;
-  public record ShortSword : IHandWeapon;
-  public record LongSword : IHandWeapon;
 
   public class SoldierAutofacModule<THandWeapon, TBodyArmor> : Module
     where THandWeapon : IHandWeapon
@@ -328,38 +199,6 @@ class MultipleObjectOfSameTypeConfiguredDifferentlyAndNamingPropagation2
       builder.RegisterType<TBodyArmor>()
         .Named<TBodyArmor>(_category)
         .SingleInstance();
-    }
-  }
-
-  public static class SoldierMsDiModule<THandWeapon, TBodyArmor>
-    where THandWeapon : class, IHandWeapon
-    where TBodyArmor : class, IBodyArmor
-  {
-    public static void RegisterIn(
-      ServiceCollection builder, string category)
-    {
-      builder.AddKeyedSingleton(
-        category,
-        (ctx, o) => ActivatorUtilities.CreateInstance<Character>(
-          ctx,
-          ctx.GetRequiredKeyedService<Armor>(category),
-          ctx.GetRequiredKeyedService<THandWeapon>(category)));
-      builder.AddKeyedSingleton(
-        category,
-        (ctx, o) => ActivatorUtilities.CreateInstance<Armor>(
-          ctx, ctx.GetRequiredKeyedService<TBodyArmor>(category)));
-
-      if (!builder.Contains(
-            new ServiceDescriptor(
-              typeof(Helmet),
-              typeof(Helmet),
-              ServiceLifetime.Transient)))
-      {
-        builder.AddTransient<Helmet>();
-      }
-
-      builder.AddKeyedSingleton<TBodyArmor>(category);
-      builder.AddKeyedSingleton<THandWeapon>(category);
     }
   }
 }
