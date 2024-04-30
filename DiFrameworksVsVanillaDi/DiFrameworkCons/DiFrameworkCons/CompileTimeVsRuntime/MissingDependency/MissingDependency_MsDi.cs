@@ -37,7 +37,8 @@ public static class MissingDependency_MsDi
       .AddTransient(c => new One(c.GetRequiredService<Two>()));
     using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
     {
-      ValidateOnBuild = true
+      ValidateOnBuild = true,
+      ValidateScopes = true
     });
     //WHEN
     //THEN
