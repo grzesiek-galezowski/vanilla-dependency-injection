@@ -14,7 +14,7 @@ public static class AutomaticDependencyResolution_SimpleInjector
     container.RegisterSingleton<Person>();
     container.RegisterSingleton<Kitchen>();
     container.RegisterSingleton<Knife>();
-    RegisterInstancePerDependency<Logger>(container);
+    container.RegisterInstancePerDependency<Logger>();
     container.RegisterSingleton<LoggingChannel>();
 
     container.Verify();
@@ -23,12 +23,5 @@ public static class AutomaticDependencyResolution_SimpleInjector
     var person2 = container.GetRequiredService<Person>();
 
     person1.Should().BeSameAs(person2);
-  }
-
-  private static void RegisterInstancePerDependency<T>(Container container) where T : class
-  {
-    container.Register<T>();
-    var registration = container.GetRegistration(typeof(T)).Registration;
-    registration.SuppressDiagnosticWarning(DiagnosticType.LifestyleMismatch, "instance per dependency lifestyle");
   }
 }
