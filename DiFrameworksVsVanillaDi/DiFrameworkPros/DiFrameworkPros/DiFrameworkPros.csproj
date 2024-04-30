@@ -21,6 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Scrutor" Version="4.2.2" />
+    <PackageReference Include="SimpleInjector" Version="5.4.4" />
   </ItemGroup>
 
 </Project>

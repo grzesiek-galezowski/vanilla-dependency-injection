@@ -6,7 +6,7 @@ namespace DiFrameworkPros._1_AutomaticDependencyResolution;
 public static class AutomaticDependencyResolution_Lamar
 {
   /// <summary>
-  /// Lamar can use auto wiring to find the types and create
+  /// Lamar can automatically find the required types and create
   /// their instances as long as those types are public and
   /// as long as we're happy with the transient lifestyle.
   /// </summary>
