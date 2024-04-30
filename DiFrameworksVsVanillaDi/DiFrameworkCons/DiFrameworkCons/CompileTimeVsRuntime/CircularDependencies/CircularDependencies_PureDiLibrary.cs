@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public static class CircularDependencies_PureDiLibrary
 {

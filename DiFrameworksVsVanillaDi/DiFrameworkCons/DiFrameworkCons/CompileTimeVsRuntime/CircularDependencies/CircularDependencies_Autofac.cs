@@ -1,6 +1,6 @@
 using Autofac.Core;
 
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public static class CircularDependencies_Autofac
 {
@@ -31,9 +31,9 @@ public static class CircularDependencies_Autofac
       .Which.ToString().Should().ContainAll(
       [
         "Autofac.Core.DependencyResolutionException: An exception was thrown while activating " +
-        "DiFrameworkCons.CircularDependencies.One -> DiFrameworkCons.CircularDependencies.Two -> DiFrameworkCons.CircularDependencies.Three",
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Two -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Three",
         "Circular component dependency detected: " +
-        "DiFrameworkCons.CircularDependencies.One -> DiFrameworkCons.CircularDependencies.Two -> DiFrameworkCons.CircularDependencies.Three -> DiFrameworkCons.CircularDependencies.One."
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Two -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Three -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One."
       ]);
   }
 }

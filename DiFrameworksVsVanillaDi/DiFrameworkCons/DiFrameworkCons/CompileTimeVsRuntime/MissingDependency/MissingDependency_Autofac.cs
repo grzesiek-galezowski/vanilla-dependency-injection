@@ -1,6 +1,6 @@
 using Autofac.Core;
 
-namespace DiFrameworkCons.MissingDependency;
+namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 
 public static class MissingDependency_Autofac
 {
@@ -18,10 +18,10 @@ public static class MissingDependency_Autofac
         var one = container.Resolve<One>();
       }).Should().Throw<DependencyResolutionException>()
       .Which.ToString().Should().Contain(
-        "None of the constructors found on type 'DiFrameworkCons.MissingDependency.One' " +
+        "None of the constructors found on type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One' " +
         "can be invoked with the available services and parameters:\r\n" +
-        "Cannot resolve parameter 'DiFrameworkCons.MissingDependency.Two Two' " +
+        "Cannot resolve parameter 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two Two' " +
         "of constructor " +
-        "'Void .ctor(DiFrameworkCons.MissingDependency.Two)'.");
+        "'Void .ctor(DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two)'.");
   }
 }

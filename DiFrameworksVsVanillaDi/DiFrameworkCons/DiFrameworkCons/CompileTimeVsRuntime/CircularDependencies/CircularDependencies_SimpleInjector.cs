@@ -1,6 +1,6 @@
 using SimpleInjector;
 
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public static class CircularDependencies_SimpleInjector
 {
@@ -15,7 +15,7 @@ public static class CircularDependencies_SimpleInjector
   public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithSimpleInjector()
   {
     //GIVEN
-    var container = new SimpleInjector.Container();
+    var container = new Container();
     container.Register<One>(Lifestyle.Transient);
     container.Register(() => new Two(container.GetInstance<Three>()));
     container.Register<Three>();

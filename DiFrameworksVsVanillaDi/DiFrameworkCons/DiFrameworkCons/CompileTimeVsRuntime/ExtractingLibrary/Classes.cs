@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Castle.Core.Logging;
 
-namespace DiFrameworkCons.ExtractingLibrary;
+namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 [SuppressMessage("ReSharper", "NotAccessedPositionalProperty.Global")]
 internal record ProjectConversion(

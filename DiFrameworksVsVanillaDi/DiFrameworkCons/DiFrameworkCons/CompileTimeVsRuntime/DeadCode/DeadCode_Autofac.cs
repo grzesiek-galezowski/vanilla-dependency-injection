@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.DeadCode;
+namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;
 
 public static class DeadCode_Autofac
 {

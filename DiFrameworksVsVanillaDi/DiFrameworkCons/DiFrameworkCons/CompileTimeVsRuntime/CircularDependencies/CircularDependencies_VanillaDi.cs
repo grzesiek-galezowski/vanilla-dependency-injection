@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public class CircularDependencies_VanillaDi
 {

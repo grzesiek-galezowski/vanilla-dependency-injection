@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.Events;
+namespace DiFrameworkCons.TODO.Events;
 
 public class MyObserver
 {

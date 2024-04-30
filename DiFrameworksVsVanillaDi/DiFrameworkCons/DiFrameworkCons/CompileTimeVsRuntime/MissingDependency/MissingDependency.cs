@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.MissingDependency;
+namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 
 //todo add descriptions
 public class MissingDependency

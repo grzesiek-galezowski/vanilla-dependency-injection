@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public static class CircularDependencies_MsDi
 {
@@ -28,8 +28,8 @@ public static class CircularDependencies_MsDi
           });
       }).Should().ThrowExactly<AggregateException>()
       .Which.ToString().Should().Contain(
-        "A circular dependency was detected for the service of type 'DiFrameworkCons.CircularDependencies.One'.\r\n" +
-        "DiFrameworkCons.CircularDependencies.One -> DiFrameworkCons.CircularDependencies.Two -> DiFrameworkCons.CircularDependencies.Three -> DiFrameworkCons.CircularDependencies.One");
+        "A circular dependency was detected for the service of type 'DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One'.\r\n" +
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Two -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Three -> DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One");
   }
 
   /// <summary>

@@ -4,7 +4,7 @@ using Container = Lamar.Container;
 using Lamar.IoC;
 #endif
 
-namespace DiFrameworkCons.CircularDependencies;
+namespace DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies;
 
 public class CircularDependencies_Lamar
 {
@@ -21,7 +21,7 @@ public class CircularDependencies_Lamar
       {
         _ = new Container(builder =>
         {
-          
+
           builder.AddTransient<One>()
           .AddTransient<Two>()
           .AddTransient<Three>();
@@ -59,9 +59,9 @@ public class CircularDependencies_Lamar
         "Detected some kind of bi-directional dependency while trying " +
         "to discover and plan a missing service registration. " +
         "Examining types: " +
-        "DiFrameworkCons.CircularDependencies.One, " +
-        "DiFrameworkCons.CircularDependencies.Two, " +
-        "DiFrameworkCons.CircularDependencies.Three");
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.One, " +
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Two, " +
+        "DiFrameworkCons.CompileTimeVsRuntime.CircularDependencies.Three");
   }
 
   /// <summary>
@@ -85,13 +85,13 @@ public class CircularDependencies_Lamar
     //Configuration check does not unveil the dependency
     container.AssertConfigurationIsValid(AssertMode.ConfigOnly);
 
-    #if NCRUNCH
+#if NCRUNCH
     Invoking(() =>
       {
         container.AssertConfigurationIsValid();
       }).Should().ThrowExactly<ContainerValidationException>()
       .Which.ToString().Should().Contain(
         "NCrunch has detected a stack overflow");
-    #endif
+#endif
   }
 }

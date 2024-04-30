@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.MissingDependency;
+namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 
 public static class MissingDependency_MsDi
 {
@@ -21,11 +21,11 @@ public static class MissingDependency_MsDi
       .Which.ToString().Should().Contain(
         "Some services are not able to be constructed " +
         "(Error while validating the service descriptor " +
-        "'ServiceType: DiFrameworkCons.MissingDependency.One " +
-        "Lifetime: Transient ImplementationType: DiFrameworkCons.MissingDependency.One': " +
+        "'ServiceType: DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One " +
+        "Lifetime: Transient ImplementationType: DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One': " +
         "Unable to resolve service for type " +
-        "'DiFrameworkCons.MissingDependency.Two' " +
-        "while attempting to activate 'DiFrameworkCons.MissingDependency.One'.)");
+        "'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two' " +
+        "while attempting to activate 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One'.)");
   }
 
   [Test]
@@ -43,6 +43,6 @@ public static class MissingDependency_MsDi
     //THEN
     Invoking(container.GetRequiredService<One>)
       .Should().Throw<InvalidOperationException>().Which.ToString().Should()
-      .Contain("No service for type 'DiFrameworkCons.MissingDependency.Two' has been registered.");
+      .Contain("No service for type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two' has been registered.");
   }
 }
