@@ -15,15 +15,7 @@ public class AutomaticDependencyResolution_PureDiLibrary
   [Test]
   public void ShouldGenerateCodeToWireBasicDependencies()
   {
-    DI.Setup(nameof(AutomaticDependencyResolution_PureDiLibrary) + "CompositionRoot")
-      .Bind().As(Lifetime.Singleton).To<Person>().Root<Person>("Johnny")
-      .Bind().As(Lifetime.Singleton).To<Kitchen>()
-      .Bind().As(Lifetime.Singleton).To<Knife>()
-      .Bind().As(Lifetime.Singleton).To<LoggingChannel>()
-      //.Bind().As(Lifetime.Transient).To<Logger>() //not necessary to register transients
-      .Root<Logger>("NewLogger");
-
-    var container = new AutomaticDependencyResolution_PureDiLibraryCompositionRoot();
+    var container = new Composition();
 
     //singletons
     var person1 = container.Resolve<Person>();
@@ -36,5 +28,19 @@ public class AutomaticDependencyResolution_PureDiLibrary
     var logger3 = container.NewLogger;
     logger1.Should().NotBeSameAs(logger2);
     logger2.Should().NotBeSameAs(logger3);
+  }
+}
+
+partial class Composition 
+{
+  public void Setup()
+  {
+    DI.Setup(nameof(Composition))
+      .Bind().As(Lifetime.Singleton).To<Person>().Root<Person>("Johnny")
+      .Bind().As(Lifetime.Singleton).To<Kitchen>()
+      .Bind().As(Lifetime.Singleton).To<Knife>()
+      .Bind().As(Lifetime.Singleton).To<LoggingChannel>()
+      //.Bind().As(Lifetime.Transient).To<Logger>() //not necessary to register transients
+      .Root<Logger>("NewLogger");
   }
 }

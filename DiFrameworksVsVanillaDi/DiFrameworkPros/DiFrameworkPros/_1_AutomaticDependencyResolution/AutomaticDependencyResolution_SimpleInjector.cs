@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
-using SimpleInjector.Diagnostics;
 
 namespace DiFrameworkPros._1_AutomaticDependencyResolution;
 

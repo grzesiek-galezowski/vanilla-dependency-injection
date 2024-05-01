@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Castle.DynamicProxy;
 
 namespace DiFrameworkPros._3_Interception;
@@ -16,14 +17,21 @@ public class Interception_VanillaDi
   [Test]
   public void ShouldEnableInterception()
   {
+    var messages = new List<string>();
     var dependency1 = CreateDependency();
     var dependency2 = CreateDependency();
 
     dependency1.DoSomething();
     dependency2.DoSomething();
+
+    messages.Count.Should().Be(2);
     return;
 
-    static Dependency CreateDependency()
-      => ProxyGenerator.CreateClassProxyWithTarget(new Dependency(), new CallLogger());
+    IDependency CreateDependency()
+    {
+      return ProxyGenerator.CreateInterfaceProxyWithTarget<IDependency>(
+        new Dependency(),
+        new CallLogger(messages));
+    }
   }
 }

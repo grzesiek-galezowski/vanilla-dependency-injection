@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Castle.DynamicProxy;
 
 namespace DiFrameworkPros._3_Interception;
@@ -15,11 +16,13 @@ public class Dependency : IDependency
   }
 }
 
-public class CallLogger : IInterceptor
+public class CallLogger(List<string> messages) : IInterceptor
 {
   public void Intercept(IInvocation invocation)
   {
-    Console.WriteLine("Called " + invocation.Method.Name);
+    var message = "Called " + invocation.Method.Name;
+    Console.WriteLine(message);
+    messages.Add(message);
     invocation.Proceed();
   }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
 
@@ -19,6 +20,7 @@ public static class Interception_Autofac
       .EnableInterfaceInterceptors()
       .InterceptedBy(typeof(CallLogger));
     containerBuilder.RegisterType<CallLogger>();
+    containerBuilder.RegisterType<List<string>>().SingleInstance();
 
     using var container = containerBuilder.Build();
 
@@ -26,5 +28,7 @@ public static class Interception_Autofac
     var dependency2 = container.Resolve<IDependency>();
     dependency1.DoSomething();
     dependency2.DoSomething();
+
+    container.Resolve<List<string>>().Count.Should().Be(2);
   }
 }
