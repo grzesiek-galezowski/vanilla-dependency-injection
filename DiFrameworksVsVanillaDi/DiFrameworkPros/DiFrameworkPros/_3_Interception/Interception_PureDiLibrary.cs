@@ -27,9 +27,13 @@ partial class Composition3
 
   public void Setup()
   {
-    // OnDependencyInjection = On
-    // OnDependencyInjectionContractTypeNameRegularExpression = IDependency
     DI.Setup(nameof(Composition3))
+      .Hint(
+        Hint.OnDependencyInjection,
+        "On")
+      .Hint(
+        Hint.OnDependencyInjectionContractTypeNameRegularExpression,
+        nameof(IDependency))
       .RootBind<IDependency>("Root").As(Lifetime.Transient).To<Dependency>();
   }
 
