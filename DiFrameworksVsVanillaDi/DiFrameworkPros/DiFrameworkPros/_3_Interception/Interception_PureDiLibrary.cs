@@ -28,12 +28,8 @@ partial class Composition3
   public void Setup()
   {
     DI.Setup(nameof(Composition3))
-      .Hint(
-        Hint.OnDependencyInjection,
-        "On")
-      .Hint(
-        Hint.OnDependencyInjectionContractTypeNameRegularExpression,
-        nameof(IDependency))
+      .Hint(Hint.OnDependencyInjection, "On")
+      .Hint(Hint.OnDependencyInjectionContractTypeNameRegularExpression, ".*")
       .RootBind<IDependency>("Root").As(Lifetime.Transient).To<Dependency>();
   }
 

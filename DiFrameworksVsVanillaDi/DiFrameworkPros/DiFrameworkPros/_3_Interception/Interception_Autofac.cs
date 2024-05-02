@@ -30,5 +30,5 @@ public static class Interception_Autofac
     dependency2.DoSomething();
 
     container.Resolve<List<string>>().Count.Should().Be(2);
-  }
+  } //BUG: autofac is the only one that can proxy anything?
 }

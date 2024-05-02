@@ -8,7 +8,8 @@ public static class AutomaticDependencyResolution_Lamar
   /// <summary>
   /// Lamar can automatically find the required types and create
   /// their instances as long as those types are public and
-  /// as long as we're happy with the transient lifestyle.
+  /// as long as we're happy with the __transient__ lifestyle.
+  /// So far, I could not find the way to configure the default lifestyle.
   /// </summary>
   [Test]
   public static void ShouldAutomaticallyResolvePublicTransientDependenciesUsingLamar()
