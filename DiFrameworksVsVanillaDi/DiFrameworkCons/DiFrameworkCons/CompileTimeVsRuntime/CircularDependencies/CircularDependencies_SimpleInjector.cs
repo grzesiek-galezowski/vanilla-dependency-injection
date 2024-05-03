@@ -27,4 +27,25 @@ public static class CircularDependencies_SimpleInjector
     //THEN
     Invoking(container.GetInstance<One>).Should().Throw<ActivationException>();
   }
+
+
+  /// <summary>
+  /// In case the cycle is not referenced by any registered type,
+  /// the ResolveUnregisteredConcreteTypes option leads to verification
+  /// passing despite there being a cycle.
+  /// </summary>
+  [Test]
+  public static void ShouldShowFailureWhenResolvingCircularDependency()
+  {
+    //GIVEN
+    var container = new Container();
+    container.Options.ResolveUnregisteredConcreteTypes = true;
+
+    //this passes because the cycle is not referenced by any registered type
+    container.Verify(VerificationOption.VerifyAndDiagnose);
+
+    //WHEN
+    //THEN
+    Invoking(container.GetInstance<One>).Should().Throw<ActivationException>();
+  }
 }
