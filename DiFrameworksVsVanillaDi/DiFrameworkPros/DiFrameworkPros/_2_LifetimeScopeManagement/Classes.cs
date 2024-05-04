@@ -2,12 +2,16 @@ using System.Collections.Generic;
 
 namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
-internal class DisposableDependency : IDisposable
+internal class DisposableDependency(Log log) : GenericDisposableDependency<object>(log);
+internal class DisposableDependency2(Log log) : GenericDisposableDependency<int>(log);
+internal class DisposableDependency3(Log log) : GenericDisposableDependency<string>(log);
+
+internal class GenericDisposableDependency<T> : IDisposable
 {
   private readonly Log _log;
   private readonly int _currentId;
 
-  public DisposableDependency(Log log)
+  public GenericDisposableDependency(Log log)
   {
     _log = log;
     _currentId = log.NextId();
