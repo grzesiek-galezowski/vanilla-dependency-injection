@@ -1,0 +1,1 @@
+Pure.Di is a code generator for compiled code, so it does not scan assemblies. 
