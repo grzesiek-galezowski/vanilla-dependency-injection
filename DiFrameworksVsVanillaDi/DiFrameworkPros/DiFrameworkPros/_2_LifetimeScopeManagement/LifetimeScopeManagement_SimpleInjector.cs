@@ -7,15 +7,25 @@ namespace DiFrameworkPros._2_LifetimeScopeManagement;
 
 public static class LifetimeScopeManagement_SimpleInjector
 {
+  /// <summary>
+  /// SimpleInjector does not seem to support auto disposing of transient objects.
+  /// (actually, it throws when a transient implements IDisposable, but
+  /// after disabling that check the transients aren't auto-disposed anyway)
+  /// 
+  /// That's why this example uses scoped lifetimes.
+  ///
+  /// Also, the end log is different than I expected.
+  /// Either there is a bug in this code, or SimpleInjector
+  /// works differently than e.g. Autofac or MsDi.
+  /// </summary>
   [Test]
-  public static void ShouldDisposeOfCreatedDependenciesUsingLamar()
+  public static void ShouldDisposeOfCreatedDependenciesUsingSimpleInjector()
   {
     var log = new Log();
     using (var container = new Container())
     {
       container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
       container.RegisterInstance(log);
-      // SimpleInjector does not seem to support auto disposing of transient objects
       container.Register<DisposableDependency>(Lifestyle.Scoped);
       container.Register<DisposableDependency2>(Lifestyle.Scoped);
       container.Register<DisposableDependency3>(Lifestyle.Scoped);
@@ -32,12 +42,12 @@ public static class LifetimeScopeManagement_SimpleInjector
           nested.GetInstance<DisposableDependency2>(); //3
 
           log.ClosingScope();
-        } // 1.Dispose()
+        }
         log.ClosedScope();
 
         container.GetRequiredService<DisposableDependency3>(); //2
         log.ClosingScope();
-      } // 2.Dispose(), 0.Dispose()
+      }
       log.ClosedScope();
 
     }
@@ -50,7 +60,7 @@ public static class LifetimeScopeManagement_SimpleInjector
         "opening scope",
         "_____CREATED______0",
         "_____CREATED______1",
-        "_____CREATED______2",
+        "_____CREATED______2", //... what..?
         "opening scope",
         "_____CREATED______3",
         "_____CREATED______4",

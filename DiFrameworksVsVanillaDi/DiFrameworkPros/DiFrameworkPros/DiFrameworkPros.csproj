@@ -22,7 +22,6 @@
     </PackageReference>
     <PackageReference Include="Scrutor" Version="4.2.2" />
     <PackageReference Include="SimpleInjector" Version="5.4.5" />
-    <PackageReference Include="yesmarket.SimpleInjectorExtensions" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

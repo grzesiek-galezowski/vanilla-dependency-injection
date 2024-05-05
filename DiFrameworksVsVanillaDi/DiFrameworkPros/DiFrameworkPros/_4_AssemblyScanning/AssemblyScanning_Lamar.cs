@@ -10,7 +10,8 @@ public class AssemblyScanning_Lamar
   /// <summary>
   /// Lamar has its own convention over configuration approach.
   /// However, I was unable to get it to work for internal types
-  /// and for registering a singleton with multiple interfaces.
+  /// and found it too tedious for registering a singleton with
+  /// multiple interfaces.
   /// (see https://jasperfx.github.io/lamar/documentation/ioc/registration/auto-registration-and-conventions/)
   ///
   /// So instead, this example takes advantage of the fact that Lamar container
