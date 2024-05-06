@@ -21,7 +21,6 @@ public class DeadCode_PureDiLibrary
     //THEN
     resolvedInstance.Should().NotBeNull();
   }
-
 }
 
 partial class Composition4

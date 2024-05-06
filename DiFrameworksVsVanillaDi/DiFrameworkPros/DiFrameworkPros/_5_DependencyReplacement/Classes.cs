@@ -9,7 +9,7 @@ public class TroublesomeDependency : ITroublesomeDependency
 {
   public void DoSomething()
   {
-    throw new System.NotImplementedException();
+    throw new NotImplementedException();
   }
 }
 
