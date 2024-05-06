@@ -21,7 +21,7 @@ public static class AutomaticDependencyResolution_SimpleInjector
   [Test]
   public static void ShouldAutomaticallyResolvePublicTransientDependenciesUsingSimpleInjector()
   {
-    var container = new Container();
+    using var container = new Container();
     container.Options.ResolveUnregisteredConcreteTypes = true;
     container.Options.DefaultLifestyle = Lifestyle.Singleton;
 
@@ -38,7 +38,7 @@ public static class AutomaticDependencyResolution_SimpleInjector
   [Test]
   public static void ShouldAutomaticallyResolveBasicDependenciesUsingSimpleInjector()
   {
-    var container = new Container();
+    using var container = new Container();
 
     container.RegisterSingleton<Person>();
     container.RegisterSingleton<Kitchen>();

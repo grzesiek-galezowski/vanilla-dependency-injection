@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Reflection;
-using Lamar.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
@@ -17,7 +16,7 @@ public class AssemblyScanning_SimpleInjector
   [Test]
   public void ShouldBeAbleToResolveBasedOnConventionSimpleInjector()
   {
-    var container = new Container();
+    using var container = new Container();
 
     var registrations =
       from type in Assembly.GetExecutingAssembly().GetTypes().ToList()

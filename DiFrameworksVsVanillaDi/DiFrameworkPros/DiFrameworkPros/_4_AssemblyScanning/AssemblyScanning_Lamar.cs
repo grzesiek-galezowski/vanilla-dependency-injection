@@ -21,7 +21,7 @@ public class AssemblyScanning_Lamar
   [Test]
   public void ShouldBeAbleToResolveBasedOnConventionLamar()
   {
-    var container = new Container(x =>
+    using var container = new Container(x =>
     {
       x.Scan(scan => scan
         .FromCallingAssembly()

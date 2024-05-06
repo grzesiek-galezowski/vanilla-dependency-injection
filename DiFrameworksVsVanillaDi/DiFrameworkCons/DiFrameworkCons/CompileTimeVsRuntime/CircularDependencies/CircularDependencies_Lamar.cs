@@ -19,7 +19,7 @@ public class CircularDependencies_Lamar
   {
     Invoking(() =>
       {
-        _ = new Container(builder =>
+        using var x = new Container(builder =>
         {
 
           builder.AddTransient<One>()
@@ -42,7 +42,7 @@ public class CircularDependencies_Lamar
   [Test]
   public static void ShouldThrowExceptionWhenResolvingCircularDependency()
   {
-    var container = new Container(_ =>
+    using var container = new Container(_ =>
     {
 
     });
@@ -73,7 +73,7 @@ public class CircularDependencies_Lamar
   [Test]
   public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithLamarLambdaRegistration()
   {
-    var container = new Container(builder =>
+    using var container = new Container(builder =>
     {
       builder
         .AddTransient<One>()

@@ -12,7 +12,7 @@ public static class DecoratorsWithMultipleChains_Lamar
   public static void ShouldComposeVariousDecoratorConfigurationsWithMsDi()
   {
     //GIVEN
-    var container = new Container(registry =>
+    using var container = new Container(registry =>
     {
       registry.AddKeyedSingleton("chain1",
         (c, _) => ActivatorUtilities.CreateInstance<A>(c,

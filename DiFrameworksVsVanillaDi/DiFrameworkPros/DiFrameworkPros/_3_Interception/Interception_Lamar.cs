@@ -15,7 +15,7 @@ internal class Interception_Lamar
   {
     //GIVEN
     var proxyGenerator = new ProxyGenerator();
-    var container = new Container(x =>
+    using var container = new Container(x =>
     {
       x.AddSingleton<CallLogger>();
       x.AddSingleton<List<string>>();

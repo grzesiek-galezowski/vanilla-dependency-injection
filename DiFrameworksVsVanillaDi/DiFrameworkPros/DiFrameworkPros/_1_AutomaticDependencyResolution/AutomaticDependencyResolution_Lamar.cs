@@ -14,7 +14,7 @@ public static class AutomaticDependencyResolution_Lamar
   [Test]
   public static void ShouldAutomaticallyResolvePublicTransientDependenciesUsingLamar()
   {
-    var container = new Container(_ => { });
+    using var container = new Container(_ => { });
     
     var person1 = container.GetRequiredService<Person>();
     var person2 = container.GetRequiredService<Person>();
@@ -28,7 +28,7 @@ public static class AutomaticDependencyResolution_Lamar
   [Test]
   public static void ShouldAllowConfiguringNonStandardCreationUsingLamar()
   {
-    var container = new Container(registry =>
+    using var container = new Container(registry =>
     {
       registry.AddSingleton<Person>();
       registry.AddSingleton<Kitchen>();

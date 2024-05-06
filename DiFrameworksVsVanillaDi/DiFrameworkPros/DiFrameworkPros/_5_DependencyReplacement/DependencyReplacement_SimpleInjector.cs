@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using SimpleInjector;
 
 namespace DiFrameworkPros._5_DependencyReplacement;
@@ -18,7 +17,7 @@ public static class DependencyReplacement_SimpleInjector
   [Test]
   public static void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingSimpleInjector()
   {
-    var container = new Container();
+    using var container = new Container();
     container.RegisterSingleton<ISomeLogic, SomeLogic>();
     container.RegisterSingleton<ITroublesomeDependency, TroublesomeDependency>();
 

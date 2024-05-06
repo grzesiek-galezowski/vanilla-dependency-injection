@@ -15,7 +15,7 @@ public static class CircularDependencies_SimpleInjector
   public static void ShouldShowFailureWhenCircularDependencyIsDiscoveredWithSimpleInjector()
   {
     //GIVEN
-    var container = new Container();
+    using var container = new Container();
     container.Register<One>(Lifestyle.Transient);
     container.Register(() => new Two(container.GetInstance<Three>()));
     container.Register<Three>();
@@ -38,7 +38,7 @@ public static class CircularDependencies_SimpleInjector
   public static void ShouldShowFailureWhenResolvingCircularDependency()
   {
     //GIVEN
-    var container = new Container();
+    using var container = new Container();
     container.Options.ResolveUnregisteredConcreteTypes = true;
 
     //this passes because the cycle is not referenced by any registered type

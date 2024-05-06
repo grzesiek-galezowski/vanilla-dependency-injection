@@ -13,7 +13,7 @@ public static class DependencyReplacement_Lamar
   [Test]
   public static void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingLamar()
   {
-    var container = new Container(builder =>
+    using var container = new Container(builder =>
     {
       builder.AddSingleton<ISomeLogic, SomeLogic>();
       builder.AddSingleton<ITroublesomeDependency, TroublesomeDependency>();
