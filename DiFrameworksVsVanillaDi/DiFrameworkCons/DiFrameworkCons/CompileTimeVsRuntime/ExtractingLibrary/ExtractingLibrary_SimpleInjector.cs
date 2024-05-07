@@ -33,12 +33,14 @@ public static class ExtractingLibrary_SimpleInjector
 
     // SimpleInjector can describe visualize object graph to a degree,
     // giving some hints on how to construct it manually.
-    container.GetRegistration<ProjectConversion>().VisualizeObjectGraph(new VisualizationOptions()
-    {
-      IncludeLifestyleInformation = true,
-      UseFullyQualifiedTypeNames = false
-    }).Should().Be(
-@"ProjectConversion( // Transient
+    // It seems to not like lambdas. No wonder.
+    container.GetRegistration<ProjectConversion>()
+      !.VisualizeObjectGraph(new VisualizationOptions()
+      {
+        IncludeLifestyleInformation = true,
+        UseFullyQualifiedTypeNames = false
+      }).Should().Be(
+        @"ProjectConversion( // Transient
     JsonFileReader(), // Transient
     ProjectSectionFormat(), // Transient
     HeaderFormat(), // Transient
