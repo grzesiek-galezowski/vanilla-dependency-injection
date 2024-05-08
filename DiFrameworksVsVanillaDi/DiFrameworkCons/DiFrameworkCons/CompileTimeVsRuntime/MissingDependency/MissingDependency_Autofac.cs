@@ -5,6 +5,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 public static class MissingDependency_Autofac
 {
   [Test]
+  //see https://autofac.readthedocs.io/en/latest/faq/container-analysis.html
   public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredWithAutofac()
   {
     //GIVEN

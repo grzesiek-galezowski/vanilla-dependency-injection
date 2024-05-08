@@ -1,4 +1,5 @@
 namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 
-public record One(Two Two);
-public record Two;
+public interface ITwo;
+public record One(ITwo Two);
+public record Two : ITwo;

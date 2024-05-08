@@ -2,8 +2,11 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 
 public static class MissingDependency_MsDi
 {
+  /// <summary>
+  /// Container validation catches missing dependencies
+  /// if their consumers are registered as types...
+  /// </summary>
   [Test]
-  //see https://autofac.readthedocs.io/en/latest/faq/container-analysis.html
   public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredWithMsDiDuringContainerBuild()
   {
     //GIVEN
@@ -24,17 +27,21 @@ public static class MissingDependency_MsDi
         "'ServiceType: DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One " +
         "Lifetime: Transient ImplementationType: DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One': " +
         "Unable to resolve service for type " +
-        "'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two' " +
+        "'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo' " +
         "while attempting to activate 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One'.)");
   }
 
+  /// <summary>
+  /// However, when registered as lambdas, the validation doesn't work
+  /// and the error is detected at resolution time.
+  /// </summary>
   [Test]
   public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredWithLambdaRegisteredMsDi()
   {
     //GIVEN
     var containerBuilder = new ServiceCollection();
     containerBuilder
-      .AddTransient(c => new One(c.GetRequiredService<Two>()));
+      .AddTransient(c => new One(c.GetRequiredService<ITwo>()));
     using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
     {
       ValidateOnBuild = true,
@@ -44,6 +51,8 @@ public static class MissingDependency_MsDi
     //THEN
     Invoking(container.GetRequiredService<One>)
       .Should().Throw<InvalidOperationException>().Which.ToString().Should()
-      .Contain("No service for type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two' has been registered.");
+      .Contain("No service for type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo' has been registered.");
   }
+
+  //BUG: add lambda example (validation doesn't work)
 }
