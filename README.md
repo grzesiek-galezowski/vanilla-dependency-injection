@@ -22,7 +22,6 @@ Your Brain on Inversion of Control and Dependency Injection](https://kalele.io/y
 * [Mark Seemann - Dependency Whac-a-mole](https://blog.ploeh.dk/2023/10/02/dependency-whac-a-mole/)
 * [Jimmy Bogard - You Probably Don't Need to Worry About MediatR](https://www.jimmybogard.com/you-probably-dont-need-to-worry-about-mediatr/) - the section `[Violates] the Explicit Dependencies Principle`
 
-
 # Topics
 
 1. Vanilla DI vs a DI container
