@@ -6,14 +6,14 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 /// <summary>
 /// With Pure.DI, we can copy-paste fragments of composition
-/// from the generated code. It's not super pretty, but it only takes
+/// from the generated code. It's not super-pretty, but it only takes
 /// a short time to clean it up (at least in this example).
 ///
 /// The composition root still needs to be changed manually though,
 /// differently than with Vanilla DI where extraction refactorings
 /// automatically adjust the composition root.
 /// </summary>
-public class ExtractingLibrary_PureDiLibrary
+public class MissingLibrary_PureDiLibrary
 {
   [Test]
   public static void ContainerContainsSomeDeadCodeWithMsDi()
