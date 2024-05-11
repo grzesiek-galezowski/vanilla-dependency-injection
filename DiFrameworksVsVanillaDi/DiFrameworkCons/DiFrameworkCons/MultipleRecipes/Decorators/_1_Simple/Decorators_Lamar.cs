@@ -7,7 +7,7 @@ public static class Decorators_Lamar
   /// <summary>
   /// Lamar supports decorators but not in a way
   /// that would allow passing an integer to the decorator's
-  /// constructor.
+  /// constructor. So I used Scrutor as with MsDi.
   /// </summary>
   [Test]
   public static void ShouldAssembleDecoratorsWithScrutor()
@@ -18,8 +18,6 @@ public static class Decorators_Lamar
 
       //Decorators are applied in the order they are registered
       builder.Decorate<IAnswer, TracedAnswer>();
-      //With Scrutor, there's currently no way around falling back lambda
-      //(see https://github.com/dotnet/extensions/issues/2937) BUG: ???
       builder.Decorate<IAnswer>((a, ctx) =>
         ActivatorUtilities.CreateInstance<SynchronizedAnswer>(ctx, a, 1));
     });

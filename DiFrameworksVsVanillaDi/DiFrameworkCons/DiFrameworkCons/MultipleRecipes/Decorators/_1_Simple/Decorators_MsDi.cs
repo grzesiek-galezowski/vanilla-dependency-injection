@@ -16,8 +16,6 @@ public static class Decorators_MsDi
 
     //Decorators are applied in the order they are registered
     builder.Decorate<IAnswer, TracedAnswer>();
-    //With MsDi, there's currently no way around falling back lambda
-    //(see https://github.com/dotnet/extensions/issues/2937)
     builder.Decorate<IAnswer>((a, ctx) =>
       ActivatorUtilities.CreateInstance<SynchronizedAnswer>(ctx, a, 1));
 
