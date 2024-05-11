@@ -86,5 +86,4 @@ public static class DecoratorsWithMultipleChains_Lamar
     chain2.Next.Next!.Next.Should().BeOfType<D>();
     chain2.Next.Next!.Next!.Next.Should().BeNull();
   }
-
 }
