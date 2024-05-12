@@ -40,21 +40,22 @@ public static class Decorators_SimpleInjector
 
   private static Predicate<PredicateContext> WhenRequestedBy<T>()
   {
-    return x => x.HasConsumer && x.Consumer.ImplementationType == typeof(T);
+    return x => x.HasConsumer
+                && x.Consumer.ImplementationType == typeof(T);
   }
 }
 
 // copied from SimpleInjector code
-sealed class TransientRegistration : Registration
+internal sealed class TransientRegistration(
+  Container container,
+  Type implementationType,
+  Func<object>? creator = null)
+  : Registration(
+    Lifestyle.Transient,
+    container,
+    implementationType,
+    creator)
 {
-  public TransientRegistration(
-    Container container,
-    Type implementationType,
-    Func<object>? creator = null)
-    : base(Lifestyle.Transient, container, implementationType, creator)
-  {
-  }
-
   public override Expression BuildExpression() =>
     BuildTransientExpression();
 }

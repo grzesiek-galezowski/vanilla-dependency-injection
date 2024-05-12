@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 using Castle.Core.Logging;
-using JasperFx.CodeGeneration;
 using Lamar;
 using Lamar.IoC;
 
