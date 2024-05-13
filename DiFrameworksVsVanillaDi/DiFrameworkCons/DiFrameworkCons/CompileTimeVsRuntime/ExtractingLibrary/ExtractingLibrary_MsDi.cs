@@ -6,7 +6,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 public static class ExtractingLibrary_MsDi
 {
   [Test]
-  public static void ShouldAllowEasyExtractionOfLibraryFromCodeUsingMsDi()
+  public static void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     var builder = new ServiceCollection();

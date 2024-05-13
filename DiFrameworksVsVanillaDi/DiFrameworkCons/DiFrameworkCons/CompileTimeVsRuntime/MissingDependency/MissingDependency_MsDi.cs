@@ -7,7 +7,7 @@ public static class MissingDependency_MsDi
   /// if their consumers are registered as types...
   /// </summary>
   [Test]
-  public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredWithMsDiDuringContainerBuild()
+  public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredDuringContainerBuild()
   {
     //GIVEN
     var containerBuilder = new ServiceCollection();
@@ -53,6 +53,4 @@ public static class MissingDependency_MsDi
       .Should().Throw<InvalidOperationException>().Which.ToString().Should()
       .Contain("No service for type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo' has been registered.");
   }
-
-  //BUG: add lambda example (validation doesn't work)
 }

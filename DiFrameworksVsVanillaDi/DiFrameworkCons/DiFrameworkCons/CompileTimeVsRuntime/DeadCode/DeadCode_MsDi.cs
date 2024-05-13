@@ -11,7 +11,7 @@ public static class DeadCode_MsDi
   /// we don't even notice they were used only by that removed part of code. 
   /// </summary>
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi()
+  public static void ContainerContainsSomeDeadCode()
   {
     //GIVEN
     var builder = new ServiceCollection();

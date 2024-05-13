@@ -4,10 +4,8 @@ namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains;
 
 public class DecoratorsWithMultipleChains_PureDiLibrary
 {
-  /// <summary>
-  /// </summary>
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi() //BUG: fix names
+  public static void ShouldComposeVariousDecoratorConfigurationsWithKeyedDependencies()
   {
     //GIVEN
     var composition = new Composition8();
@@ -35,17 +33,16 @@ partial class Composition8
   {
     DI.Setup(nameof(Composition8))
       .Bind<D>().As(Lifetime.Transient).To<D>()
-      .Bind<C1>().As(Lifetime.Transient).To<C1>(context =>
+      .Bind<C1>().As(Lifetime.Transient).To(context =>
       {
         context.Inject<D>(out var d);
         return new C1(d);
       })
-      .Bind<C2>().As(Lifetime.Transient).To<C2>(context =>
+      .Bind<C2>().As(Lifetime.Transient).To(context =>
       {
         context.Inject<D>(out var d);
         return new C2(d);
       })
-      //BUG: get back to the previous example and pass tags here
       .Bind<B>("chain1B").As(Lifetime.Transient).To(context =>
         {
           context.Inject<C1>(out var c1);

@@ -10,7 +10,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;
 public class DeadCode_PureDiLibrary
 {
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi()
+  public static void ContainerContainsSomeDeadCode()
   {
     //GIVEN
     var composition = new Composition4();

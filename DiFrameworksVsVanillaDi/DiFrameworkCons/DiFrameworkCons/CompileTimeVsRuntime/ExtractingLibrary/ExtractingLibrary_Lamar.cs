@@ -8,7 +8,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 public static class ExtractingLibrary_Lamar
 {
   [Test]
-  public static void ShouldAllowEasyExtractionOfLibraryFromCodeUsingLamar()
+  public static void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     using var container = new Container(builder =>
@@ -53,20 +53,20 @@ public class ProjectConversionGenerated
     _stringValue1752363900 = stringValue1752363900;
   }
 
-  public Regex func_headerFormat_Regex { get; set; }
-  public string func_jsonFileReader2_FileName { get; set; }
+  public Regex FuncHeaderFormatRegex { get; set; }
+  public string FuncJsonFileReader2FileName { get; set; }
 
   internal ProjectConversion Build(Scope scope)
   {
     return new ProjectConversion(
       new JsonFileReader(_stringValue1752363900)
       {
-        FileName = func_jsonFileReader2_FileName
+        FileName = FuncJsonFileReader2FileName
       },
       new ProjectSectionFormat(),
       new HeaderFormat(_regex217491225)
       {
-        Regex = func_headerFormat_Regex
+        Regex = FuncHeaderFormatRegex
       },
       new ConsoleLogger());
   }

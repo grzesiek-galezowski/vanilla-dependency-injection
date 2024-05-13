@@ -7,7 +7,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 public static class ExtractingLibrary_SimpleInjector
 {
   [Test]
-  public static void ShouldAllowEasyExtractionOfLibraryFromCodeUsingSimpleInjector()
+  public static void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     using var container = new Container();

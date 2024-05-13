@@ -5,16 +5,15 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
 public class MissingDependency_PureDiLibrary
 {
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi()
+  public static void ShouldShowFailureWhenMissingDependencyIsDiscovered()
   {
     //GIVEN
     var composition = new Composition6();
 
     //WHEN
-
     //This resolves because Two is bound in the generator,
     //but scroll down and comment out binding for ITwo
-    //and compile error will show up.
+    //in Composition6 and compile error will show up.
     var resolvedInstance = composition.One;
 
     //THEN

@@ -6,7 +6,7 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 public static class ExtractingLibrary_Autofac
 {
   [Test]
-  public static void ShouldAllowEasyExtractionOfLibraryFromCodeUsingAutofac()
+  public static void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     var builder = new ContainerBuilder();

@@ -5,9 +5,8 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 internal class ExtractingLibrary_VanillaDi
 {
-  //todo: add description, add simple injector example
   [Test]
-  public void ShouldAllowEasyExtractionOfLibraryFromCodeUsingVanillaDi()
+  public void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     //show how to extract library returning project conversion

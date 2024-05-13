@@ -13,10 +13,10 @@ namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 /// differently than with Vanilla DI where extraction refactorings
 /// automatically adjust the composition root.
 /// </summary>
-public class MissingLibrary_PureDiLibrary
+public class ExtractingLibrary_PureDiLibrary
 {
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi()
+  public static void ShouldAllowEasyExtractionOfLibraryFromCode()
   {
     //GIVEN
     var composition = new Composition5();

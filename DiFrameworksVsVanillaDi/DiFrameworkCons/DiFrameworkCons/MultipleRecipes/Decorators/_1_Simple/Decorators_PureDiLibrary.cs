@@ -4,9 +4,8 @@ namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple;
 
 public class Decorators_PureDiLibrary
 {
-
   [Test]
-  public static void ContainerContainsSomeDeadCodeWithMsDi()
+  public static void ShouldAssembleDecorators()
   {
     //GIVEN
     var composition = new Composition7();

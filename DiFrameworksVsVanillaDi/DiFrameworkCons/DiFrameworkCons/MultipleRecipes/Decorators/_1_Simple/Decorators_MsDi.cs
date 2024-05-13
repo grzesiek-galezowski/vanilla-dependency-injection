@@ -8,7 +8,7 @@ public static class Decorators_MsDi
   /// Two ways around these limitations are: 1) MediatR, 2) Scrutor (shown below)
   /// </summary>
   [Test]
-  public static void ShouldAssembleDecoratorsUsingMsDiWithScrutor()
+  public static void ShouldAssembleDecoratorsWithScrutor()
   {
     var builder = new ServiceCollection();
 
