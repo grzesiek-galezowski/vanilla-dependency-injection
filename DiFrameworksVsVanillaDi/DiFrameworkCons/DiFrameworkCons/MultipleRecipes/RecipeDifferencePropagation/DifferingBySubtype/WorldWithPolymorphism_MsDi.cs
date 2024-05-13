@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingBySubtype;
 
 public static class WorldWithPolymorphism_MsDi
@@ -84,15 +86,7 @@ public static class WorldWithPolymorphism_MsDi
         (ctx, o) => ActivatorUtilities.CreateInstance<Armor>(
           ctx, ctx.GetRequiredKeyedService<TBodyArmor>(category)));
 
-      if (!builder.Contains(
-            new ServiceDescriptor(
-              typeof(Helmet),
-              typeof(Helmet),
-              ServiceLifetime.Transient)))
-      {
-        builder.AddTransient<Helmet>();
-      }
-
+      builder.TryAddTransient<Helmet>();
       builder.AddKeyedSingleton<TBodyArmor>(category);
       builder.AddKeyedSingleton<THandWeapon>(category);
     }

@@ -25,9 +25,9 @@ public class Decorators_PureDiLibrary
     var composition = new Composition7(X: 1);
 
     var answer = composition.Answer;
-    AssertionExtensions.Should((object)answer).BeOfType<TaggedSynchronizedAnswer>();
-    AssertionExtensions.Should((object)answer.NestedAnswer).BeOfType<TaggedTracedAnswer>();
-    AssertionExtensions.Should((object)answer.NestedAnswer.NestedAnswer).BeOfType<Answer>();
+    answer.Should().BeOfType<TaggedSynchronizedAnswer>();
+    answer.NestedAnswer.Should().BeOfType<TaggedTracedAnswer>();
+    answer.NestedAnswer.NestedAnswer.Should().BeOfType<Answer>();
     ((SynchronizedAnswer)answer).X.Should().Be(1);
   }
 }

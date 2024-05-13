@@ -21,8 +21,8 @@ public static class MissingDependency_Autofac
       .Which.ToString().Should().Contain(
         "None of the constructors found on type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One' " +
         "can be invoked with the available services and parameters:\r\n" +
-        "Cannot resolve parameter 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two Two' " +
+        "Cannot resolve parameter 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo Two' " +
         "of constructor " +
-        "'Void .ctor(DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Two)'.");
+        "'Void .ctor(DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo)'.");
   }
 }
