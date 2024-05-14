@@ -19,7 +19,7 @@ public class AssemblyScanning_Lamar
   /// library.
   /// </summary>
   [Test]
-  public void ShouldBeAbleToResolveBasedOnConventionLamar()
+  public void ShouldBeAbleToResolveBasedOnConvention()
   {
     using var container = new Container(x =>
     {
