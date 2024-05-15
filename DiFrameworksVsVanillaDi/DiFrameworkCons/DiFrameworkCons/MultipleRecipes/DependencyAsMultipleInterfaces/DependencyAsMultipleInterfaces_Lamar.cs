@@ -73,7 +73,7 @@ public static class DependencyAsMultipleInterfaces_Lamar
   /// https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/
   /// only to show that in Lamar, registering the same implementation twice
   /// as singleton, each time as a different interface is not equal to
-  /// resolving the same instance from each registration
+  /// registering one singleton as multiple interfaces
   /// </summary>
   [Test]
   public static void WhenRegisteredAsSeparateSingleton_InstancesAreNotTheSame()

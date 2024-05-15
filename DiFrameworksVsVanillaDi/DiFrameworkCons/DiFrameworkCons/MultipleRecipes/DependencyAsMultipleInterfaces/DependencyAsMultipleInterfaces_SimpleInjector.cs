@@ -5,7 +5,7 @@ namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces;
 public static class DependencyAsMultipleInterfaces_SimpleInjector
 {
   /// <summary>
-  /// With Autofac, this is relatively easy - we can register
+  /// With SimpleInjector, this is relatively easy - we can register
   /// the same type several times, each time as a different interface.
   /// SimpleInjector doesn't necessarily "lose" with Vanilla DI because
   /// registering as multiple interfaces is very straightforward. Even though,

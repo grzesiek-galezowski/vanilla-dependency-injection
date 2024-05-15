@@ -62,8 +62,6 @@ public static class DependencyAsMultipleInterfaces_MsDi
     cacheUser.WriteCache.Number.Should().Be(cacheUser.ReadCache.Number);
   }
 
-
-
   /// <summary>
   /// This is a test adapted from
   /// https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/
