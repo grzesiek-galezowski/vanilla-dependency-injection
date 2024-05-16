@@ -8,6 +8,7 @@ public class ObjectWithTwoConstructors
   {
     Arg = arg;
   }
+
   public ObjectWithTwoConstructors(Constructor2Argument arg)
   {
     Arg = arg;
