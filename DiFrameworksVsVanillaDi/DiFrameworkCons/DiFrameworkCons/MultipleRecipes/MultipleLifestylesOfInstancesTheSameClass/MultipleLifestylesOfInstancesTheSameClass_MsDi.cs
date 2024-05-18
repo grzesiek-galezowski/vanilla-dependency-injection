@@ -31,7 +31,6 @@ public static class MultipleLifestylesOfInstancesTheSameClass_MsDi
     var p2 = container.GetRequiredService<ScheduledProcess>();
     var p3 = container.GetRequiredService<EmergencyProcess>();
 
-
     //THEN
     p1.ThrottledOutbox.Should().BeSameAs(p2.ThrottledOutbox);
     p3.ThrottledOutbox.Should().NotBeSameAs(p2.ThrottledOutbox);

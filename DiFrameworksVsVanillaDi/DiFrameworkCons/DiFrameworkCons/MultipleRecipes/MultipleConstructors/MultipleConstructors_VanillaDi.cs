@@ -14,4 +14,6 @@ class MultipleConstructors_VanillaDi
     //THEN
     resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
   }
+
+  //BUG: the third option is to use a ActivatorUtilitiesConstructorAttribute
 }

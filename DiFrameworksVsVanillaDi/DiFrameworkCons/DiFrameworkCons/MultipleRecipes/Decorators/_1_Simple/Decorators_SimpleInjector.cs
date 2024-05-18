@@ -24,10 +24,7 @@ public static class Decorators_SimpleInjector
     container.RegisterConditional
       <IAnswer, TracedAnswer>(WhenRequestedBy<SynchronizedAnswer>());
     container.RegisterConditional<IAnswer>(
-      new TransientRegistration(
-        container,
-        typeof(SynchronizedAnswer),
-        container.GetInstance<SynchronizedAnswer>),
+      Lifestyle.Transient.CreateRegistration(container.GetInstance<SynchronizedAnswer>, container),
       context => !context.Handled);
 
     var answer = container.GetInstance<IAnswer>();
@@ -43,19 +40,4 @@ public static class Decorators_SimpleInjector
     return x => x.HasConsumer
                 && x.Consumer.ImplementationType == typeof(T);
   }
-}
-
-// copied from SimpleInjector code
-internal sealed class TransientRegistration(
-  Container container,
-  Type implementationType,
-  Func<object>? creator = null)
-  : Registration(
-    Lifestyle.Transient,
-    container,
-    implementationType,
-    creator)
-{
-  public override Expression BuildExpression() =>
-    BuildTransientExpression();
 }
