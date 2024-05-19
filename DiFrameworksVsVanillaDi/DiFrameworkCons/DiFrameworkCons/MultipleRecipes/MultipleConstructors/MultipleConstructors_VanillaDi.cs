@@ -9,10 +9,10 @@ class MultipleConstructors_VanillaDi
     //GIVEN
 
     //WHEN
-    var resolvedInstance = new ObjectWithTwoConstructors(new Constructor1Argument());
+    var instance = new ObjectWithTwoConstructors(new Constructor1Argument());
 
     //THEN
-    resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
+    instance.Arg.Should().BeOfType<Constructor1Argument>();
   }
 
   //BUG: the third option is to use a ActivatorUtilitiesConstructorAttribute
