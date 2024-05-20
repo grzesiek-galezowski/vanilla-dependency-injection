@@ -6,24 +6,6 @@ namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments;
 public static class MultipleSameInterfaceArguments_Autofac
 {
   [Test]
-  //also: keyed (below) and indexed (and named parameters for constants)
-  public static void ContainerCompositionWithNamed()
-  {
-    var containerBuilder = new ContainerBuilder();
-    containerBuilder.RegisterType<LocalDataStorage>().Named<IDataStorage>("local");
-    containerBuilder.RegisterType<RemoteDataStorage>().Named<IDataStorage>("remote");
-    containerBuilder.Register(c =>
-      new ArchiveService(
-        c.ResolveNamed<IDataStorage>("local"),
-        c.ResolveNamed<IDataStorage>("remote")));
-
-    using var container = containerBuilder.Build();
-    var archiveService = container.Resolve<ArchiveService>();
-    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
-    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
-  }
-
-  [Test]
   public static void ContainerCompositionThroughResolveKeyedComponents()
   {
     var containerBuilder = new ContainerBuilder();
@@ -79,6 +61,24 @@ public static class MultipleSameInterfaceArguments_Autofac
 
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveServiceAttributed>();
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
+  }
+
+  [Test]
+  //also: keyed (below) and indexed (and named parameters for constants)
+  public static void ContainerCompositionWithNamed()
+  {
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder.RegisterType<LocalDataStorage>().Named<IDataStorage>("local");
+    containerBuilder.RegisterType<RemoteDataStorage>().Named<IDataStorage>("remote");
+    containerBuilder.Register(c =>
+      new ArchiveService(
+        c.ResolveNamed<IDataStorage>("local"),
+        c.ResolveNamed<IDataStorage>("remote")));
+
+    using var container = containerBuilder.Build();
+    var archiveService = container.Resolve<ArchiveService>();
     archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
     archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }

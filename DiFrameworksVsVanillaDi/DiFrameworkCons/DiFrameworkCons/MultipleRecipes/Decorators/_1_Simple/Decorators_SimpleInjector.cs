@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using SimpleInjector;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple;
