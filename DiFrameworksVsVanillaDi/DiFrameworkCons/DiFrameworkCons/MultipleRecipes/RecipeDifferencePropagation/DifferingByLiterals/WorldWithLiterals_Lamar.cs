@@ -153,43 +153,43 @@ public static class WorldWithLiterals_Lamar
 
       builder.ForConcreteType<Character>()
         .Configure
-        .Ctor<Armor>("Armor").IsNamedInstance(firstKey)
-        .Ctor<Sword>("Sword").IsNamedInstance(firstKey)
+        .Ctor<Armor>().IsNamedInstance(firstKey)
+        .Ctor<Sword>().IsNamedInstance(firstKey)
         .Singleton().Named(firstKey);
 
       builder.ForConcreteType<Character>()
         .Configure
-        .Ctor<Armor>("Armor").IsNamedInstance(secondKey)
-        .Ctor<Sword>("Sword").IsNamedInstance(secondKey)
+        .Ctor<Armor>().IsNamedInstance(secondKey)
+        .Ctor<Sword>().IsNamedInstance(secondKey)
         .Singleton().Named(secondKey);
 
       builder.ForConcreteType<Armor>()
         .Configure
-        .Ctor<BreastPlate>("BreastPlate").IsNamedInstance(firstKey)
+        .Ctor<BreastPlate>().IsNamedInstance(firstKey)
         .Singleton().Named(firstKey);
 
       builder.ForConcreteType<Armor>()
         .Configure
-        .Ctor<BreastPlate>("BreastPlate").IsNamedInstance(secondKey)
+        .Ctor<BreastPlate>().IsNamedInstance(secondKey)
         .Singleton().Named(secondKey);
 
       builder.For<Helmet>().Use<Helmet>().Transient();
       builder.ForConcreteType<BreastPlate>()
         .Configure
-        .Ctor<int>("Defense").Is(2)
+        .Ctor<int>().Is(2)
         .Singleton().Named(firstKey);
       builder.ForConcreteType<BreastPlate>()
         .Configure
-        .Ctor<int>("Defense").Is(4)
+        .Ctor<int>().Is(4)
         .Singleton().Named(secondKey);
 
       builder.ForConcreteType<Sword>()
         .Configure
-        .Ctor<int>("Attack").Is(4)
+        .Ctor<int>().Is(4)
         .Singleton().Named(firstKey);
       builder.ForConcreteType<Sword>()
         .Configure
-        .Ctor<int>("Attack").Is(6)
+        .Ctor<int>().Is(6)
         .Singleton().Named(secondKey);
     });
 

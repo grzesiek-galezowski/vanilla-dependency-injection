@@ -46,4 +46,6 @@ class WorldWithLiterals_SimpleInjector
         ActivatorUtilities.CreateInstance<BreastPlate>(x, breastPlateDefense)),
       ActivatorUtilities.CreateInstance<Sword>(x, swordAttack));
   }
+
+  //BUG: try homemade keyed registrations with factory
 }
