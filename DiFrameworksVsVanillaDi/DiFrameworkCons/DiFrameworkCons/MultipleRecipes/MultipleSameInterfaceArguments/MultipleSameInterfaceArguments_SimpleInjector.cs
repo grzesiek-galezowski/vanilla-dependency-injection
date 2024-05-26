@@ -40,19 +40,19 @@ public static class MultipleSameInterfaceArguments_SimpleInjector
     archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
-
   [Test]
   public static void ContainerCompositionThroughKeyedComponents()
   {
     using var container = new Container();
-    var factory = new SimpleInjectorKeyedFactory<IDataStorage>(container);
-    factory.Register<LocalDataStorage>("local");
-    factory.Register<RemoteDataStorage>("remote");
-    container.RegisterInstance(factory);
+    container.NamedRegistrations<IDataStorage>(c =>
+    {
+      c.Register<LocalDataStorage>("local");
+      c.Register<RemoteDataStorage>("remote");
+    });
     container.RegisterSingleton(() =>
       new ArchiveService(
-        factory.CreateNew("local"),
-        factory.CreateNew("remote")));
+        container.GetNamedService<IDataStorage>("local"),
+        container.GetNamedService<IDataStorage>("remote")));
 
     var archiveService = container.GetRequiredService<ArchiveService>();
 
