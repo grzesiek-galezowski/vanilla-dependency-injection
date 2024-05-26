@@ -9,30 +9,30 @@ public static class WorldWithLiterals_MsDi
   {
     //GIVEN
     var builder = new ServiceCollection();
+    var secondCharacterKey = "second";
     builder.AddSingleton(x =>
       ActivatorUtilities.CreateInstance<World>(
         x,
         x.GetRequiredService<Character>(),
-        x.GetRequiredKeyedService<Character>("secondCharacter")
+        x.GetRequiredKeyedService<Character>(secondCharacterKey)
         ));
     builder.AddSingleton<Character>();
-    builder.AddKeyedSingleton("secondCharacter",
+    builder.AddKeyedSingleton(secondCharacterKey,
         (x, key) =>
           ActivatorUtilities.CreateInstance<Character>(x,
-              x.GetRequiredKeyedService<Armor>("secondArmor"),
-              x.GetRequiredKeyedService<Sword>("secondSword")));
-
+              x.GetRequiredKeyedService<Armor>(key),
+              x.GetRequiredKeyedService<Sword>(key)));
     builder.AddSingleton<Armor>();
-    builder.AddKeyedSingleton("secondArmor", (x, key) =>
+    builder.AddKeyedSingleton(secondCharacterKey, (x, key) =>
         ActivatorUtilities.CreateInstance<Armor>(x,
-            x.GetRequiredKeyedService<BreastPlate>("secondBreastPlate")));
+            x.GetRequiredKeyedService<BreastPlate>(key)));
     builder.AddTransient<Helmet>();
     builder.AddSingleton(
       x => ActivatorUtilities.CreateInstance<BreastPlate>(x, 2));
-    builder.AddKeyedSingleton("secondBreastPlate",
+    builder.AddKeyedSingleton(secondCharacterKey,
       (x, key) => ActivatorUtilities.CreateInstance<BreastPlate>(x, 4));
     builder.AddSingleton(x => ActivatorUtilities.CreateInstance<Sword>(x, 4));
-    builder.AddKeyedSingleton("secondSword", (x, key) => ActivatorUtilities.CreateInstance<Sword>(x, 6));
+    builder.AddKeyedSingleton(secondCharacterKey, (x, key) => ActivatorUtilities.CreateInstance<Sword>(x, 6));
 
     using var container = builder.BuildServiceProvider();
 
