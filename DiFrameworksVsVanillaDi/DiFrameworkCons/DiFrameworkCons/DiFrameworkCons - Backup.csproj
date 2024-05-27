@@ -31,7 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MultipleRecipes\MultipleConstructors\SimpleInjector\" />
+    <Folder Include="MultipleRecipes\Decorators\_1_Simple\Autofac\" />
+    <Folder Include="MultipleRecipes\Decorators\_1_Simple\SimpleInjector\" />
+    <Folder Include="MultipleRecipes\Decorators\_1_Simple\PureDiLibrary\" />
+    <Folder Include="MultipleRecipes\Decorators\_1_Simple\MsDi\" />
+    <Folder Include="MultipleRecipes\Decorators\_1_Simple\Lamar\" />
   </ItemGroup>
 
 </Project>

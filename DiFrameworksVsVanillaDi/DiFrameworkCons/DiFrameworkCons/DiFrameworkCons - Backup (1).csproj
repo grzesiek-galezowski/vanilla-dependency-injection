@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Autofac.Configuration" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.31.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Lamar" Version="13.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="nunit" Version="4.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Pure.DI" Version="2.1.19">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Scrutor" Version="4.2.2" />
+    <PackageReference Include="SimpleInjector" Version="5.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CompileTimeVsRuntime\DeadCode\Autofac\" />
+    <Folder Include="CompileTimeVsRuntime\DeadCode\Lamar\" />
+    <Folder Include="CompileTimeVsRuntime\DeadCode\MsDi\" />
+    <Folder Include="CompileTimeVsRuntime\DeadCode\PureDiLibrary\" />
+    <Folder Include="CompileTimeVsRuntime\DeadCode\SimpleInjector\" />
+    <Folder Include="CompileTimeVsRuntime\DeadCode\VanillaDi\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\Autofac\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\Lamar\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\MsDi\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\PureDiLibrary\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\SimpleInjector\" />
+    <Folder Include="CompileTimeVsRuntime\ExtractingLibrary\VanillaDi\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\Autofac\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\Lamar\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\MsDi\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\PureDiLibrary\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\SimpleInjector\" />
+    <Folder Include="CompileTimeVsRuntime\MissingDependency\VanillaDi\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\Autofac\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\Lamar\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\MsDi\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\PureDiLibrary\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\SimpleInjector\" />
+    <Folder Include="MultipleRecipes\DependencyAsMultipleInterfaces\VanillaDi\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\Autofac\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\Lamar\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\MsDi\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\PureDiLibrary\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\SimpleInjector\" />
+    <Folder Include="MultipleRecipes\MultipleConstructors\VanillaDi\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\Autofac\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\Lamar\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\MsDi\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\PureDiLibrary\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\SimpleInjector\" />
+    <Folder Include="MultipleRecipes\MultipleLifestylesOfInstancesTheSameClass\VanillaDi\" />
+  </ItemGroup>
+
+</Project>

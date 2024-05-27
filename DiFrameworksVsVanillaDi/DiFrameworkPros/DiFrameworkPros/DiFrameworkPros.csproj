@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -26,6 +26,48 @@
 
   <ItemGroup>
     <Folder Include="HelperCode\" />
+    <Folder Include="_1_AutomaticDependencyResolution\Autofac\" />
+    <Folder Include="_1_AutomaticDependencyResolution\Lamar\" />
+    <Folder Include="_1_AutomaticDependencyResolution\MsDi\" />
+    <Folder Include="_1_AutomaticDependencyResolution\PureDiLibrary\" />
+    <Folder Include="_1_AutomaticDependencyResolution\SimpleInjector\" />
+    <Folder Include="_1_AutomaticDependencyResolution\VanillaDi\" />
+    <Folder Include="_2_LifetimeScopeManagement\Autofac\" />
+    <Folder Include="_2_LifetimeScopeManagement\Lamar\" />
+    <Folder Include="_2_LifetimeScopeManagement\MsDi\" />
+    <Folder Include="_2_LifetimeScopeManagement\PureDiLibrary\" />
+    <Folder Include="_2_LifetimeScopeManagement\SimpleInjector\" />
+    <Folder Include="_2_LifetimeScopeManagement\VanillaDi\" />
+    <Folder Include="_3_Interception\Autofac\" />
+    <Folder Include="_3_Interception\Lamar\" />
+    <Folder Include="_3_Interception\MsDi\" />
+    <Folder Include="_3_Interception\PureDiLibrary\" />
+    <Folder Include="_3_Interception\SimpleInjector\" />
+    <Folder Include="_3_Interception\VanillaDi\" />
+    <Folder Include="_4_AssemblyScanning\Autofac\" />
+    <Folder Include="_4_AssemblyScanning\Lamar\" />
+    <Folder Include="_4_AssemblyScanning\MsDi\" />
+    <Folder Include="_4_AssemblyScanning\PureDiLibrary\" />
+    <Folder Include="_4_AssemblyScanning\SimpleInjector\" />
+    <Folder Include="_4_AssemblyScanning\VanillaDi\" />
+    <Folder Include="_5_DependencyReplacement\Autofac\" />
+    <Folder Include="_5_DependencyReplacement\Lamar\" />
+    <Folder Include="_5_DependencyReplacement\MsDi\" />
+    <Folder Include="_5_DependencyReplacement\PureDiLibrary\" />
+    <Folder Include="_5_DependencyReplacement\SimpleInjector\" />
+    <Folder Include="_5_DependencyReplacement\VanillaDi\" />
+    <Folder Include="_6_LazyLoading\Autofac\" />
+    <Folder Include="_6_LazyLoading\Lamar\" />
+    <Folder Include="_6_LazyLoading\MsDi\" />
+    <Folder Include="_6_LazyLoading\PureDiLibrary\" />
+    <Folder Include="_6_LazyLoading\SimpleInjector\" />
+    <Folder Include="_6_LazyLoading\VanillaDi\" />
+    <Folder Include="_7_Modules\Autofac\" />
+    <Folder Include="_7_Modules\Lamar\" />
+    <Folder Include="_7_Modules\MsDi\" />
+    <Folder Include="_7_Modules\PureDiLibrary\" />
+    <Folder Include="_7_Modules\SimpleInjector\" />
+    <Folder Include="_7_Modules\VanillaDi\" />
   </ItemGroup>
 
 </Project>
