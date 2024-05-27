@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode.VanillaDi;
+namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;
 
 public class DeadCode_VanillaDi
 {

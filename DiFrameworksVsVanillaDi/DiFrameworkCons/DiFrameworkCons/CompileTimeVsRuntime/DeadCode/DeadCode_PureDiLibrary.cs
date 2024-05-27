@@ -1,4 +1,3 @@
-using DiFrameworkCons.CompileTimeVsRuntime.DeadCode.VanillaDi;
 using Pure.DI;
 
 namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;

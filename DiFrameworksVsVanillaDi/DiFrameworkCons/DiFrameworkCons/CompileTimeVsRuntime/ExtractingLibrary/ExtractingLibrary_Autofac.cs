@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Castle.Core.Logging;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary.Autofac;
+namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 public static class ExtractingLibrary_Autofac
 {

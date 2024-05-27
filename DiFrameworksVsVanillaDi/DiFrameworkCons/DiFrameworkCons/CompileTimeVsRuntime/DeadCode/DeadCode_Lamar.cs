@@ -1,9 +1,8 @@
-using DiFrameworkCons.CompileTimeVsRuntime.DeadCode.VanillaDi;
-using SimpleInjector;
+using Lamar;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode.SimpleInjector;
+namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;
 
-public static class DeadCode_SimpleInjector
+public static class DeadCode_Lamar
 {
   /// <summary>
   /// The container doesn't know which registrations are going to be used
@@ -17,12 +16,13 @@ public static class DeadCode_SimpleInjector
   public static void ContainerContainsSomeDeadCodeWithLamar()
   {
     //GIVEN
-    using var container = new Container();
-
-    container.RegisterSingleton<Dependency>();
-    container.RegisterSingleton<DependencyConsumer>();
-    //dead code
-    container.RegisterSingleton<DeadCode_VanillaDi>();
+    using var container = new Container(builder =>
+    {
+      builder.AddSingleton<Dependency>();
+      builder.AddSingleton<DependencyConsumer>();
+      //dead code
+      builder.AddSingleton<DeadCode_VanillaDi>();
+    });
 
     //WHEN
     var resolvedInstance = container.GetRequiredService<DependencyConsumer>();

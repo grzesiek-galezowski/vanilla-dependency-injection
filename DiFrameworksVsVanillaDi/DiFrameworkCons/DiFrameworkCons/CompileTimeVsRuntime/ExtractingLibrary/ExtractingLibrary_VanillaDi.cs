@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Castle.Core.Logging;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary.VanillaDi;
+namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 internal class ExtractingLibrary_VanillaDi
 {

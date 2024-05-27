@@ -1,6 +1,4 @@
-using DiFrameworkCons.CompileTimeVsRuntime.DeadCode.VanillaDi;
-
-namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode.MsDi;
+namespace DiFrameworkCons.CompileTimeVsRuntime.DeadCode;
 
 public static class DeadCode_MsDi
 {

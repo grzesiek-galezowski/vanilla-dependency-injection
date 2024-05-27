@@ -3,7 +3,7 @@ using Castle.Core.Logging;
 using Lamar;
 using Lamar.IoC;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary.Lamar;
+namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 public static class ExtractingLibrary_Lamar
 {

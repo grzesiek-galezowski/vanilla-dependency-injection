@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using Castle.Core.Logging;
 using SimpleInjector;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary.SimpleInjector;
+namespace DiFrameworkCons.CompileTimeVsRuntime.ExtractingLibrary;
 
 public static class ExtractingLibrary_SimpleInjector
 {
