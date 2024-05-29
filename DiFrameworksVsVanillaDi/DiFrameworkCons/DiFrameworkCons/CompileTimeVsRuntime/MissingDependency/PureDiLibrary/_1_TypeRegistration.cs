@@ -1,8 +1,8 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency;
+namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.PureDiLibrary;
 
-public class MissingDependency_PureDiLibrary
+public class _1_TypeRegistration
 {
   [Test]
   public static void ShouldShowFailureWhenMissingDependencyIsDiscovered()

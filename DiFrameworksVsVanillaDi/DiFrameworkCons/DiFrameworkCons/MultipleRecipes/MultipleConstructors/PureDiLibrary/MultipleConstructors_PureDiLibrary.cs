@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.MultipleConstructors;
+namespace DiFrameworkCons.MultipleRecipes.MultipleConstructors.PureDiLibrary;
 
 /// <summary>
 /// Automatic constructor selection

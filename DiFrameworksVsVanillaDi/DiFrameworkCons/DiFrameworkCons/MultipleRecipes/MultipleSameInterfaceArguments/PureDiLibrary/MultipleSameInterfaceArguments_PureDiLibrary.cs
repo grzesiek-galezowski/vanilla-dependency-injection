@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments;
+namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments.PureDiLibrary;
 
 public class MultipleSameInterfaceArguments_PureDiLibrary
 {

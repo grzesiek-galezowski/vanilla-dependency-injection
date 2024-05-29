@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains;
+namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains.PureDiLibrary;
 
 public class DecoratorsWithMultipleChains_PureDiLibrary
 {

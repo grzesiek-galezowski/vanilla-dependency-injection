@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingByLiterals;
+namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingByLiterals.PureDiLibrary;
 
 static class WorldWithLiterals_PureDiLibrary
 {

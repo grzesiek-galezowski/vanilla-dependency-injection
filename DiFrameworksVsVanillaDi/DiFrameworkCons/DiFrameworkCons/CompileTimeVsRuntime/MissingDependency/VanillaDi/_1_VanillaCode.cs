@@ -1,7 +1,7 @@
 namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.VanillaDi;
 
 //todo add descriptions
-public class MissingDependency_VanillaDi
+public class _1_VanillaCode
 {
   [Test]
   public void ShouldShowCompileErrorInCaseOfMissingDependency()

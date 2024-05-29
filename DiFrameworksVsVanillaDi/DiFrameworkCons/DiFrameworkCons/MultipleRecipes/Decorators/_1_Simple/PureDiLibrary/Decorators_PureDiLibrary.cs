@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple;
+namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.PureDiLibrary;
 
 public class Decorators_PureDiLibrary
 {

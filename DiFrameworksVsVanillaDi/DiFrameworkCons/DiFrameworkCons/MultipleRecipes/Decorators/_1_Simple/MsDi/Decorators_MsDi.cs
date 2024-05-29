@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple;
+namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.MsDi;
 
 public static class Decorators_MsDi
 {

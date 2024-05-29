@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.PureDiLibrary;
 
 //todo add descriptions
 internal class MultipleLifestylesOfInstancesTheSameClass_PureDiLibrary

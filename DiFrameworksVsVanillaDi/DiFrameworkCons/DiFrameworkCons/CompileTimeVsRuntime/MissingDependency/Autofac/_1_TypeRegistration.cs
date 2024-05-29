@@ -2,7 +2,7 @@ using Autofac.Core;
 
 namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Autofac;
 
-public static class MissingDependency_Autofac
+public static class _1_TypeRegistration
 {
   [Test]
   //see https://autofac.readthedocs.io/en/latest/faq/container-analysis.html

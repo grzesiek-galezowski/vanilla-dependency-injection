@@ -1,6 +1,6 @@
 using Pure.DI;
 
-namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces;
+namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces.PureDiLibrary;
 
 public class DependencyAsMultipleInterfaces_PureDiLibrary
 {

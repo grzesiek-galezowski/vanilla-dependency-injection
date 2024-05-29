@@ -1,6 +1,6 @@
 using SimpleInjector;
 
-namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple;
+namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.SimpleInjector;
 
 public static class Decorators_SimpleInjector
 {

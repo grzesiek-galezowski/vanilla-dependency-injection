@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.MsDi;
 
-public static class MissingDependency_MsDi
+public static class _1_TypeRegistration
 {
   /// <summary>
   /// Container validation catches missing dependencies
@@ -15,11 +15,12 @@ public static class MissingDependency_MsDi
 
     Invoking(() =>
       {
-        using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
-        {
-          ValidateOnBuild = true,
-          ValidateScopes = true
-        });
+        using var container = containerBuilder.BuildServiceProvider(
+          new ServiceProviderOptions
+          {
+            ValidateOnBuild = true,
+            ValidateScopes = true
+          });
       }).Should().Throw<AggregateException>()
       .Which.ToString().Should().Contain(
         "Some services are not able to be constructed " +
@@ -29,28 +30,5 @@ public static class MissingDependency_MsDi
         "Unable to resolve service for type " +
         "'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo' " +
         "while attempting to activate 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.One'.)");
-  }
-
-  /// <summary>
-  /// However, when registered as lambdas, the validation doesn't work
-  /// and the error is detected at resolution time.
-  /// </summary>
-  [Test]
-  public static void ShouldShowFailureWhenMissingDependencyIsDiscoveredWithLambdaRegisteredMsDi()
-  {
-    //GIVEN
-    var containerBuilder = new ServiceCollection();
-    containerBuilder
-      .AddTransient(c => new One(c.GetRequiredService<ITwo>()));
-    using var container = containerBuilder.BuildServiceProvider(new ServiceProviderOptions
-    {
-      ValidateOnBuild = true,
-      ValidateScopes = true
-    });
-    //WHEN
-    //THEN
-    Invoking(container.GetRequiredService<One>)
-      .Should().Throw<InvalidOperationException>().Which.ToString().Should()
-      .Contain("No service for type 'DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.ITwo' has been registered.");
   }
 }
