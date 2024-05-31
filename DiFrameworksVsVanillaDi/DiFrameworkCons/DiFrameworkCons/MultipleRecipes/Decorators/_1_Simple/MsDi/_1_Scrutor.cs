@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.MsDi;
 
-public static class Decorators_MsDi
+public static class _1_Scrutor
 {
   /// <summary>
   /// MsDi doesn't support decorators (we can always fall back to lambda registration of course).

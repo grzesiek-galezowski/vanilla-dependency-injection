@@ -2,7 +2,7 @@ using Lamar;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.Lamar;
 
-public static class Decorators_Lamar
+public static class _1_Scrutor
 {
   /// <summary>
   /// Lamar supports decorators but not in a way

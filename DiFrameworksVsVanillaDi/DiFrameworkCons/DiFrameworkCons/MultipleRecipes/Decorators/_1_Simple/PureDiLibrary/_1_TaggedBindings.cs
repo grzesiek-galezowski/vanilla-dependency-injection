@@ -2,8 +2,15 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.PureDiLibrary;
 
-public class Decorators_PureDiLibrary
+public class _1_TaggedBindings
 {
+  /// <summary>
+  /// In Pure.DI library, we can use tagged dependencies and lambdas.
+  /// We still have to invoke the constructors manually, so we lose
+  /// automatic parameter resolution. But at least it's as safe as
+  /// Vanilla DI because the generated code gets checked by the compiler,
+  /// contrary to containers where lambdas are invoked upon resolution.
+  /// </summary>
   [Test]
   public static void ShouldAssembleDecorators()
   {

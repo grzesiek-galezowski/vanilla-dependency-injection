@@ -3,14 +3,8 @@ using SimpleInjector;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains.SimpleInjector;
 
-public static class DecoratorsWithMultipleChains_SimpleInjector
+public static class _1_ActivatorUtilitiesAllTheWay
 {
-  /// <summary>
-  /// There is a chance that this example can be implemented
-  /// in a smarter way using the named registrations trick
-  /// (https://docs.simpleinjector.org/en/latest/howto.html#resolve-instances-by-key)
-  /// and conditional registrations, but I failed to find this way.
-  /// </summary>
   [Test]
   public static void ShouldComposeVariousDecoratorConfigurations()
   {
@@ -37,11 +31,11 @@ public static class DecoratorsWithMultipleChains_SimpleInjector
 
     //THEN
     chain1.Next.Should().BeOfType<B>();
-    chain1.Next.Next.Should().BeOfType<C1>();
+    chain1.Next!.Next.Should().BeOfType<C1>();
     chain1.Next.Next!.Next.Should().BeOfType<D>();
 
     chain2.Next.Should().BeOfType<B>();
-    chain2.Next.Next.Should().BeOfType<C2>();
+    chain2.Next!.Next.Should().BeOfType<C2>();
     chain2.Next.Next!.Next.Should().BeOfType<D>();
     chain2.Next.Next!.Next!.Next.Should().BeNull();
   }

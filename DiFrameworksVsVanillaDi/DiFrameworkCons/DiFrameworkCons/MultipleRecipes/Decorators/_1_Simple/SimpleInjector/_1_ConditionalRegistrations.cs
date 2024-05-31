@@ -2,7 +2,7 @@ using SimpleInjector;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.SimpleInjector;
 
-public static class Decorators_SimpleInjector
+public static class _1_ConditionalRegistrations
 {
   /// <summary>
   /// SimpleInjector supports special feature for decorators,

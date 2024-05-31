@@ -28,6 +28,11 @@ public class SimpleInjectorNamedFactory<T>(Container container)
     Register(name, instanceCreator, Lifestyle.Singleton);
   }
 
+  public void Register(string name, Func<string, T> instanceCreator)
+  {
+    Register(name, instanceCreator, Lifestyle.Transient);
+  }
+
   private void Register<TImplementation>(string name, Lifestyle lifestyle) where TImplementation : class, T
   {
     _producers.Add(name, lifestyle.CreateProducer<T, TImplementation>(container));

@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.MultipleRecipes.Decorators._1_Simple.VanillaDi;
 
-public class Decorators_VanillaDi
+public class _1_VanillaCode
 {
   /// <summary>
   /// In Vanilla DI, this is pretty straightforward. It's really no different

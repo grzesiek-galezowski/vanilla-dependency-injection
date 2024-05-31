@@ -2,7 +2,7 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains.PureDiLibrary;
 
-public class DecoratorsWithMultipleChains_PureDiLibrary
+public class _1_TaggedBindings
 {
   [Test]
   public static void ShouldComposeVariousDecoratorConfigurationsWithKeyedDependencies()
