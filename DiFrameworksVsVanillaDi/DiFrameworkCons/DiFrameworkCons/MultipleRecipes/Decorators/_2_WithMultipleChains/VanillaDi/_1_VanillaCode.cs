@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.MultipleRecipes.Decorators._2_WithMultipleChains.VanillaDi;
 
-public class DecoratorsWithMultipleChains_VanillaDi
+public class _1_VanillaCode
 {
   /// <summary>
   /// in Vanilla DI, composing a chain of decorators is as straightforward

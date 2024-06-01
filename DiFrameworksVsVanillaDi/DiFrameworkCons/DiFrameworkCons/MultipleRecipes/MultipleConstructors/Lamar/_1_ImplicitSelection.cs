@@ -2,7 +2,7 @@ using Lamar;
 
 namespace DiFrameworkCons.MultipleRecipes.MultipleConstructors.Lamar;
 
-public static class MultipleConstructors_Lamar
+public static class _1_ImplicitSelection
 {
   /// <summary>
   /// Lamar by default picks the "greediest" constructor it can satisfy
@@ -21,32 +21,6 @@ public static class MultipleConstructors_Lamar
       builder.AddSingleton<Constructor1Argument>();
       builder.AddSingleton<Constructor2Argument>();
       builder.AddSingleton<ObjectWithTwoConstructors>();
-    });
-
-    //WHEN
-    var resolvedInstance = container.GetRequiredService<ObjectWithTwoConstructors>();
-
-    //THEN
-    resolvedInstance.Arg.Should().BeOfType<Constructor1Argument>();
-  }
-
-  /// <summary>
-  /// We can also pick the constructor at the price of using
-  /// a lambda.
-  /// </summary>
-  [Test]
-  public static void ShouldResolveUsingFirstConstructorUsingManualSelection()
-  {
-    //GIVEN
-    using var container = new Container(builder =>
-    {
-      builder.AddSingleton<Constructor1Argument>();
-      builder.AddSingleton<Constructor2Argument>();
-      builder.AddSingleton<ObjectWithTwoConstructors>();
-
-      builder.ForConcreteType<ObjectWithTwoConstructors>().Configure
-        .SelectConstructor(() => new ObjectWithTwoConstructors(
-          (null as Constructor1Argument)!));
     });
 
     //WHEN

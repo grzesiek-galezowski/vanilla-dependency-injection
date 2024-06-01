@@ -2,7 +2,7 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces.PureDiLibrary;
 
-public class DependencyAsMultipleInterfaces_PureDiLibrary
+public class _1_TaggedBindings
 {
   [Test]
   public void ShouldUseOneInstanceForDifferentInterfaces()

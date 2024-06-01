@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces.VanillaDi;
 
-public class DependencyAsMultipleInterfaces_VanillaDi
+public class _1_VanillaCode
 {
   /// <summary>
   /// With Vanilla DI, this is business as usual - we can create an object,

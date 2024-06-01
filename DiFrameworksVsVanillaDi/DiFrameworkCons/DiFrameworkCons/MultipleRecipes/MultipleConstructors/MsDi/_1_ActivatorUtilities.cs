@@ -1,12 +1,13 @@
 namespace DiFrameworkCons.MultipleRecipes.MultipleConstructors.MsDi;
 
-public static class MultipleConstructors_MsDi
+public static class _1_ActivatorUtilities
 {
   /// <summary>
   /// In MsDi, we can, to a degree, influence which constructor
   /// is picked, by using the ActivatorUtilities.
   ///
-  /// This, however, forces us into lambda registrations.
+  /// This, however, forces us into lambda registrations which
+  /// is less than optimal in MsDi.
   /// </summary>
   [Test]
   public static void ShouldResolveUsingFirstConstructorFromAutofac()

@@ -2,7 +2,7 @@ using SimpleInjector;
 
 namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces.SimpleInjector;
 
-public static class DependencyAsMultipleInterfaces_SimpleInjector
+public static class _1_SeparateRegistrations
 {
   /// <summary>
   /// With SimpleInjector, this is relatively easy - we can register
