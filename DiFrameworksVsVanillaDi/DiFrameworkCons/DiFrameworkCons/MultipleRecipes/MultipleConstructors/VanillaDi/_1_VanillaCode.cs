@@ -2,7 +2,7 @@ namespace DiFrameworkCons.MultipleRecipes.MultipleConstructors.VanillaDi;
 
 //todo add descriptions
 //BUG: add SimpleInjector version
-class MultipleConstructors_VanillaDi
+class _1_VanillaCode
 {
   [Test]
   public void ShouldResolveUsingFirstConstructorUsingVanillaDi()

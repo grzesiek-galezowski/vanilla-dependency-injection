@@ -30,8 +30,4 @@
     <PackageReference Include="SimpleInjector" Version="5.4.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MultipleRecipes\MultipleConstructors\SimpleInjector\" />
-  </ItemGroup>
-
 </Project>

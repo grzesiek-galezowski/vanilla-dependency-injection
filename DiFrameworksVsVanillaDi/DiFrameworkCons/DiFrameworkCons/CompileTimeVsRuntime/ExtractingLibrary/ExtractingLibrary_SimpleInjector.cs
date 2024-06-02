@@ -21,7 +21,7 @@ public static class ExtractingLibrary_SimpleInjector
     // a class with multiple constructor parameters.
     // https://docs.simpleinjector.org/en/latest/extensibility.html#overriding-constructor-resolution-behavior
     // shows how to override it but it's much more work than a lambda
-    // and besides, SimpleInjector verification is based on resolution,
+    // and besides, SimpleInjector verification is based on resolution of every registration,
     // so we should be fine here.
     container.Register<ILogger>(() => new ConsoleLogger());
 
