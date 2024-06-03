@@ -2,7 +2,7 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments.PureDiLibrary;
 
-public class MultipleSameInterfaceArguments_PureDiLibrary
+public class _1_TaggedBindings
 {
   [Test]
   public void ContainerCompositionThroughTaggedComponents()

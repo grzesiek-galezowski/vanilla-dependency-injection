@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using SimpleInjector;
 
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.SimpleInjectorExtensions;
 
 public class SimpleInjectorNamedFactory<T>(Container container)
   where T : class

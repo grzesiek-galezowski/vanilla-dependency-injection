@@ -1,3 +1,4 @@
+using DiFrameworkCons.SimpleInjectorExtensions;
 using SimpleInjector;
 
 namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingBySubtype.SimpleInjector;

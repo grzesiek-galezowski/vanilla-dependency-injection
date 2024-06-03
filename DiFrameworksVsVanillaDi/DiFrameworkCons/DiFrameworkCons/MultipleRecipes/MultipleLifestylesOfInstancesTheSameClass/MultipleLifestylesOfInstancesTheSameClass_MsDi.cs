@@ -1,9 +1,9 @@
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.MsDi;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
 
 public static class MultipleLifestylesOfInstancesTheSameClass_MsDi
 {
   [Test]
-  public static void ShouldComposeWithTwoLifestylesOfThrottledOutbox_UsingMsDi()
+  public static void ShouldComposeWithTwoLifestylesOfThrottledOutbox()
   {
     //GIVEN
     var services = new ServiceCollection();

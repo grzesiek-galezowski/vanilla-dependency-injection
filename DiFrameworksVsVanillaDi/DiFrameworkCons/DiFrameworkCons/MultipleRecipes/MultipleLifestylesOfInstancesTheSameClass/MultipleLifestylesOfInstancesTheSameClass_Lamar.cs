@@ -1,10 +1,9 @@
 using Lamar;
 
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.Lamar;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
 
 public static class MultipleLifestylesOfInstancesTheSameClass_Lamar
 {
-
   [Test]
   public static void ShouldComposeWithTwoLifestylesOfThrottledOutbox()
   {

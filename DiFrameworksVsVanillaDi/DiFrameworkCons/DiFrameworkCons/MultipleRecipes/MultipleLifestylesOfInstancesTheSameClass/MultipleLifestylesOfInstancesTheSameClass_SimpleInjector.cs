@@ -1,6 +1,6 @@
 using SimpleInjector;
 
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.SimpleInjector;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
 
 internal class MultipleLifestylesOfInstancesTheSameClass_SimpleInjector
 {

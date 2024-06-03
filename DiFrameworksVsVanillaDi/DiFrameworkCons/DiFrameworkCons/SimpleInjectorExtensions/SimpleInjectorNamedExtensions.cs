@@ -1,6 +1,6 @@
 using SimpleInjector;
 
-namespace DiFrameworkCons;
+namespace DiFrameworkCons.SimpleInjectorExtensions;
 
 public static class SimpleInjectorNamedExtensions
 {

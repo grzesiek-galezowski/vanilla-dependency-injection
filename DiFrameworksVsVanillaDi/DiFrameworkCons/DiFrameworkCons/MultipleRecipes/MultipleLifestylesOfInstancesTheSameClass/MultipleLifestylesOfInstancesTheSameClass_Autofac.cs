@@ -1,9 +1,9 @@
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.Autofac;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
 
 public static class MultipleLifestylesOfInstancesTheSameClass_Autofac
 {
   [Test]
-  public static void ShouldComposeWithTwoLifestylesOfThrottledOutbox_UsingAutofac()
+  public static void ShouldComposeWithTwoLifestylesOfThrottledOutbox()
   {
     //GIVEN
     var builder = new ContainerBuilder();

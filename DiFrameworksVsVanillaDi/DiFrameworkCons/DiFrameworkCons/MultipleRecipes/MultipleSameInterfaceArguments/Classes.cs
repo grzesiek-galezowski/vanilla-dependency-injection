@@ -10,9 +10,6 @@ public record ArchiveService(
   IDataStorage LocalStorage,
   IDataStorage RemoteStorage);
 
-public record ArchiveServiceAttributed(
-  [KeyFilter(Storages.Local)] IDataStorage LocalStorage,
-  [KeyFilter(Storages.Remote)] IDataStorage RemoteStorage);
 
 public record RemoteDataStorage : IDataStorage;
 

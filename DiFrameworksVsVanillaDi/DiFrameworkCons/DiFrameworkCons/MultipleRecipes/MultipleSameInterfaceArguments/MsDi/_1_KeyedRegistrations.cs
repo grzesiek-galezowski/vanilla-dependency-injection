@@ -1,6 +1,6 @@
 namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments.MsDi;
 
-public static class MultipleSameInterfaceArguments_MsDi
+public static class _1_KeyedRegistrations
 {
   [Test]
   public static void ContainerCompositionThroughKeyedComponents()

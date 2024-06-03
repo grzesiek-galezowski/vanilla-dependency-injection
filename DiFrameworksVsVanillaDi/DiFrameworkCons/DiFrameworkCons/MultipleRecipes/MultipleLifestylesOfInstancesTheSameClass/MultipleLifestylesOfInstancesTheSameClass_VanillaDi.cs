@@ -1,4 +1,4 @@
-namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass.VanillaDi;
+namespace DiFrameworkCons.MultipleRecipes.MultipleLifestylesOfInstancesTheSameClass;
 
 //todo add descriptions
 internal class MultipleLifestylesOfInstancesTheSameClass_VanillaDi

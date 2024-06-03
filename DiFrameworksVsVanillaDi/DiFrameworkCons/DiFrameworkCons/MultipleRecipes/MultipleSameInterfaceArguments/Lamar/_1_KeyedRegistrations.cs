@@ -2,7 +2,7 @@ using Lamar;
 
 namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments.Lamar;
 
-public static class MultipleSameInterfaceArguments_Lamar
+public static class _1_KeyedRegistrations
 {
   [Test]
   public static void ContainerCompositionThroughKeyedComponents()
