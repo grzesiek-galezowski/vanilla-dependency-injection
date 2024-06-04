@@ -2,10 +2,10 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingByLiterals.PureDiLibrary;
 
-static class WorldWithLiterals_PureDiLibrary
+static class _1_TaggedDependencies
 {
   [Test]
-  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromVanillaDi()
+  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeaves()
   {
     //GIVEN
     var composition = new Composition15();
