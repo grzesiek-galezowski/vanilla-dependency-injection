@@ -2,7 +2,7 @@ using Pure.DI;
 
 namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingBySubtype.PureDiLibrary;
 
-static class WorldWithPolymorphism_PureDiLibrary
+static class _1_TaggedBindings
 {
   [Test]
   public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromVanillaDi()
