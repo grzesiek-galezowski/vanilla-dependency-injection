@@ -12,7 +12,7 @@ public static class Interception_Autofac
   /// or stuff like opening/closing a transaction around another call.
   /// </summary>
   [Test]
-  public static void ShouldEnableInterceptionUsingAutofac()
+  public static void ShouldEnableInterception()
   {
     var containerBuilder = new ContainerBuilder();
     containerBuilder
@@ -30,5 +30,5 @@ public static class Interception_Autofac
     dependency2.DoSomething();
 
     container.Resolve<List<string>>().Count.Should().Be(2);
-  } //BUG: autofac is the only one that can proxy anything?
+  }
 }

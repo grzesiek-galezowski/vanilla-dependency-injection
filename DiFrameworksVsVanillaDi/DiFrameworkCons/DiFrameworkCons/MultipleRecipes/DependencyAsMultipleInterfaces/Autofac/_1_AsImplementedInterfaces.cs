@@ -9,7 +9,7 @@ public static class _1_AsImplementedInterfaces
   /// multiple interfaces is very straightforward.
   /// </summary>
   [Test]
-  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfacesUsingAutofac()
+  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfaces()
   {
     //GIVEN
     var containerBuilder = new ContainerBuilder();

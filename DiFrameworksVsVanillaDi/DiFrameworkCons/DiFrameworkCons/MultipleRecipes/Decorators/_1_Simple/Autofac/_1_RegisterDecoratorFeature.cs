@@ -12,7 +12,7 @@ public static class _1_RegisterDecoratorFeature
   /// without falling back to manual composition.
   /// </summary>
   [Test]
-  public static void ShouldAssembleDecoratorsUsingAutofac()
+  public static void ShouldAssembleDecorators()
   {
     var builder = new ContainerBuilder();
 

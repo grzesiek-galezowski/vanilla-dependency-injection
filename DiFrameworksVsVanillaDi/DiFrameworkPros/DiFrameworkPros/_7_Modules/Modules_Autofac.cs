@@ -11,7 +11,7 @@ internal class UsingAutofac
   /// from another module (ApplicationLogicModule).
   /// </summary>
   [Test]
-  public static void ShouldAllowComposingModulesUsingAutofac()
+  public static void ShouldAllowComposingModules()
   {
     //GIVEN
     var builder = new ContainerBuilder();

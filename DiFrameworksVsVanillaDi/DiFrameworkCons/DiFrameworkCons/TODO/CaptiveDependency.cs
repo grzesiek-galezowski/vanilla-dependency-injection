@@ -25,7 +25,7 @@ public class CaptiveDependency
   /// See https://autofac.readthedocs.io/en/latest/faq/container-analysis.html
   /// </summary>
   [Test]
-  public void ShouldShowCaptiveDependencyIssueUsingAutofac()
+  public void ShouldShowCaptiveDependencyIssue()
   {
     var i = 0;
     //GIVEN
@@ -195,7 +195,7 @@ public class CaptiveDependency
   }
 
   [Test]
-  public void ShouldDemonstrateNotDisposingScopedDependenciesHeldBySingletonUsingAutofac()
+  public void ShouldDemonstrateNotDisposingScopedDependenciesHeldBySingleton()
   {
     var serviceCollection = new ContainerBuilder();
     serviceCollection.RegisterType<Scoped>().InstancePerLifetimeScope();

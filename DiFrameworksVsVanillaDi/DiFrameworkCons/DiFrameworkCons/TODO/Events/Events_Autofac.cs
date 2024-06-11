@@ -10,7 +10,7 @@ public static class Events_Autofac
   /// We can use OnRelease callback to unplug an event if it's necessary
   /// </summary>
   [Test]
-  public static void ShouldShowHandMadeHandlingOfEventsUsingAutofac()
+  public static void ShouldShowHandMadeHandlingOfEvents()
   {
     //GIVEN
     var builder = new ContainerBuilder();

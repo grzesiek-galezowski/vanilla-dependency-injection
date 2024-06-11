@@ -13,7 +13,7 @@ public static class DependencyReplacement_Autofac
   /// when dealing with frameworks like Asp.NET Core. 
   /// </summary>
   [Test]
-  public static void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingAutofac()
+  public static void ShouldBeAbleToOverrideArbitraryDependencyInContainer()
   {
     var builder = new ContainerBuilder();
 

@@ -1,4 +1,4 @@
-namespace DiFrameworkPros._1_AutomaticDependencyResolution;
+namespace DiFrameworkPros._1_Autowiring;
 
 #pragma warning disable CS9113 // Parameter is unread.
 public class Person(Kitchen kitchen, Logger logger);

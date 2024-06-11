@@ -10,7 +10,7 @@ public static class _1_ConditionalRegistrations
   /// is to use conditional registrations.
   /// </summary>
   [Test]
-  public static void ShouldAssembleDecoratorsUsingAutofac()
+  public static void ShouldAssembleDecorators()
   {
     using var container = new Container();
     container.Register<TracedAnswer>();

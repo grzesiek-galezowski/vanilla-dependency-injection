@@ -5,7 +5,7 @@ namespace DiFrameworkPros._2_LifetimeScopeManagement;
 public static class LifetimeScopeManagement_Autofac
 {
   [Test]
-  public static void ShouldDisposeOfCreatedDependenciesUsingAutofac()
+  public static void ShouldDisposeOfCreatedDependencies()
   {
     var log = new Log();
     var containerBuilder = new ContainerBuilder();

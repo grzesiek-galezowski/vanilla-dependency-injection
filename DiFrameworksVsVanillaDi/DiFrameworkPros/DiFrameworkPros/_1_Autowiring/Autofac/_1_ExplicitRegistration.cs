@@ -1,11 +1,11 @@
 using Autofac;
 
-namespace DiFrameworkPros._1_AutomaticDependencyResolution;
+namespace DiFrameworkPros._1_Autowiring.Autofac;
 
-public static class AutomaticDependencyResolution_Autofac
+public static class _1_ExplicitRegistration
 {
   [Test]
-  public static void ShouldAutomaticallyResolveBasicDependenciesUsingAutofac()
+  public static void ShouldAutomaticallyResolveBasicDependencies()
   {
     var builder = new ContainerBuilder();
     builder.RegisterType<Person>().SingleInstance();

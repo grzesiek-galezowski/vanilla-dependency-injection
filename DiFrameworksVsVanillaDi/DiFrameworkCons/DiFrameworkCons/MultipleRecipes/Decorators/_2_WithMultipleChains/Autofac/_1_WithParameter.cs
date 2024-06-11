@@ -11,7 +11,7 @@ public static class _1_WithParameter
   /// for this subgraph while retaining some of its cons.
   /// </summary>
   [Test]
-  public static void ShouldComposeVariousDecoratorConfigurationsUsingAutofac()
+  public static void ShouldComposeVariousDecoratorConfigurations()
   {
     //GIVEN
     var builder = new ContainerBuilder();

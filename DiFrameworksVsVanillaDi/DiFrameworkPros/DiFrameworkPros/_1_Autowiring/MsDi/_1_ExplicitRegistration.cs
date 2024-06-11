@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiFrameworkPros._1_AutomaticDependencyResolution;
+namespace DiFrameworkPros._1_Autowiring.MsDi;
 
-public static class AutomaticDependencyResolution_MsDi
+public static class _1_ExplicitRegistration
 {
   [Test]
-  public static void ShouldAutomaticallyResolveBasicDependenciesUsingMsDi()
+  public static void ShouldAutomaticallyResolveBasicDependencies()
   {
     var builder = new ServiceCollection();
     builder.AddSingleton<Person>();

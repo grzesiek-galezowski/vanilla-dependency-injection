@@ -13,8 +13,8 @@ public static class _2_KeyedRegistrationsWithModules
         x,
         x.GetRequiredKeyedService<Character>("first"),
         x.GetRequiredKeyedService<Character>("second")));
-    CharacterWithLiteralsExtensions.AddCharacter(builder, "first", 2, 4);
-    CharacterWithLiteralsExtensions.AddCharacter(builder, "second", 4, 6);
+    builder.AddCharacter("first", 2, 4);
+    builder.AddCharacter("second", 4, 6);
 
     using var container = builder.BuildServiceProvider();
 

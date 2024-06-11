@@ -6,7 +6,7 @@ public static class _2_ChainedAs
   /// We can also specify the interfaces separately, using multiple .As<> calls
   /// </summary>
   [Test]
-  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfacesUsingAutofac()
+  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfaces()
   {
     //GIVEN
     var containerBuilder = new ContainerBuilder();

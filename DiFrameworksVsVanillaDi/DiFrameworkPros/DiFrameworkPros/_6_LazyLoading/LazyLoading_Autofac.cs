@@ -24,7 +24,7 @@ public static class LazyLoading_Autofac
   /// (e.g. https://stackoverflow.com/questions/39005861/asp-net-core-initialize-singleton-after-configuring-di)
   /// </summary>
   [Test]
-  public static void ShouldLazyLoadUsingAutofac()
+  public static void ShouldLazyLoad()
   {
     //GIVEN
     var builder = new ContainerBuilder();

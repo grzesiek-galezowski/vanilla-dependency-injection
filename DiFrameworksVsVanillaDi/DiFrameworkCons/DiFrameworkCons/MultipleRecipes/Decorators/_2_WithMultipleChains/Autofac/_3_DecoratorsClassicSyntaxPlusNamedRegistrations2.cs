@@ -9,7 +9,7 @@ public static class _3_DecoratorsClassicSyntaxPlusNamedRegistrations2
   /// More autowiring advantages at the cost of more LoC
   /// </summary>
   [Test]
-  public static void ShouldComposeVariousDecoratorChainsUsingAutofacDecoratorsFeature2()
+  public static void ShouldComposeVariousDecoratorChainsUsingDecoratorsFeature2()
   {
     //GIVEN
     var builder = new ContainerBuilder();

@@ -2,9 +2,9 @@ using DiFrameworkPros.HelperCode;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
-namespace DiFrameworkPros._1_AutomaticDependencyResolution;
+namespace DiFrameworkPros._1_Autowiring.SimpleInjector;
 
-public static class AutomaticDependencyResolution_SimpleInjector
+public static class _1_ExplicitRegistration
 {
   /// <summary>
   /// SimpleInjector can automatically find the required types and create
@@ -34,24 +34,4 @@ public static class AutomaticDependencyResolution_SimpleInjector
 
     person1.Should().BeSameAs(person2);
   }
-
-  [Test]
-  public static void ShouldAutomaticallyResolveBasicDependenciesUsingSimpleInjector()
-  {
-    using var container = new Container();
-
-    container.RegisterSingleton<Person>();
-    container.RegisterSingleton<Kitchen>();
-    container.RegisterSingleton<Knife>();
-    container.RegisterInstancePerDependency<Logger>();
-    container.RegisterSingleton<LoggingChannel>();
-
-    container.Verify();
-
-    var person1 = container.GetRequiredService<Person>();
-    var person2 = container.GetRequiredService<Person>();
-
-    person1.Should().BeSameAs(person2);
-  }
-
 }

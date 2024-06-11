@@ -3,7 +3,7 @@ namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingB
 public static class _2_NamedRegistrationsWithModules
 {
   [Test]
-  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModulesUsingAutofac()
+  public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModules()
   {
     //GIVEN
     var firstCategory = "hero";

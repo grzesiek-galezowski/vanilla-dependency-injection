@@ -13,7 +13,7 @@ public static class AssemblyScanning_Autofac
   /// Autofac has assembly scanning built in
   /// </summary>
   [Test]
-  public static void ShouldBeAbleToResolveBasedOnConventionUsingAutofac()
+  public static void ShouldBeAbleToResolveBasedOnConvention()
   {
     var builder = new ContainerBuilder();
 

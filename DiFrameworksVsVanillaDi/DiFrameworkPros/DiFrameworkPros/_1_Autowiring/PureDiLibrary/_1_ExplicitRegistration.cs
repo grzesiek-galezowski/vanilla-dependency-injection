@@ -1,8 +1,8 @@
 using Pure.DI;
 
-namespace DiFrameworkPros._1_AutomaticDependencyResolution;
+namespace DiFrameworkPros._1_Autowiring.PureDiLibrary;
 
-public class AutomaticDependencyResolution_PureDiLibrary
+public class _1_ExplicitRegistration
 {
   /// <summary>
   /// The Pure.DI library generates code.

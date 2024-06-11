@@ -19,8 +19,8 @@ public static class _3_KeyFilterAttribute
 
     using var container = containerBuilder.Build();
     var archiveService = container.Resolve<ArchiveServiceAttributed>();
-    AssertionExtensions.Should((object)archiveService.LocalStorage).BeOfType<LocalDataStorage>();
-    AssertionExtensions.Should((object)archiveService.RemoteStorage).BeOfType<RemoteDataStorage>();
+    archiveService.LocalStorage.Should().BeOfType<LocalDataStorage>();
+    archiveService.RemoteStorage.Should().BeOfType<RemoteDataStorage>();
   }
 
   public record ArchiveServiceAttributed(

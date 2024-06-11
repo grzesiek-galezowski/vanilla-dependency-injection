@@ -7,7 +7,7 @@ public static class _1_ActivatorUtilitiesAttribute
   /// by marking it with the ActivatorUtilitiesConstructor attribute.
   /// </summary>
   [Test]
-  public static void ShouldResolveUsingFirstConstructorFromAutofac()
+  public static void ShouldResolveUsingFirstConstructor()
   {
     //GIVEN
     var builder = new ServiceCollection();

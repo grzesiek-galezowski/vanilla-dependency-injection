@@ -10,7 +10,7 @@ public static class _1_ActivatorUtilities
   /// is less than optimal in MsDi.
   /// </summary>
   [Test]
-  public static void ShouldResolveUsingFirstConstructorFromAutofac()
+  public static void ShouldResolveUsingFirstConstructor()
   {
     //GIVEN
     var builder = new ServiceCollection();
