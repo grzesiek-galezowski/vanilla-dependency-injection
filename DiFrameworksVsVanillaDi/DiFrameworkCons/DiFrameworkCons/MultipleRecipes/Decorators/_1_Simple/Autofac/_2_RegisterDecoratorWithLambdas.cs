@@ -7,7 +7,7 @@ public static class _2_RegisterDecoratorWithLambdas
   /// for the troublesome dependency
   /// </summary>
   [Test]
-  public static void ShouldAssembleDecoratorsUsingAutofacWithABitOfManualComposition()
+  public static void ShouldAssembleDecoratorsWithABitOfManualComposition()
   {
     var builder = new ContainerBuilder();
 

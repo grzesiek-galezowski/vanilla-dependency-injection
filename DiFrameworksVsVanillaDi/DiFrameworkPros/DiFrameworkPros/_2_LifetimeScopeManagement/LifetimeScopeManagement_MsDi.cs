@@ -5,7 +5,7 @@ namespace DiFrameworkPros._2_LifetimeScopeManagement;
 public static class LifetimeScopeManagement_MsDi
 {
   [Test]
-  public static void ShouldDisposeOfCreatedDependenciesUsingMsDi()
+  public static void ShouldDisposeOfCreatedDependencies()
   {
     var log = new Log();
     var containerBuilder = new ServiceCollection();

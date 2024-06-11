@@ -10,7 +10,7 @@ public static class AssemblyScanning_MsDi
   /// but this capability can be added using e.g. the Scrutor library.
   /// </summary>
   [Test]
-  public static void ShouldBeAbleToResolveBasedOnConventionUsingMsDiAndScrutor()
+  public static void ShouldBeAbleToResolveBasedOnConventionUsingScrutor()
   {
     var builder = new ServiceCollection();
 

@@ -13,7 +13,7 @@ internal class Modules_MsDi
   // container.AddHttpClient();
   // etc.
   [Test]
-  public void ShouldAllowComposingModulesUsingMsDi()
+  public void ShouldAllowComposingModules()
   {
     //GIVEN
     var builder = new ServiceCollection();

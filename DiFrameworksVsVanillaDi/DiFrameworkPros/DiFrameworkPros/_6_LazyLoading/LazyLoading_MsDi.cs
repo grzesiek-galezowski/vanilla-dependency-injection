@@ -6,7 +6,7 @@ namespace DiFrameworkPros._6_LazyLoading;
 public static class LazyLoading_MsDi //BUG: add other containers
 {
   [Test]
-  public static void ShouldLazyLoadUsingMsDi()
+  public static void ShouldLazyLoad()
   {
     //GIVEN
     var builder = new ServiceCollection();

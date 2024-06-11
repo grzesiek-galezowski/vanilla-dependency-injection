@@ -8,7 +8,7 @@ public static class _1_LambdaRegistrationsWithConcreteTypes
   /// error-prone than Vanilla DI.
   /// </summary>
   [Test]
-  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfacesUsingMsDi()
+  public static void ShouldRegisterSingleInstancesWhenRegisteringSingleTypeAsTwoInterfaces()
   {
     //GIVEN
     var builder = new ServiceCollection();

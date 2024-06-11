@@ -6,7 +6,7 @@ namespace DiFrameworkPros._5_DependencyReplacement;
 public static class DependencyReplacement_MsDi
 {
   [Test]
-  public static void ShouldBeAbleToOverrideArbitraryDependencyInContainerUsingMsDi()
+  public static void ShouldBeAbleToOverrideArbitraryDependencyInContainer()
   {
     var builder = new ServiceCollection();
 

@@ -13,7 +13,7 @@ internal class Modules_VanillaDi
   /// This is merely old-fashioned OO.
   /// </summary>
   [Test]
-  public void ShouldAllowComposingModulesUsingVanillaDi()
+  public void ShouldAllowComposingModules()
   {
     //GIVEN
     var outputModule = new InMemoryOutputModule();

@@ -9,7 +9,7 @@ public static class Events_MsDi
   /// classes only require the interface.
   /// </summary>
   [Test]
-  public static void ShouldShowHandMadeHandlingOfEventsUsingMsDi()
+  public static void ShouldShowHandMadeHandlingOfEvents()
   {
     //GIVEN
     var services = new ServiceCollection();
