@@ -1,8 +1,8 @@
 using Autofac;
 
-namespace DiFrameworkPros._2_LifetimeScopeManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement.Autofac;
 
-public static class LifetimeScopeManagement_Autofac
+public static class _1_BuiltinManagement
 {
   [Test]
   public static void ShouldDisposeOfCreatedDependencies()

@@ -2,9 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
-namespace DiFrameworkPros._2_LifetimeScopeManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement.SimpleInjector;
 
-public static class LifetimeScopeManagement_SimpleInjector
+public static class _1_BuiltinManagement
 {
   /// <summary>
   /// SimpleInjector does not seem to support auto disposing of transient objects.

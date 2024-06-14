@@ -1,19 +1,17 @@
-using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiFrameworkPros._2_LifetimeScopeManagement;
+namespace DiFrameworkPros._2_LifetimeScopeManagement.MsDi;
 
-public static class LifetimeScopeManagement_Lamar
+public static class _1_BuiltinManagement
 {
   [Test]
-  public static void ShouldDisposeOfCreatedDependenciesUsingLamar()
+  public static void ShouldDisposeOfCreatedDependencies()
   {
     var log = new Log();
-    using (var container = new Container(builder =>
-           {
-             builder.AddSingleton(log);
-             builder.AddTransient<DisposableDependency>();
-           }))
+    var containerBuilder = new ServiceCollection();
+    containerBuilder.AddSingleton(log);
+    containerBuilder.AddTransient<DisposableDependency>();
+    using (var container = containerBuilder.BuildServiceProvider())
     {
       container.GetRequiredService<DisposableDependency>(); //0
       container.GetRequiredService<DisposableDependency>(); //1
