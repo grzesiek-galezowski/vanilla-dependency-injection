@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Pure.DI;
 
 namespace DiFrameworkPros._5_DependencyReplacement;
@@ -39,6 +40,5 @@ public partial class TestComposition20
       .RootBind<ITroublesomeDependency>("TroublesomeDependencyMock")
       .As(Lifetime.Singleton)
       .To(context => Substitute.For<ITroublesomeDependency>());
-
   }
 }
