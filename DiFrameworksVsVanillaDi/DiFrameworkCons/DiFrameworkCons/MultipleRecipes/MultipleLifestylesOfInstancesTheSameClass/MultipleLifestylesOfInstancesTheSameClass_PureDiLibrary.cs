@@ -39,7 +39,6 @@ partial class Composition10
         context.Inject<ThrottledOutbox>("emergencyOutbox", out var value);
         return new EmergencyProcess(value);
       });
-      ;
   }
 }
 

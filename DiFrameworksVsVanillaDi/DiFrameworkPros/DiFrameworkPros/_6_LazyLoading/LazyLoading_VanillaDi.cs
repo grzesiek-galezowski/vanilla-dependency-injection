@@ -17,13 +17,14 @@ public class LazyLoading_VanillaDi
   /// and on test parallelization.
   /// </summary>
   [Test]
-  public void ShouldLazyLoadUsingVanillaDi()
+  public void ShouldLazyLoad()
   {
     //GIVEN
     var compositionRoot = new VanillaCompositionRoot();
 
     //WHEN
     var stopWatch = new Stopwatch();
+    stopWatch.Start();
     var controllerINeed = compositionRoot.CreateControllerINeed();
     stopWatch.Stop();
 
