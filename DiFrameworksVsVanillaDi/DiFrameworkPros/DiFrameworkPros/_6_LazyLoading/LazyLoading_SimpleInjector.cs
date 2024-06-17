@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
 namespace DiFrameworkPros._6_LazyLoading;

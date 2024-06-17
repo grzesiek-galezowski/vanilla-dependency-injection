@@ -1,5 +1,4 @@
 using Lamar;
-using Lamar.IoC;
 
 namespace DiFrameworkCons.CompileTimeVsRuntime.MissingDependency.Lamar;
 

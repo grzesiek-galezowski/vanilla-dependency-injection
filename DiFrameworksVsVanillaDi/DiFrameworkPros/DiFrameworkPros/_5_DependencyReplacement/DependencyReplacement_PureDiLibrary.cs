@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Pure.DI;
 
 namespace DiFrameworkPros._5_DependencyReplacement;

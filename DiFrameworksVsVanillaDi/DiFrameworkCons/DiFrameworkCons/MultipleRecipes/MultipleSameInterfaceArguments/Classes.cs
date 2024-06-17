@@ -1,5 +1,3 @@
-using Autofac.Features.AttributeFilters;
-
 namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments;
 
 public interface IDataStorage;

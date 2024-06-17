@@ -1,6 +1,3 @@
-using Autofac.Core;
-using Autofac.Features.AttributeFilters;
-
 namespace DiFrameworkCons.MultipleRecipes.MultipleSameInterfaceArguments.Autofac;
 
 public static class _5_WithParameterPlusManualCreation

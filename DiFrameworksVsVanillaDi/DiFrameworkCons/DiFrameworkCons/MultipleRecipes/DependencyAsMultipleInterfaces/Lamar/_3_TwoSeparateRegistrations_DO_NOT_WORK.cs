@@ -1,5 +1,4 @@
 using Lamar;
-using Scrutor;
 
 namespace DiFrameworkCons.MultipleRecipes.DependencyAsMultipleInterfaces.Lamar;
 
