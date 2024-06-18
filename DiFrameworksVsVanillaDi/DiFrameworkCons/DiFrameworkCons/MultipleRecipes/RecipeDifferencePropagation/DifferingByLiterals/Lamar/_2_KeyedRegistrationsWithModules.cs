@@ -5,6 +5,10 @@ namespace DiFrameworkCons.MultipleRecipes.RecipeDifferencePropagation.DifferingB
 
 public static class _2_KeyedRegistrationsWithModules
 {
+  /// <summary>
+  /// While Lamar supports modules (called registries),
+  /// it does not seem to support
+  /// </summary>
   [Test]
   public static void ShouldResolveTwoSimilarObjectGraphsWithDifferentLeavesFromContainerModules()
   {
@@ -15,8 +19,8 @@ public static class _2_KeyedRegistrationsWithModules
           x,
           x.GetRequiredKeyedService<Character>("first"),
           x.GetRequiredKeyedService<Character>("second")));
-      builder.AddCharacter("first", 2, 4);
-      builder.AddCharacter("second", 4, 6);
+      builder.IncludeRegistry<FirstCharacterRegistry>();
+      builder.IncludeRegistry<SecondCharacterRegistry>();
     });
 
     //WHEN
@@ -37,27 +41,33 @@ public static class _2_KeyedRegistrationsWithModules
   }
 }
 
-file static class CharacterWithLiteralsExtensions
+
+// While Lamar supports modules and even passing module instances,
+// it seems to not support two instances of the same registry,
+// hence the subtypes:
+
+file class FirstCharacterRegistry() : CharacterWithLiteralsRegistry("first", 2, 4);
+file class SecondCharacterRegistry() : CharacterWithLiteralsRegistry("second", 4, 6);
+
+file class CharacterWithLiteralsRegistry : ServiceRegistry
 {
-  public static void AddCharacter(
-    this IServiceCollection builder,
+  protected CharacterWithLiteralsRegistry(
     string prefix,
     int breastPlateDefense,
     int swordAttack)
   {
-    builder.AddKeyedSingleton(prefix,
+    this.AddKeyedSingleton(prefix,
       (x, key) =>
         ActivatorUtilities.CreateInstance<Character>(x,
           x.GetRequiredKeyedService<Armor>(key),
           x.GetRequiredKeyedService<Sword>(key)));
-    builder.AddKeyedSingleton(prefix, (x, key) =>
+    this.AddKeyedSingleton(prefix, (x, key) =>
       ActivatorUtilities.CreateInstance<Armor>(x,
         x.GetRequiredKeyedService<BreastPlate>(key)));
-    builder.TryAddTransient<Helmet>();
-    builder.AddKeyedSingleton(prefix,
+    this.TryAddTransient<Helmet>();
+    this.AddKeyedSingleton(prefix,
       (x, key) => ActivatorUtilities.CreateInstance<BreastPlate>(x, breastPlateDefense));
-    builder.AddKeyedSingleton(prefix,
+    this.AddKeyedSingleton(prefix,
       (x, key) => ActivatorUtilities.CreateInstance<Sword>(x, swordAttack));
   }
-
 }
