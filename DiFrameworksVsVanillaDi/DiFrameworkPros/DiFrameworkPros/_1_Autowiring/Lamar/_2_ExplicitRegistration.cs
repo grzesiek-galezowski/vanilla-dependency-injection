@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiFrameworkPros._1_Autowiring.Lamar;
 
-public static class _2_ExplicitRegistrations
+public static class _2_ExplicitRegistration
 {
   /// <summary>
   /// Every non-default creation we need to register explicitly
