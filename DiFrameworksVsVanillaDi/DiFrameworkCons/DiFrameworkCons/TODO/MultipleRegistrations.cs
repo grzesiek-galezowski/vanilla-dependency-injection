@@ -28,7 +28,7 @@ public class MultipleRegistrations
     var builder = new ContainerBuilder();
     builder.Register<Constructor1Argument>(context =>
     {
-      Execute.Assertion.FailWith("should not be called");
+      AssertionChain.GetOrCreate().FailWith("should not be called");
       return null!;
     }).As<IConstructorArgument>().SingleInstance();
     builder.RegisterType<Constructor1Argument>().As<IConstructorArgument>().InstancePerDependency();

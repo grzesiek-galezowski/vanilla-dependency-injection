@@ -24,8 +24,8 @@ public class AssemblyScanning_Lamar
     using var container = new Container(x =>
     {
       x.Scan(scan => scan
-        .FromCallingAssembly()
-        .AddClasses(classes => classes.Where(c => c.Name.EndsWith("Repository")))
+        .FromAssemblyOf<MyRepository>()
+        .AddClasses(classes => classes.Where(c => c.Name.EndsWith("Repository")), publicOnly: false)
         .UsingRegistrationStrategy(RegistrationStrategy.Skip)
         .AsSelfWithInterfaces()
         .WithSingletonLifetime());

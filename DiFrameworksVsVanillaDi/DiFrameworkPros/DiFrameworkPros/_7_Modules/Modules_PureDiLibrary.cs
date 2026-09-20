@@ -24,9 +24,8 @@ public partial class FinalComposition
   public void Setup()
   {
     DI.Setup(nameof(FinalComposition))
-      .DependsOn(
-        nameof(ApplicationLogicCompositionPart),
-        nameof(InMemoryOutputCompositionPart))
+      .DependsOn(nameof(ApplicationLogicCompositionPart))
+      .DependsOn(nameof(InMemoryOutputCompositionPart))
       .Root<IApplicationLogic>("AppLogic");
   }
 }
